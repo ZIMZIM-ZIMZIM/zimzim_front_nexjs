@@ -8,13 +8,13 @@ import { store } from '#stores/store';
 
 import DashboardPage from '#/pages/dashboard/DashboardPage';
 import ExercisePage from '#pages/exercise/ExercisePage';
-import ExerciseListPage from '#/pages/exercise/ExerciseListPage';
-import ExercisePostPage from '#/pages/exercise/ExercisePostPage';
-import ExerciseDetailPage from './pages/exercise/ExerciseDetailPage';
+import ExerciseListPage from '#/app/exercise/page';
+import ExercisePostPage from '#/app/exercise/post/page';
+import ExerciseDetailPage from './app/exercise/detail/[id]/page';
 import ExerciseUpdatePage from '#pages/exercise/ExerciseUpdatePage';
-import WaterPage from '#/pages/water/WaterPage';
-import LoginPage from '#/pages/login/LoginPage';
-import SignUpPage from '#/pages/signup/SignUpPage';
+import WaterPage from '#/app/water/page';
+import LoginPage from '#/app/login/page';
+import SignUpPage from '#/app/signup/page';
 import NotFoundPage from '#pages/NotFoundPage';
 
 import AuthGuard from '#layout/AuthGuard';
