@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import dayjs from 'dayjs';
@@ -13,11 +13,13 @@ import FORMAT from '#/constants/format';
 import WeightIcon from '#assets/icon/chart/weight.svg';
 import CardioIcon from '#assets/icon/chart/cardio.svg';
 import { EXERCISE_TYPE } from '#/api/types';
+import { useRouter } from 'next/router';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ExerciseChart = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const router = useRouter();
 
   const { data: userInfo } = useGetUserInfoQuery();
 
@@ -112,7 +114,7 @@ const ExerciseChart = () => {
   return (
     <div
       className="w-1/3 bg-white rounded-lg border-1 pt-2 px-2 flex flex-col cursor-pointer h-full"
-      onClick={() => navigate(ROUTE.EXERCISE.DEFAULT)}
+      onClick={() => router.push(ROUTE.EXERCISE.DEFAULT)}
     >
       <p className="text-sm font-bold pl-2">Weight/Cardio</p>
       <div className="w-full flex justify-center h-full p-2 items-center">

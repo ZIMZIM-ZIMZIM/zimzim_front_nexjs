@@ -9,8 +9,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import ROUTE from '#/constants/route';
+import { useRouter } from 'next/router';
 
 ChartJS.register(
   CategoryScale,
@@ -22,7 +23,8 @@ ChartJS.register(
 );
 
 const WaterChart = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const router = useRouter();
 
   const data = {
     labels: ['January'],
@@ -63,7 +65,7 @@ const WaterChart = () => {
   return (
     <div
       className="bg-white rounded-lg border-1 h-32 pb-6 pt-2 px-4 w-full cursor-pointer"
-      onClick={() => navigate(ROUTE.WATER)}
+      onClick={() => router.push(ROUTE.WATER)}
     >
       <p className="text-sm font-bold">Water Total Volume</p>
       <Bar data={data} options={options} />

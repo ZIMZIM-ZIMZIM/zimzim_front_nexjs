@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
 
 import Button from '#components/common/Button';
@@ -12,6 +12,7 @@ import { useGetUserInfoQuery } from '#/api/services/userApi';
 import { ExerciseDetail } from '#/api/types';
 import { ACTION_BUTTON } from '#/constants/style';
 import ROUTE from '#/constants/route';
+import { useRouter } from 'next/router';
 
 interface ButtonGroupProps {
   checkedExercise: string[];
@@ -21,7 +22,8 @@ interface ButtonGroupProps {
 const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
   const isDeleteDisabled = checkedExercise.length === 0;
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const router = useRouter();
 
   const [deleteExerciseDetail] = useDeleteExerciseDetailMutation();
   const { data: userInfo } = useGetUserInfoQuery();
@@ -82,7 +84,7 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
       </Button>
       <Button
         className={twMerge(ACTION_BUTTON, 'bg-primary')}
-        onClick={() => navigate(ROUTE.EXERCISE.POST)}
+        onClick={() => router.push(ROUTE.EXERCISE.POST)}
       >
         추가
       </Button>

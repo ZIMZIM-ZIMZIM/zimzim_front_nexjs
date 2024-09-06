@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import {
   createColumnHelper,
   flexRender,
@@ -16,8 +16,9 @@ import ContentBox from '#/components/common/ContentBox';
 import useExerciseData, { FlattenedExercise } from '#/hooks/useExerciseData';
 import { useGetExerciseColumns } from '#/hooks/useExerciseColumns';
 
-import LeftArrowIcon from '#assets/icon/left-arrow.svg?react';
-import RightArrowIcon from '#assets/icon/right-arrow.svg?react';
+import LeftArrowIcon from '#assets/icon/left-arrow.svg';
+import RightArrowIcon from '#assets/icon/right-arrow.svg';
+import { useRouter } from 'next/router';
 
 interface ExerciseTableProps {
   checkedExercise: string[];
@@ -36,7 +37,8 @@ const ExerciseTable = ({
   page,
   setPage,
 }: ExerciseTableProps) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const router = useRouter();
 
   const columnHelper = createColumnHelper<FlattenedExercise>();
 
@@ -87,7 +89,7 @@ const ExerciseTable = ({
                 <tr
                   key={row.id}
                   onClick={() =>
-                    navigate(`/exercise/detail/${row.original._id}`)
+                    router.push(`/exercise/detail/${row.original._id}`)
                   }
                   className="cursor-pointer hover:bg-secondary-light/20"
                 >

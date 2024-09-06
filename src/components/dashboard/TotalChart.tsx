@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -15,11 +15,13 @@ import { useGetExerciseQuery } from '#/api/services/exerciseApi';
 
 import FORMAT from '#/constants/format';
 import ROUTE from '#/constants/route';
+import { useRouter } from 'next/router';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
 const TotalChart = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const router = useRouter();
 
   const { data: userInfo } = useGetUserInfoQuery();
 
@@ -96,7 +98,7 @@ const TotalChart = () => {
       <Line
         data={data}
         options={options}
-        onClick={() => navigate(ROUTE.EXERCISE.DEFAULT)}
+        onClick={() => router.push(ROUTE.EXERCISE.DEFAULT)}
       />
     </div>
   );

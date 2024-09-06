@@ -4,7 +4,7 @@ import axios from 'axios';
 let navigateFunction: (path: string) => void;
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_SERVER_URL,
+  baseURL: process.env.SERVER_URL,
   headers: {
     'Content-Type': 'application/json',
   },
