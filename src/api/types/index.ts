@@ -53,12 +53,6 @@ export interface PostExercisePayload {
   detail: ExerciseDetail[];
 }
 
-export interface UpdateExercisePayload {
-  id: string;
-  payload: Pick<Exercise, 'isPT'> &
-    Pick<Exercise['detail'][number], 'duration' | 'force' | 'type'>;
-}
-
 export interface DeleteExerciseDetailPayload {
   exerciseId: string;
   detailIds: string[];

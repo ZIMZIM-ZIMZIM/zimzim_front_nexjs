@@ -1,8 +1,9 @@
 'use client';
 
-import ROUTE from '#/constants/route';
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
+
+import ROUTE from '#/constants/route';
 
 const SignUpLink = () => (
   <p className="flex space-x-2 justify-center">

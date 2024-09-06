@@ -1,6 +1,7 @@
 'use client';
-import React, { Dispatch, SetStateAction } from 'react';
-// import { useNavigate } from 'react-router-dom';
+
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   createColumnHelper,
   flexRender,
@@ -14,12 +15,18 @@ import { twMerge } from 'tailwind-merge';
 import Button from '#components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
 
-import useExerciseData, { FlattenedExercise } from '#/hooks/useExerciseData';
+import { useCustomQuery } from '#/hooks/useCustomQuery';
 import { useGetExerciseColumns } from '#/hooks/useExerciseColumns';
+
+import API_ENDPOINT from '#/constants/api';
+
+import { Exercise } from '#/api/types';
 
 import LeftArrowIcon from 'public/icon/left-arrow.svg';
 import RightArrowIcon from 'public/icon/right-arrow.svg';
-import { useRouter } from 'next/router';
+
+export type FlattenedExercise = Pick<Exercise, 'date' | 'isPT'> &
+  Pick<Exercise['detail'][number], 'type' | 'duration' | 'force' | '_id'>;
 
 interface ExerciseTableProps {
   checkedExercise: string[];
@@ -38,12 +45,34 @@ const ExerciseTable = ({
   page,
   setPage,
 }: ExerciseTableProps) => {
-  // const navigate = useNavigate();
   const router = useRouter();
 
   const columnHelper = createColumnHelper<FlattenedExercise>();
 
-  const { exerciseData, flattenedData } = useExerciseData(page);
+  const { data: userInfo } = useCustomQuery(['user'], API_ENDPOINT.USER.INFO);
+  const { data: exerciseData } = useCustomQuery(
+    ['exercise'],
+    `${API_ENDPOINT.EXERCISE.LIST}?id=${userInfo?.id}&page=${page}&limit=10`,
+  );
+  const [flattenedData, setFlattenData] = useState<FlattenedExercise[] | []>(
+    [],
+  );
+  useEffect(() => {
+    if (exerciseData?.items) {
+      setFlattenData(
+        exerciseData?.items.flatMap((exercise) =>
+          exercise.detail.map((element) => ({
+            _id: element._id,
+            date: exercise.date,
+            type: element.type,
+            force: element.force,
+            duration: element.duration,
+            isPT: exercise.isPT,
+          })),
+        ),
+      );
+    }
+  }, [exerciseData]);
 
   const columns = useGetExerciseColumns(
     columnHelper,
@@ -90,7 +119,7 @@ const ExerciseTable = ({
                 <tr
                   key={row.id}
                   onClick={() =>
-                    router.push(`/exercise/detail/${row.original._id}`)
+                    router.push(`/user/exercise/detail/${row.original._id}`)
                   }
                   className="cursor-pointer hover:bg-secondary-light/20"
                 >

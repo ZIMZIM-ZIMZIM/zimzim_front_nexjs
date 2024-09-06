@@ -1,33 +1,34 @@
 'use client';
 
 import React from 'react';
-// import { NavLink, useNavigate } frosm 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useQueryClient } from '@tanstack/react-query';
+import { twMerge } from 'tailwind-merge';
 
 import Button from '#components/common/Button';
 
-import { authApi, usePostLogoutMutation } from '#/api/services/authApi';
+import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import ROUTE from '#/constants/route';
-
-import { twMerge } from 'tailwind-merge';
-import { HEADER_ICON, HEADER_ICON_BUTTON } from '#/constants/style';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import Image from 'next/image';
+import { HEADER_ICON_BUTTON } from '#/constants/style';
+import API_ENDPOINT from '#/constants/api';
 
 const UserHeader = () => {
-  // const navigate = useNavigate();
-  // const router = useRouter();
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
-  // const dispatch = useDispatch();
-  // const [logout] = usePostLogoutMutation();
+  const { mutate } = useCustomMutation(API_ENDPOINT.AUTH.LOGOUT, 'post', {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
+      router.push(ROUTE.LOGIN);
+    },
+  });
 
   const handleLogout = async () => {
     try {
-      // await logout().unwrap();
-      // dispatch(authApi.util.invalidateTags([{ type: 'User', id: 'User' }]));
-      // router.push(ROUTE.LOGIN);
+      mutate();
     } catch (error) {
       console.log(error);
     }

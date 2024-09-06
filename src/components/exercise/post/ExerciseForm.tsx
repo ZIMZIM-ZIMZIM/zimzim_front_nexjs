@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,7 +21,7 @@ import {
 } from '#/constants/option';
 import { PRIMARY_BUTTON } from '#/constants/style';
 
-import DeleteIcon from '#assets/icon/delete.svg';
+import DeleteIcon from 'public/icon/delete.svg';
 
 export type ExercisePostFormInput = {
   _id?: string | null;

@@ -5,9 +5,18 @@ import {
   UseQueryResult,
   QueryKey,
 } from '@tanstack/react-query';
+import { cookies } from 'next/headers';
 
 const fetchData = async (url: string) => {
-  const response = await axiosInstance.get(url);
+  // const cookieStore = cookies();
+  // const token = cookieStore.get('token')?.value;
+
+  const response = await axiosInstance.get(url, {
+    // headers: {
+    //   Authorization: `Bearer ${token}`,
+    // },
+  });
+
   return response.data;
 };
 

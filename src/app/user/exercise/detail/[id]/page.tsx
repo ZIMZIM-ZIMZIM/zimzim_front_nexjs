@@ -1,33 +1,32 @@
 import React from 'react';
-// import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import Link from 'next/link';
+import { twMerge } from 'tailwind-merge';
 import dayjs from 'dayjs';
+
+import { customFetch } from '#/app/user/dashboard/page';
 
 import Button from '#/components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
 
-import { useGetExerciseDetailQuery } from '#/api/services/exerciseApi';
-import { twMerge } from 'tailwind-merge';
 import { ACTION_BUTTON } from '#/constants/style';
 import FORMAT from '#/constants/format';
-import { useRouter } from 'next/router';
 
-const ExerciseDetailPage = () => {
-  const router = useRouter();
-  // const navigate = useNavigate();
-  const { id } = router.query;
+import API_ENDPOINT from '#/constants/api';
 
-  const { data } = useGetExerciseDetailQuery(id ? id[0] : '');
+const ExerciseDetailPage = async ({ params }: { params: { id: string } }) => {
+  const exerciseId = params.id;
+
+  const { data } = await customFetch(API_ENDPOINT.EXERCISE.DETAIL(exerciseId));
 
   return (
     <div className=" flex flex-row justify-center">
       <div className="flex flex-col gap-8 w-2/5">
         <div className="flex justify-end">
-          <Button
-            className={twMerge(ACTION_BUTTON, 'bg-primary')}
-            onClick={() => router.push(`/exercise/update/${id}`)}
-          >
-            수정
-          </Button>
+          <Link href={`/user/exercise/update/${exerciseId}`}>
+            <Button className={twMerge(ACTION_BUTTON, 'bg-primary')}>
+              수정
+            </Button>
+          </Link>
         </div>
         <div className="flex justify-center w-full">
           <ContentBox className="rounded-2xl w-full">

@@ -1,10 +1,8 @@
 import React from 'react';
-// import { NavLink } from 'react-router-dom';
-
-// import CIIcon from '#assets/icon/icon.svg?react';
-import ROUTE from '#/constants/route';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import ROUTE from '#/constants/route';
 
 const Header = () => (
   <header>

@@ -10,32 +10,28 @@ import Button from '#/components/common/Button';
 import FORMAT from '#/constants/format';
 import Link from 'next/link';
 import ROUTE from '#/constants/route';
-import { useCustomQuery } from '#/hooks/useCustomQuery';
-import axiosInstance from '#/api/axios';
-import API_ENDPOINT from '#/constants/api';
 
 import axios from 'axios';
-import { cookies } from 'next/headers'; // Next.js에서 서버 측 쿠키를 가져오는 유틸리티
+import { cookies } from 'next/headers';
 
-const fetchUserInfo = async (url: string) => {
+export const customFetch = async (url: string) => {
   const cookieStore = cookies();
-  const token = cookieStore.get('token')?.value; // 쿠키에서 토큰 가져오기
-  console.log(token, 'token~!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-  const response = await axios.get(`http://localhost:4000/${url}`, {
+  const token = cookieStore.get('token')?.value;
+
+  const response = await axios.get(`http://localhost:4000${url}`, {
     headers: {
-      Authorization: `Bearer ${token}`, // 쿠키에서 가져온 토큰을 헤더에 추가
+      Authorization: `Bearer ${token}`,
     },
   });
-  console.log(response);
   return response.data;
 };
 
 const DashboardPage = async () => {
   try {
-    const { data: userInfo } = await fetchUserInfo('user/info');
+    const { data: userInfo } = await customFetch('/user/info');
 
-    const { data: exerciseData } = await fetchUserInfo(
-      `exercise?id=${userInfo?.id}&startDate=${dayjs().subtract(7, 'day').format(FORMAT.DATE)}&endDate=${dayjs().format(FORMAT.DATE)}`,
+    const { data: exerciseData } = await customFetch(
+      `/exercise?id=${userInfo?.id}&startDate=${dayjs().subtract(7, 'day').format(FORMAT.DATE)}&endDate=${dayjs().format(FORMAT.DATE)}`,
     );
 
     const totalDuration = exerciseData?.reduce(

@@ -1,40 +1,40 @@
 'use client';
 
 import React from 'react';
-import { useDispatch } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 import ContentBox from '#components/common/ContentBox';
 import ExerciseForm, {
   ExercisePostFormInput,
 } from '#components/exercise/post/ExerciseForm';
 
-import { AppDispatch } from '#/stores/store';
-
-import { useGetUserInfoQuery } from '#/api/services/userApi';
-import {
-  exerciseApi,
-  usePostExerciseMutation,
-} from '#/api/services/exerciseApi';
+import { useCustomMutation } from '#/hooks/useCustomMutation';
+import { useCustomQuery } from '#/hooks/useCustomQuery';
 
 import { getKoreaDate } from '#/util';
 
 import ROUTE from '#/constants/route';
 import MESSAGE from '#/constants/message';
+import API_ENDPOINT from '#/constants/api';
 
 import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
-import { useRouter } from 'next/router';
 
 const ExercisePostPage = () => {
   const today = getKoreaDate();
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  // const navigate = useNavigate();
   const router = useRouter();
 
-  const [postExercise] = usePostExerciseMutation();
-  const { data: userInfo } = useGetUserInfoQuery();
+  const { data: userInfo } = useCustomQuery(['user'], API_ENDPOINT.USER.INFO);
+  const { mutate } = useCustomMutation<ExercisePostFormInput[]>(
+    API_ENDPOINT.EXERCISE.EXERCISE,
+    'post',
+    {
+      onSuccess: () => {
+        alert(MESSAGE.COMPLETED('등록이'));
+        router.push(ROUTE.MAIN_PAGE);
+      },
+    },
+  );
 
   const createExercisePayload = (exercise: ExercisePostFormInput) => ({
     userId: userInfo?.id ?? '',
@@ -83,23 +83,14 @@ const ExercisePostPage = () => {
 
         if (isSameDate) {
           const payload = handleSameDateExercises(exerciseList);
-          promises.push(postExercise(payload));
+          promises.push(mutate(payload));
         } else {
           exerciseList.forEach((exercise) => {
-            promises.push(postExercise(createExercisePayload(exercise)));
+            promises.push(mutate(createExercisePayload(exercise)));
           });
         }
 
         await Promise.allSettled(promises);
-
-        dispatch(
-          exerciseApi.util.invalidateTags([
-            { type: 'Exercise', id: 'LIST' },
-            { type: 'Exercise', id: 'Exercise' },
-          ]),
-        );
-        alert(MESSAGE.COMPLETED('등록이'));
-        router.push(ROUTE.MAIN_PAGE);
       } catch (error) {
         console.log(error, 'error');
       }

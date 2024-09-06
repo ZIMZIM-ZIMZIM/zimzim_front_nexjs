@@ -1,5 +1,6 @@
 import API_ENDPOINT from '#/constants/api';
 import axios from 'axios';
+import { cookies } from 'next/headers';
 
 let navigateFunction: (path: string) => void;
 
@@ -14,10 +15,9 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const { url } = config;
 
-    // if (!url?.includes(API_ENDPOINT.AUTH.SIGN_UP)) {
-    config.withCredentials = true;
-    // }
-    // console.log(config, 'config');
+    if (!url?.includes(API_ENDPOINT.AUTH.SIGN_UP)) {
+      config.withCredentials = true;
+    }
     return config;
   },
   (error) => {
@@ -27,7 +27,6 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    // console.log(response, ';~');
     return response.data;
   },
   async (error) => {

@@ -1,37 +1,51 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-// import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { usePathname, useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
-
-import {
-  exerciseApi,
-  useGetExerciseDetailQuery,
-  useUpdateExerciseMutation,
-} from '#/api/services/exerciseApi';
 
 import ContentBox from '#/components/common/ContentBox';
 import ExerciseForm, {
   ExercisePostFormInput,
 } from '#/components/exercise/post/ExerciseForm';
 
-import { AppDispatch } from '#/stores/store';
+import { useCustomQuery } from '#/hooks/useCustomQuery';
+import { useCustomMutation } from '#/hooks/useCustomMutation';
+
 import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
 
 import MESSAGE from '#/constants/message';
 import FORMAT from '#/constants/format';
 import ROUTE from '#/constants/route';
-import { useRouter } from 'next/router';
+import API_ENDPOINT from '#/constants/api';
 
 const ExerciseUpdatePage = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  // const navigate = useNavigate();
   const router = useRouter();
 
-  const { id } = router.query;
-  const { data } = useGetExerciseDetailQuery(id ? id[0] : '');
-  const [updateExercise] = useUpdateExerciseMutation();
+  const queryClient = useQueryClient();
+  const pathname = usePathname();
+  const id = pathname.split('update/')[1];
+
+  const { data: exerciseDetail } = useCustomQuery(
+    ['exercise'],
+    API_ENDPOINT.EXERCISE.DETAIL(id),
+  );
+
+  const { mutate } = useCustomMutation<
+    { token: string },
+    Error,
+    {
+      duration: string;
+      force: EXERCISE_FORCE_TYPE;
+      type: EXERCISE_TYPE;
+      isPT: string;
+    }
+  >(API_ENDPOINT.EXERCISE.DETAIL(id), 'post', {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['exercise'] });
+    },
+  });
 
   const [defaultValues, setDefaultValues] = useState<ExercisePostFormInput>();
 
@@ -42,22 +56,13 @@ const ExerciseUpdatePage = () => {
       const { duration, force, isPT, type } = data;
 
       try {
-        await updateExercise({
-          id: id ? id[0] : '',
-          payload: {
-            duration,
-            force: force as EXERCISE_FORCE_TYPE,
-            isPT,
-            type: type as EXERCISE_TYPE,
-          },
-        }).unwrap();
+        mutate({
+          duration: duration,
+          force: force as EXERCISE_FORCE_TYPE,
+          isPT,
+          type: type as EXERCISE_TYPE,
+        });
 
-        dispatch(
-          exerciseApi.util.invalidateTags([
-            { type: 'Exercise', id: 'LIST' },
-            { type: 'Exercise', id: 'DETAIL' },
-          ]),
-        );
         alert(MESSAGE.COMPLETED('수정'));
         router.push(ROUTE.EXERCISE.DEFAULT);
       } catch (error) {
@@ -67,16 +72,16 @@ const ExerciseUpdatePage = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (exerciseDetail) {
       setDefaultValues({
-        date: dayjs(data.date).format(FORMAT.DATE),
-        isPT: data.isPT,
-        duration: data.detail[0].duration,
-        type: data.detail[0].type,
-        force: data.detail[0].force,
+        date: dayjs(exerciseDetail?.date).format(FORMAT.DATE),
+        isPT: exerciseDetail?.isPT,
+        duration: exerciseDetail?.detail[0].duration,
+        type: exerciseDetail?.detail[0].type,
+        force: exerciseDetail?.detail[0].force,
       });
     }
-  }, [data]);
+  }, [exerciseDetail]);
 
   return (
     <div className="flex justify-center">

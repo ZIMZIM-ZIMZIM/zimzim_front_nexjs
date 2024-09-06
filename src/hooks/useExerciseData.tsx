@@ -1,31 +1,22 @@
 import { useEffect, useState } from 'react';
 
-import { useGetExerciseListQuery } from '#/api/services/exerciseApi';
-import { useGetUserInfoQuery } from '#/api/services/userApi';
+import { useCustomQuery } from '#hooks/useCustomQuery';
+
 import { Exercise } from '#/api/types';
+import API_ENDPOINT from '#/constants/api';
 
 export type FlattenedExercise = Pick<Exercise, 'date' | 'isPT'> &
   Pick<Exercise['detail'][number], 'type' | 'duration' | 'force' | '_id'>;
 
 const useExerciseData = (page: number) => {
-  const { data: userInfo } = useGetUserInfoQuery();
-  const { data: exerciseData, refetch } = useGetExerciseListQuery(
-    {
-      userId: userInfo?.id ?? '',
-      page,
-      limit: 10,
-    },
-    { skip: !userInfo?.id },
+  const { data: userInfo } = useCustomQuery(['user'], API_ENDPOINT.USER.INFO);
+  const { data: exerciseData } = useCustomQuery(
+    ['exercise'],
+    `${API_ENDPOINT.EXERCISE.LIST}?userId=${userInfo?.id}&page=${page}&limit=10`,
   );
   const [flattenedData, setFlattenData] = useState<FlattenedExercise[] | []>(
     [],
   );
-
-  useEffect(() => {
-    if (userInfo) {
-      refetch();
-    }
-  }, [page, refetch, userInfo]);
 
   useEffect(() => {
     if (exerciseData?.items) {

@@ -1,20 +1,20 @@
 'use client';
 
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
 import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
+import { twMerge } from 'tailwind-merge';
 
 import Button from '#components/common/Button';
 
-import {
-  useDeleteExerciseDetailMutation,
-  useGetExerciseListQuery,
-} from '#/api/services/exerciseApi';
-import { useGetUserInfoQuery } from '#/api/services/userApi';
-import { ExerciseDetail } from '#/api/types';
+import { useCustomMutation } from '#/hooks/useCustomMutation';
+
+import { DeleteExerciseDetailPayload, ExerciseDetail } from '#/api/types';
 
 import { ACTION_BUTTON } from '#/constants/style';
 import ROUTE from '#/constants/route';
+import { useCustomQuery } from '#/hooks/useCustomQuery';
+import API_ENDPOINT from '#/constants/api';
 
 interface ButtonGroupProps {
   checkedExercise: string[];
@@ -22,20 +22,28 @@ interface ButtonGroupProps {
 }
 
 const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
+  const queryClient = useQueryClient();
   const isDeleteDisabled = checkedExercise.length === 0;
 
   const router = useRouter();
 
-  const [deleteExerciseDetail] = useDeleteExerciseDetailMutation();
-  const { data: userInfo } = useGetUserInfoQuery();
-  const { data: exerciseData } = useGetExerciseListQuery(
-    {
-      userId: userInfo?.id ?? '',
-      page,
-      limit: 10,
-    },
-    { skip: !userInfo?.id },
+  const { data: userInfo } = useCustomQuery(['user'], API_ENDPOINT.USER.INFO);
+  const { data: exerciseData } = useCustomQuery(
+    ['exercise'],
+    `${API_ENDPOINT.EXERCISE.LIST}?id=${userInfo?.id}&page=${page}&limit=10`,
   );
+
+  const { mutate } = useCustomMutation<
+    { token: string },
+    Error,
+    {
+      exerciseDetails: DeleteExerciseDetailPayload;
+    }
+  >(API_ENDPOINT.EXERCISE.DETAILS, 'post', {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['exercise'] });
+    },
+  });
 
   const handleDeleteExercise = async () => {
     if (checkedExercise.length && exerciseData && exerciseData?.items.length) {
@@ -63,7 +71,7 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
         };
       });
       try {
-        await deleteExerciseDetail(payload).unwrap();
+        mutate({ exerciseDetails: payload });
       } catch (error) {
         console.log(error);
       }

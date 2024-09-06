@@ -11,8 +11,8 @@ import ErrorMessage from '#components/common/ErrorMessage';
 
 import useSelectBox from '#hooks/useSelectBox';
 
-import ArrowDownIcon from '#assets/icon/angle-down-solid.svg?react';
-import ArrowUPIcon from '#assets/icon/angle-up-solid.svg?react';
+import ArrowDownIcon from 'public/icon/angle-down-solid.svg';
+import ArrowUPIcon from 'public/icon/angle-up-solid.svg';
 
 type Option = {
   value: string;

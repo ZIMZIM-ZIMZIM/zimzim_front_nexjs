@@ -10,8 +10,6 @@ const mutateData = async <TData, TVariables>(
   method: 'post' | 'put' | 'delete' | 'patch',
   data?: TVariables,
 ) => {
-  console.log(url, method, data);
-
   const response = await axiosInstance({
     url,
     method,
