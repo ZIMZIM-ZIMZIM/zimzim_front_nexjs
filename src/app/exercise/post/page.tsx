@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import ContentBox from '#components/common/ContentBox';
 import ExerciseForm, {
@@ -21,13 +23,15 @@ import ROUTE from '#/constants/route';
 import MESSAGE from '#/constants/message';
 
 import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
+import { useRouter } from 'next/router';
 
 const ExercisePostPage = () => {
   const today = getKoreaDate();
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const router = useRouter();
 
   const [postExercise] = usePostExerciseMutation();
   const { data: userInfo } = useGetUserInfoQuery();
@@ -95,7 +99,7 @@ const ExercisePostPage = () => {
           ]),
         );
         alert(MESSAGE.COMPLETED('등록이'));
-        navigate(ROUTE.MAIN_PAGE);
+        router.push(ROUTE.MAIN_PAGE);
       } catch (error) {
         console.log(error, 'error');
       }

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 
 import ExerciseTable from '#/components/exercise/list/ExerciseTable';

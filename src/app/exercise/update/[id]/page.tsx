@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 
@@ -20,13 +22,15 @@ import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
 import MESSAGE from '#/constants/message';
 import FORMAT from '#/constants/format';
 import ROUTE from '#/constants/route';
+import { useRouter } from 'next/router';
 
 const ExerciseUpdatePage = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const router = useRouter();
 
-  const { id } = useParams();
-  const { data } = useGetExerciseDetailQuery(id as string);
+  const { id } = router.query;
+  const { data } = useGetExerciseDetailQuery(id ? id[0] : '');
   const [updateExercise] = useUpdateExerciseMutation();
 
   const [defaultValues, setDefaultValues] = useState<ExercisePostFormInput>();
@@ -39,7 +43,7 @@ const ExerciseUpdatePage = () => {
 
       try {
         await updateExercise({
-          id: id ?? '',
+          id: id ? id[0] : '',
           payload: {
             duration,
             force: force as EXERCISE_FORCE_TYPE,
@@ -55,7 +59,7 @@ const ExerciseUpdatePage = () => {
           ]),
         );
         alert(MESSAGE.COMPLETED('수정'));
-        navigate(ROUTE.EXERCISE.DEFAULT);
+        router.push(ROUTE.EXERCISE.DEFAULT);
       } catch (error) {
         console.log('Error updating exercise:', error);
       }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+// import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import Button from '#/components/common/Button';
@@ -9,12 +9,14 @@ import { useGetExerciseDetailQuery } from '#/api/services/exerciseApi';
 import { twMerge } from 'tailwind-merge';
 import { ACTION_BUTTON } from '#/constants/style';
 import FORMAT from '#/constants/format';
+import { useRouter } from 'next/router';
 
 const ExerciseDetailPage = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const router = useRouter();
+  // const navigate = useNavigate();
+  const { id } = router.query;
 
-  const { data } = useGetExerciseDetailQuery(id ?? '');
+  const { data } = useGetExerciseDetailQuery(id ? id[0] : '');
 
   return (
     <div className=" flex flex-row justify-center">
@@ -22,7 +24,7 @@ const ExerciseDetailPage = () => {
         <div className="flex justify-end">
           <Button
             className={twMerge(ACTION_BUTTON, 'bg-primary')}
-            onClick={() => navigate(`/exercise/update/${id}`)}
+            onClick={() => router.push(`/exercise/update/${id}`)}
           >
             수정
           </Button>

@@ -11,7 +11,8 @@ import {
 } from 'chart.js';
 // import { useNavigate } from 'react-router-dom';
 import ROUTE from '#/constants/route';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 ChartJS.register(
   CategoryScale,
@@ -24,7 +25,7 @@ ChartJS.register(
 
 const WaterChart = () => {
   // const navigate = useNavigate();
-  const router = useRouter();
+  // const router = useRouter();
 
   const data = {
     labels: ['January'],
@@ -63,12 +64,11 @@ const WaterChart = () => {
   };
 
   return (
-    <div
-      className="bg-white rounded-lg border-1 h-32 pb-6 pt-2 px-4 w-full cursor-pointer"
-      onClick={() => router.push(ROUTE.WATER)}
-    >
-      <p className="text-sm font-bold">Water Total Volume</p>
-      <Bar data={data} options={options} />
+    <div className="bg-white rounded-lg border-1 h-32 pb-6 pt-2 px-4 w-full cursor-pointer">
+      <Link href={ROUTE.WATER}>
+        <p className="text-sm font-bold">Water Total Volume</p>
+        <Bar data={data} options={options} />
+      </Link>
     </div>
   );
 };

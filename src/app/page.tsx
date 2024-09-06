@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
-import { useRouter } from 'next/navigation';
 
 import TotalChart from '#components/dashboard/TotalChart';
 import ExerciseChart from '#/components/dashboard/ExerciseChart';
@@ -12,11 +11,10 @@ import { useGetUserInfoQuery } from '#/api/services/userApi';
 import { useGetExerciseQuery } from '#/api/services/exerciseApi';
 
 import FORMAT from '#/constants/format';
+import Link from 'next/link';
+import ROUTE from '#/constants/route';
 
 const DashboardPage = () => {
-  const router = useRouter();
-  const [totalDuration, setTotalDuration] = useState(0);
-
   const { data: userInfo, isLoading: isUserInfoLoading } =
     useGetUserInfoQuery();
 
@@ -33,16 +31,11 @@ const DashboardPage = () => {
       },
     );
 
-  useEffect(() => {
-    if (exerciseData?.length) {
-      setTotalDuration(
-        exerciseData.reduce(
-          (acc, cur) => acc + parseFloat(cur.totalDuration),
-          0,
-        ),
-      );
-    }
-  }, [exerciseData]);
+  const totalDuration = exerciseData?.reduce(
+    (acc: number, cur: { totalDuration: string }) =>
+      acc + parseFloat(cur.totalDuration),
+    0,
+  );
 
   if (isUserInfoLoading || isExerciseLoading) {
     return <div>loading~</div>;
@@ -57,8 +50,8 @@ const DashboardPage = () => {
       {exerciseData?.length ? (
         <div className="flex flex-col gap-6 h-11/12">
           <div className="flex flex-row justify-between items-cetner gap-6">
-            <TotalChart />
-            <ExerciseChart />
+            <TotalChart exerciseData={''} />
+            <ExerciseChart exerciseData={''} />
           </div>
           <WaterChart />
         </div>
@@ -67,14 +60,11 @@ const DashboardPage = () => {
           <p>운동 기록을 추가하고 일주일간 얼마나 운동했는지 알아보세요</p>
           <div className="flex flex-col items-center">
             <div>image</div>
-            <Button
-              className="bg-primary w-[120px] h-12 rounded-lg text-white font-bold text-md border-1 border-gray-light"
-              onClick={() => {
-                router.push('/exercise/post');
-              }}
-            >
-              추가
-            </Button>
+            <Link href={ROUTE.EXERCISE.POST}>
+              <Button className="bg-primary w-[120px] h-12 rounded-lg text-white font-bold text-md border-1 border-gray-light">
+                추가
+              </Button>
+            </Link>
           </div>
         </ContentBox>
       )}
