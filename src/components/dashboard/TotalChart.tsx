@@ -20,7 +20,7 @@ import Link from 'next/link';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
-const TotalChart = ({ exerciseData }) => {
+const TotalChart = () => {
   // const navigate = useNavigate();
   // const router = useRouter();
 

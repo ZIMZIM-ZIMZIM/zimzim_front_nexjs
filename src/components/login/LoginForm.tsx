@@ -1,5 +1,7 @@
+'use client';
 import React, { useRef, useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
+import { useRouter } from 'next/navigation';
 
 import Button from '#components/common/Button';
 import Input from '#/components/common/input/Input';
@@ -10,12 +12,27 @@ import { usePostLoginMutation } from '#/api/services/authApi';
 import ROUTE from '#/constants/route';
 import MESSAGE from '#/constants/message';
 import { PRIMARY_BUTTON } from '#/constants/style';
-import { twMerge } from 'tailwind-merge';
+import { useCustomMutation } from '#/hooks/useCustomMutation';
+import API_ENDPOINT from '#/constants/api';
 
 const LoginForm = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
-  const [postLogin] = usePostLoginMutation();
+  // const [postLogin] = usePostLoginMutation();
+  const { mutate } = useCustomMutation<
+    { token: string },
+    Error,
+    { id: string; password: string }
+  >(API_ENDPOINT.AUTH.LOGIN, 'post', {
+    onSuccess: () => {
+      router.push(ROUTE.MAIN_PAGE);
+    },
+    onError: (error) => {
+      console.error('Error during login:', error);
+
+      setHasError(true);
+    },
+  });
 
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -28,18 +45,10 @@ const LoginForm = () => {
     if (idRef.current?.value === '' || passwordRef.current?.value === '') {
       setHasError(true);
     } else {
-      try {
-        await postLogin({
-          id: idRef.current?.value ?? '',
-          password: passwordRef.current?.value ?? '',
-        }).unwrap();
-
-        navigate(ROUTE.MAIN_PAGE);
-      } catch (error) {
-        console.error('Error during login:', error);
-
-        setHasError(true);
-      }
+      mutate({
+        id: idRef.current?.value ?? '',
+        password: passwordRef.current?.value ?? '',
+      });
     }
   };
 

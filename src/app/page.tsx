@@ -50,8 +50,8 @@ const DashboardPage = () => {
       {exerciseData?.length ? (
         <div className="flex flex-col gap-6 h-11/12">
           <div className="flex flex-row justify-between items-cetner gap-6">
-            <TotalChart exerciseData={''} />
-            <ExerciseChart exerciseData={''} />
+            <TotalChart />
+            <ExerciseChart />
           </div>
           <WaterChart />
         </div>

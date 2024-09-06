@@ -10,15 +10,15 @@ import dayjs from 'dayjs';
 import ROUTE from '#/constants/route';
 import FORMAT from '#/constants/format';
 
-import WeightIcon from '#assets/icon/chart/weight.svg';
-import CardioIcon from '#assets/icon/chart/cardio.svg';
+import WeightIcon from '/icon/chart/weight.svg';
+import CardioIcon from '/icon/chart/cardio.svg';
 import { EXERCISE_TYPE } from '#/api/types';
 import Link from 'next/link';
 // import { useRouter } from 'next/router';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const ExerciseChart = ({ exerciseData }) => {
+const ExerciseChart = () => {
   // const navigate = useNavigate();
   // const router = useRouter();
 

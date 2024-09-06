@@ -1,8 +1,12 @@
 import ClientProvider from './ClientProvider';
+import '../index.css';
 
 export const metadata = {
   title: 'ZIMZIM',
   description: 'Exercise saves you',
+  icons: {
+    icon: '/icon/icon.svg',
+  },
 };
 
 export default function RootLayout({

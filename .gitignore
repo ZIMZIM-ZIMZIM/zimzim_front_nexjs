@@ -1,4 +1,5 @@
 *.env
+.next
 
 # Logs
 logs
@@ -26,4 +27,3 @@ dist-ssr
 *.sw?
 
 
-.next
