@@ -19,7 +19,7 @@ import {
 } from '#/constants/option';
 import { PRIMARY_BUTTON } from '#/constants/style';
 
-import DeleteIcon from '#assets/icon/delete.svg?react';
+import DeleteIcon from '#assets/icon/delete.svg';
 
 export type ExercisePostFormInput = {
   _id?: string | null;

@@ -1,3 +1,4 @@
+'use client';
 import React, { Dispatch, SetStateAction } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import {
@@ -16,8 +17,8 @@ import ContentBox from '#/components/common/ContentBox';
 import useExerciseData, { FlattenedExercise } from '#/hooks/useExerciseData';
 import { useGetExerciseColumns } from '#/hooks/useExerciseColumns';
 
-import LeftArrowIcon from '#assets/icon/left-arrow.svg';
-import RightArrowIcon from '#assets/icon/right-arrow.svg';
+import LeftArrowIcon from 'public/icon/left-arrow.svg';
+import RightArrowIcon from 'public/icon/right-arrow.svg';
 import { useRouter } from 'next/router';
 
 interface ExerciseTableProps {

@@ -4,7 +4,7 @@ import axios from 'axios';
 let navigateFunction: (path: string) => void;
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_SERVER_URL,
+  baseURL: 'http://localhost:4000',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -14,9 +14,10 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const { url } = config;
 
-    if (!url?.startsWith(API_ENDPOINT.AUTH.SIGN_UP)) {
-      config.withCredentials = true;
-    }
+    // if (!url?.includes(API_ENDPOINT.AUTH.SIGN_UP)) {
+    config.withCredentials = true;
+    // }
+    // console.log(config, 'config');
     return config;
   },
   (error) => {
@@ -26,6 +27,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
+    // console.log(response, ';~');
     return response.data;
   },
   async (error) => {
@@ -36,7 +38,7 @@ axiosInstance.interceptors.response.use(
       if (status === 401 || status === 403) {
         try {
           const response = await axios.post(
-            `${import.meta.env.VITE_SERVER_URL}${API_ENDPOINT.AUTH.REFRESH_TOKEN}`,
+            `${import.meta.env.NEXT_PUBLIC_SERVER_URL}${API_ENDPOINT.AUTH.REFRESH_TOKEN}`,
           );
 
           originalRequest.headers['Authorization'] =

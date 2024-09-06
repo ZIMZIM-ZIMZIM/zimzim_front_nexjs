@@ -1,5 +1,5 @@
 import ClientProvider from './ClientProvider';
-import '../index.css';
+import '../styles/index.css';
 
 export const metadata = {
   title: 'ZIMZIM',

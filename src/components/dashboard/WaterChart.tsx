@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -9,9 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-// import { useNavigate } from 'react-router-dom';
 import ROUTE from '#/constants/route';
-// import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 ChartJS.register(
@@ -24,9 +24,6 @@ ChartJS.register(
 );
 
 const WaterChart = () => {
-  // const navigate = useNavigate();
-  // const router = useRouter();
-
   const data = {
     labels: ['January'],
     datasets: [
@@ -43,6 +40,7 @@ const WaterChart = () => {
   const options = {
     indexAxis: 'y' as const,
     responsive: true,
+    barThickness: 44,
     maintainAspectRatio: false,
     plugins: {
       legend: {
@@ -61,12 +59,18 @@ const WaterChart = () => {
         max: 100,
       },
     },
+    layout: {
+      padding: {
+        top: 0,
+        bottom: 60,
+      },
+    },
   };
 
   return (
-    <div className="bg-white rounded-lg border-1 h-32 pb-6 pt-2 px-4 w-full cursor-pointer">
+    <div className="bg-white rounded-lg border-1 h-32 pt-2 px-4 w-full cursor-pointer">
+      <p className="text-sm font-bold">Water Total Volume</p>
       <Link href={ROUTE.WATER}>
-        <p className="text-sm font-bold">Water Total Volume</p>
         <Bar data={data} options={options} />
       </Link>
     </div>

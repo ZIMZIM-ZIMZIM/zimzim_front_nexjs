@@ -1,75 +1,36 @@
+'use client';
+
 import React, { useMemo } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import Link from 'next/link';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import dayjs from 'dayjs';
-
-// import { useGetUserInfoQuery } from '#/api/services/userApi';
-// import { useGetExerciseQuery } from '#/api/services/exerciseApi';
 
 import ROUTE from '#/constants/route';
-import FORMAT from '#/constants/format';
 
-import WeightIcon from '/icon/chart/weight.svg';
-import CardioIcon from '/icon/chart/cardio.svg';
-import { EXERCISE_TYPE } from '#/api/types';
-import Link from 'next/link';
-// import { useRouter } from 'next/router';
+import { Exercise, EXERCISE_TYPE } from '#/api/types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const ExerciseChart = () => {
-  // const navigate = useNavigate();
-  // const router = useRouter();
+const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
+  const { weight, cardio } = useMemo(() => {
+    let cardio = 0;
+    let weight = 0;
 
-  // const { data: userInfo } = useGetUserInfoQuery();
+    exerciseData?.forEach((ele) =>
+      ele.detail.forEach((detail) => {
+        if (detail.type === EXERCISE_TYPE.CARDIO) {
+          cardio += parseFloat(detail.duration);
+        } else {
+          weight += parseFloat(detail.duration);
+        }
+      }),
+    );
 
-  // const { data: exerciseData, isLoading: isExerciseLoading } =
-  //   useGetExerciseQuery(
-  //     {
-  //       userId: userInfo?.id ?? '',
-  //       startDate: dayjs().subtract(7, 'day').format(FORMAT.DATE),
-  //       endDate: dayjs().format(FORMAT.DATE),
-  //     },
-  //     { skip: !userInfo },
-  //   );
-
-  // if (isExerciseLoading) {
-  //   return <div>loading~</div>;
-  // }
-
-  // const { weight, cardio } = useMemo(() => {
-  //   let cardio = 0;
-  //   let weight = 0;
-
-  //   exerciseData?.forEach((ele) =>
-  //     ele.detail.forEach((detail) => {
-  //       if (detail.type === EXERCISE_TYPE.CARDIO) {
-  //         cardio += parseFloat(detail.duration);
-  //       } else {
-  //         weight += parseFloat(detail.duration);
-  //       }
-  //     }),
-  //   );
-
-  //   return {
-  //     weight,
-  //     cardio,
-  //   };
-  // }, [exerciseData]);
-
-  let cardio = 0;
-  let weight = 0;
-
-  exerciseData?.forEach((ele) =>
-    ele.detail.forEach((detail) => {
-      if (detail.type === EXERCISE_TYPE.CARDIO) {
-        cardio += parseFloat(detail.duration);
-      } else {
-        weight += parseFloat(detail.duration);
-      }
-    }),
-  );
+    return {
+      weight,
+      cardio,
+    };
+  }, [exerciseData]);
 
   const data = {
     labels: [EXERCISE_TYPE.WEIGHT, EXERCISE_TYPE.CARDIO],
@@ -85,23 +46,19 @@ const ExerciseChart = () => {
     ],
   };
 
-  const images = [weight ? WeightIcon : '', cardio ? CardioIcon : ''].map(
-    (src) => {
+  const images = [
+    weight ? '/icon/chart/weight.svg' : '',
+    cardio ? '/icon/chart/cardio.svg' : '',
+  ].map((src) => {
+    if (src !== '') {
       const img = new Image();
       img.src = src;
-      return img;
-    },
-  );
+      img.width = 40;
+      img.height = 40;
 
-  // const images = useMemo(
-  //   () =>
-  //     [weight ? WeightIcon : '', cardio ? CardioIcon : ''].map((src) => {
-  //       const img = new Image();
-  //       img.src = src;
-  //       return img;
-  //     }),
-  //   [weight, cardio],
-  // );
+      return img;
+    }
+  });
 
   const customPlugin = {
     id: 'customPlugin',
@@ -116,7 +73,9 @@ const ExerciseChart = () => {
 
           const image = images[index];
 
-          ctx.drawImage(image, x - width / 2, y - width / 2, width, width);
+          if (image) {
+            ctx.drawImage(image, x - width / 2, y - width / 2, width, width);
+          }
         },
       );
 
@@ -125,7 +84,7 @@ const ExerciseChart = () => {
   };
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     plugins: {
       legend: {
         display: false,

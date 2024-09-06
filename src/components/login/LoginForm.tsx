@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useRef, useState, FormEvent } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useRouter } from 'next/navigation';
@@ -7,18 +8,16 @@ import Button from '#components/common/Button';
 import Input from '#/components/common/input/Input';
 import ErrorMessage from '#components/common/ErrorMessage';
 
-import { usePostLoginMutation } from '#/api/services/authApi';
+import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import ROUTE from '#/constants/route';
 import MESSAGE from '#/constants/message';
 import { PRIMARY_BUTTON } from '#/constants/style';
-import { useCustomMutation } from '#/hooks/useCustomMutation';
 import API_ENDPOINT from '#/constants/api';
 
 const LoginForm = () => {
   const router = useRouter();
 
-  // const [postLogin] = usePostLoginMutation();
   const { mutate } = useCustomMutation<
     { token: string },
     Error,

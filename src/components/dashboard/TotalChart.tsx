@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useMemo } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import Link from 'next/link';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -10,46 +12,21 @@ import {
 } from 'chart.js';
 import dayjs from 'dayjs';
 
-// import { useGetUserInfoQuery } from '#/api/services/userApi';
-// import { useGetExerciseQuery } from '#/api/services/exerciseApi';
-
 import FORMAT from '#/constants/format';
 import ROUTE from '#/constants/route';
-import Link from 'next/link';
-// import { useRouter } from 'next/router';
+
+import { Exercise } from '#/api/types';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
-const TotalChart = () => {
-  // const navigate = useNavigate();
-  // const router = useRouter();
-
-  // const { data: userInfo } = useGetUserInfoQuery();
-
-  // const dateRagne = useMemo(
-  //   () =>
-  //     Array.from({ length: 7 }, (_, i) =>
-  //       dayjs().subtract(6, 'day').add(i, 'day').format(FORMAT.DATE),
-  //     ),
-  //   [],
-  // );
-  const dateRagne = Array.from({ length: 7 }, (_, i) =>
-    dayjs().subtract(6, 'day').add(i, 'day').format(FORMAT.DATE),
+const TotalChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
+  const dateRagne = useMemo(
+    () =>
+      Array.from({ length: 7 }, (_, i) =>
+        dayjs().subtract(6, 'day').add(i, 'day').format(FORMAT.DATE),
+      ),
+    [],
   );
-
-  // const { data: exerciseData, isLoading: isExerciseLoading } =
-  //   useGetExerciseQuery(
-  //     {
-  //       userId: userInfo?.id ?? '',
-  //       startDate: dayjs().subtract(7, 'day').format(FORMAT.DATE),
-  //       endDate: dayjs().format(FORMAT.DATE),
-  //     },
-  //     { skip: !userInfo },
-  //   );
-
-  // if (isExerciseLoading) {
-  //   return <div>loading~</div>;
-  // }
 
   const data = {
     labels: dateRagne,

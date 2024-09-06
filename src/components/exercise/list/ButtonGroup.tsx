@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { twMerge } from 'tailwind-merge';
+import { useRouter } from 'next/navigation';
 
 import Button from '#components/common/Button';
 
@@ -10,9 +12,9 @@ import {
 } from '#/api/services/exerciseApi';
 import { useGetUserInfoQuery } from '#/api/services/userApi';
 import { ExerciseDetail } from '#/api/types';
+
 import { ACTION_BUTTON } from '#/constants/style';
 import ROUTE from '#/constants/route';
-import { useRouter } from 'next/router';
 
 interface ButtonGroupProps {
   checkedExercise: string[];
@@ -22,7 +24,6 @@ interface ButtonGroupProps {
 const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
   const isDeleteDisabled = checkedExercise.length === 0;
 
-  // const navigate = useNavigate();
   const router = useRouter();
 
   const [deleteExerciseDetail] = useDeleteExerciseDetailMutation();

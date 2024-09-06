@@ -1,12 +1,13 @@
+'use client';
 import React from 'react';
 
 import MenuItem from '#components/common/menu/MenuItem';
 
 import ROUTE from '#/constants/route';
 
-import ChartIcon from '#assets/icon/chart.svg?react';
-import ExerciseIcon from '#assets/icon/exercise.svg?react';
-import WaterIcon from '#assets/icon/water.svg?react';
+import ChartIcon from 'public/icon/chart.svg';
+import ExerciseIcon from 'public/icon/exercise.svg';
+import WaterIcon from 'public/icon/water.svg';
 
 const Menu = () => (
   <header className="w-48 justify-center algin-center border-b-1 border-slate-900/10 bg-white">
