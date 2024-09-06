@@ -1,8 +1,14 @@
 {
-  "../node_modules/@tanstack/query-devtools/build/dev.js -> ./Devtools/E6UWR6XD.js": {
-    "id": "../node_modules/@tanstack/query-devtools/build/dev.js -> ./Devtools/E6UWR6XD.js",
+  "../node_modules/@tanstack/query-devtools/build/dev.js -> ./DevtoolsComponent/AIPVUCAN.js": {
+    "id": "../node_modules/@tanstack/query-devtools/build/dev.js -> ./DevtoolsComponent/AIPVUCAN.js",
     "files": [
-      "static/chunks/_app-pages-browser_node_modules_tanstack_query-devtools_build_Devtools_E6UWR6XD_js.js"
+      "static/chunks/_app-pages-browser_node_modules_tanstack_query-devtools_build_DevtoolsComponent_AIPVUCAN_js.js"
+    ]
+  },
+  "../node_modules/@tanstack/query-devtools/build/dev.js -> ./DevtoolsPanelComponent/YCAYD3IW.js": {
+    "id": "../node_modules/@tanstack/query-devtools/build/dev.js -> ./DevtoolsPanelComponent/YCAYD3IW.js",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_tanstack_query-devtools_build_DevtoolsPanelComponent_YCAYD3IW_js.js"
     ]
   }
 }
