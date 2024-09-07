@@ -13,13 +13,24 @@ const Menu = () => (
   <header className="w-48 justify-center algin-center border-b-1 border-slate-900/10 bg-white">
     <nav className="h-full flex flex-col gap-6 pt-4 items-center">
       <div className="flex flex-col gap-8 w-5/6 text-gray-600 max-md:items-center">
-        <MenuItem to={ROUTE.MAIN_PAGE} title="Dashboard" Icon={ChartIcon} />
+        <MenuItem
+          to={ROUTE.MAIN_PAGE}
+          title="Dashboard"
+          Icon={ChartIcon}
+          id="/user/dashboard"
+        />
         <MenuItem
           to={ROUTE.EXERCISE.DEFAULT}
           title="Exercise"
           Icon={ExerciseIcon}
+          id="/user/exercise"
         />
-        <MenuItem to={ROUTE.WATER} title="Water" Icon={WaterIcon} />
+        <MenuItem
+          to={ROUTE.WATER}
+          title="Water"
+          Icon={WaterIcon}
+          id="/user/water"
+        />
       </div>
     </nav>
   </header>

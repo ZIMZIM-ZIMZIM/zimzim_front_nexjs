@@ -8,13 +8,20 @@ import { twMerge } from 'tailwind-merge';
 import Button from '#components/common/Button';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
+import { useCustomQuery } from '#/hooks/useCustomQuery';
 
-import { DeleteExerciseDetailPayload, ExerciseDetail } from '#/api/types';
+import {
+  DeleteExerciseDetailPayload,
+  Exercise,
+  ExerciseDetail,
+  ExerciseList,
+  User,
+} from '#/api/types';
 
 import { ACTION_BUTTON } from '#/constants/style';
 import ROUTE from '#/constants/route';
-import { useCustomQuery } from '#/hooks/useCustomQuery';
 import API_ENDPOINT from '#/constants/api';
+import QUERY_KEYS from '#/constants/queryKey';
 
 interface ButtonGroupProps {
   checkedExercise: string[];
@@ -27,8 +34,11 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
 
   const router = useRouter();
 
-  const { data: userInfo } = useCustomQuery(['user'], API_ENDPOINT.USER.INFO);
-  const { data: exerciseData } = useCustomQuery(
+  const { data: userInfo } = useCustomQuery<User>(
+    QUERY_KEYS.USER,
+    API_ENDPOINT.USER.INFO,
+  );
+  const { data: exerciseData } = useCustomQuery<ExerciseList>(
     ['exercise'],
     `${API_ENDPOINT.EXERCISE.LIST}?id=${userInfo?.id}&page=${page}&limit=10`,
   );
@@ -37,19 +47,19 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
     { token: string },
     Error,
     {
-      exerciseDetails: DeleteExerciseDetailPayload;
+      exerciseDetails: DeleteExerciseDetailPayload[];
     }
   >(API_ENDPOINT.EXERCISE.DETAILS, 'post', {
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['exercise'] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.EXERCISE.LIST() });
     },
   });
 
   const handleDeleteExercise = async () => {
     if (checkedExercise.length && exerciseData && exerciseData?.items.length) {
       let temp = checkedExercise.flatMap((exercise) =>
-        exerciseData.items.filter((item) =>
-          item.detail.find((ele) => ele._id === exercise),
+        exerciseData.items.filter((item: Exercise) =>
+          item.detail.find((ele: ExerciseDetail) => ele._id === exercise),
         ),
       );
 

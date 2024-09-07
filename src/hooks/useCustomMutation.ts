@@ -33,13 +33,11 @@ export const useCustomMutation = <
     mutationFn: (variables: TVariables) =>
       mutateData<TData, TVariables>(url, method, variables),
     onSuccess: (data, variables, context) => {
-      console.log('Mutation successful', data);
       if (options?.onSuccess) {
         options.onSuccess(data, variables, context);
       }
     },
     onError: (error, variables, context) => {
-      console.error('Mutation failed', error);
       if (options?.onError) {
         options.onError(error, variables, context);
       }

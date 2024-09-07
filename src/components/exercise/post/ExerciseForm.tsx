@@ -115,14 +115,14 @@ const ExerciseForm = ({
       return (
         <Badge content={content} key={content}>
           <Button
-            className="p-1"
+            className="px-1"
             onClick={() => {
               setExerciseList((prev: ExercisePostFormInput[]) =>
                 prev.filter((element) => element !== exercise),
               );
             }}
           >
-            <DeleteIcon width={8} height={10} />
+            <DeleteIcon className="w-2 h-2" />
           </Button>
         </Badge>
       );

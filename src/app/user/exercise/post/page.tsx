@@ -17,24 +17,33 @@ import ROUTE from '#/constants/route';
 import MESSAGE from '#/constants/message';
 import API_ENDPOINT from '#/constants/api';
 
-import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
+import {
+  EXERCISE_FORCE_TYPE,
+  EXERCISE_TYPE,
+  PostExercisePayload,
+  User,
+} from '#/api/types';
+import QUERY_KEYS from '#/constants/queryKey';
 
 const ExercisePostPage = () => {
   const today = getKoreaDate();
 
   const router = useRouter();
 
-  const { data: userInfo } = useCustomQuery(['user'], API_ENDPOINT.USER.INFO);
-  const { mutate } = useCustomMutation<ExercisePostFormInput[]>(
-    API_ENDPOINT.EXERCISE.EXERCISE,
-    'post',
-    {
-      onSuccess: () => {
-        alert(MESSAGE.COMPLETED('등록이'));
-        router.push(ROUTE.MAIN_PAGE);
-      },
-    },
+  const { data: userInfo } = useCustomQuery<User>(
+    QUERY_KEYS.USER,
+    API_ENDPOINT.USER.INFO,
   );
+  const { mutate } = useCustomMutation<
+    { token: string },
+    Error,
+    PostExercisePayload
+  >(API_ENDPOINT.EXERCISE.EXERCISE, 'post', {
+    onSuccess: () => {
+      alert(MESSAGE.COMPLETED('등록이'));
+      router.push(ROUTE.MAIN_PAGE);
+    },
+  });
 
   const createExercisePayload = (exercise: ExercisePostFormInput) => ({
     userId: userInfo?.id ?? '',

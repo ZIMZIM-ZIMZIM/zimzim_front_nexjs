@@ -21,8 +21,8 @@ const UserHeader = () => {
 
   const { mutate } = useCustomMutation(API_ENDPOINT.AUTH.LOGOUT, 'post', {
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user'] });
       router.push(ROUTE.LOGIN);
+      queryClient.invalidateQueries();
     },
   });
 
@@ -42,8 +42,26 @@ const UserHeader = () => {
         </Link>
       </div>
       <div className="flex flex-row gap-4">
+        <Button
+          className={twMerge(
+            HEADER_ICON_BUTTON,
+            'rounded-full hover:bg-secondary-light',
+          )}
+        >
+          <Image
+            src="/icon/translate.svg"
+            width={20}
+            height={20}
+            alt="translate icon"
+          />
+        </Button>
         <Link href={ROUTE.USER}>
-          <div className={twMerge(HEADER_ICON_BUTTON, 'rounded-full')}>
+          <div
+            className={twMerge(
+              HEADER_ICON_BUTTON,
+              'rounded-full hover:bg-secondary-light',
+            )}
+          >
             <Image
               src="/icon/user.svg"
               width={20}
@@ -53,14 +71,17 @@ const UserHeader = () => {
           </div>
         </Link>
         <Button
-          className={twMerge(HEADER_ICON_BUTTON, 'rounded-md')}
+          className={twMerge(
+            HEADER_ICON_BUTTON,
+            'rounded-md hover:bg-secondary-light',
+          )}
           onClick={handleLogout}
         >
           <Image
             src="/icon/logout.svg"
             width={20}
             height={20}
-            alt="user icon"
+            alt="logout icon"
           />
         </Button>
       </div>

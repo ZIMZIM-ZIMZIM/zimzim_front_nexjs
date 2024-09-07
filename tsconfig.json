@@ -12,42 +12,18 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "#/*": [
-        "src/*"
-      ],
-      "#api/*": [
-        "src/api/*"
-      ],
-      "#pages/*": [
-        "src/app/*"
-      ],
-      "#layout/*": [
-        "src/layout/*"
-      ],
-      "#components/*": [
-        "src/components/*"
-      ],
-      "#assets/*": [
-        "src/assets/*"
-      ],
-      "#stores/*": [
-        "src/stores/*"
-      ],
-      "#hooks/*": [
-        "src/hooks/*"
-      ],
-      "#util/*": [
-        "src/util/*"
-      ],
-      "#constants/*": [
-        "src/constants/*"
-      ]
+      "#/*": ["src/*"],
+      "#api/*": ["src/api/*"],
+      "#pages/*": ["src/app/*"],
+      "#layout/*": ["src/layout/*"],
+      "#components/*": ["src/components/*"],
+      "#assets/*": ["src/assets/*"],
+      "#stores/*": ["src/stores/*"],
+      "#hooks/*": ["src/hooks/*"],
+      "#util/*": ["src/util/*"],
+      "#constants/*": ["src/constants/*"]
     },
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "incremental": true,
     "esModuleInterop": true,
@@ -63,12 +39,9 @@
     "src",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "next.config.js"
+    "next.config.js",
+    "middleware.ts"
   ],
-  "files": [
-    "src/custom.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "files": ["src/custom.d.ts"],
+  "exclude": ["node_modules"]
 }

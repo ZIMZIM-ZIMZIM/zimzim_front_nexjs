@@ -19,8 +19,9 @@ import { useCustomQuery } from '#/hooks/useCustomQuery';
 import { useGetExerciseColumns } from '#/hooks/useExerciseColumns';
 
 import API_ENDPOINT from '#/constants/api';
+import QUERY_KEYS from '#/constants/queryKey';
 
-import { Exercise } from '#/api/types';
+import { Exercise, ExerciseDetail, ExerciseList, User } from '#/api/types';
 
 import LeftArrowIcon from 'public/icon/left-arrow.svg';
 import RightArrowIcon from 'public/icon/right-arrow.svg';
@@ -49,9 +50,12 @@ const ExerciseTable = ({
 
   const columnHelper = createColumnHelper<FlattenedExercise>();
 
-  const { data: userInfo } = useCustomQuery(['user'], API_ENDPOINT.USER.INFO);
-  const { data: exerciseData } = useCustomQuery(
-    ['exercise'],
+  const { data: userInfo } = useCustomQuery<User>(
+    QUERY_KEYS.USER,
+    API_ENDPOINT.USER.INFO,
+  );
+  const { data: exerciseData } = useCustomQuery<ExerciseList>(
+    QUERY_KEYS.EXERCISE.LIST(),
     `${API_ENDPOINT.EXERCISE.LIST}?id=${userInfo?.id}&page=${page}&limit=10`,
   );
   const [flattenedData, setFlattenData] = useState<FlattenedExercise[] | []>(
@@ -60,8 +64,8 @@ const ExerciseTable = ({
   useEffect(() => {
     if (exerciseData?.items) {
       setFlattenData(
-        exerciseData?.items.flatMap((exercise) =>
-          exercise.detail.map((element) => ({
+        exerciseData?.items.flatMap((exercise: Exercise) =>
+          exercise.detail.map((element: ExerciseDetail) => ({
             _id: element._id,
             date: exercise.date,
             type: element.type,

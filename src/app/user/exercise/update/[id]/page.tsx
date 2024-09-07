@@ -13,12 +13,13 @@ import ExerciseForm, {
 import { useCustomQuery } from '#/hooks/useCustomQuery';
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
-import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
+import { Exercise, EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
 
 import MESSAGE from '#/constants/message';
 import FORMAT from '#/constants/format';
 import ROUTE from '#/constants/route';
 import API_ENDPOINT from '#/constants/api';
+import QUERY_KEYS from '#/constants/queryKey';
 
 const ExerciseUpdatePage = () => {
   const router = useRouter();
@@ -27,8 +28,8 @@ const ExerciseUpdatePage = () => {
   const pathname = usePathname();
   const id = pathname.split('update/')[1];
 
-  const { data: exerciseDetail } = useCustomQuery(
-    ['exercise'],
+  const { data: exerciseDetail } = useCustomQuery<Exercise>(
+    QUERY_KEYS.EXERCISE.DETAIL(id),
     API_ENDPOINT.EXERCISE.DETAIL(id),
   );
 
@@ -43,7 +44,7 @@ const ExerciseUpdatePage = () => {
     }
   >(API_ENDPOINT.EXERCISE.DETAIL(id), 'post', {
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['exercise'] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.EXERCISE.LIST() });
     },
   });
 
@@ -74,11 +75,11 @@ const ExerciseUpdatePage = () => {
   useEffect(() => {
     if (exerciseDetail) {
       setDefaultValues({
-        date: dayjs(exerciseDetail?.date).format(FORMAT.DATE),
-        isPT: exerciseDetail?.isPT,
-        duration: exerciseDetail?.detail[0].duration,
-        type: exerciseDetail?.detail[0].type,
-        force: exerciseDetail?.detail[0].force,
+        date: dayjs(exerciseDetail.date).format(FORMAT.DATE),
+        isPT: exerciseDetail.isPT,
+        duration: exerciseDetail.detail[0].duration,
+        type: exerciseDetail.detail[0].type,
+        force: exerciseDetail.detail[0].force,
       });
     }
   }, [exerciseDetail]);

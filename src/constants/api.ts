@@ -12,7 +12,7 @@ const API_ENDPOINT = {
     EXERCISE: '/exercise',
     LIST: '/exercise/list',
     DETAIL: (id: string) => `/exercise/detail/${id}`,
-    DETAILS: 'exercise/details',
+    DETAILS: '/exercise/details',
   },
 };
 

@@ -9,11 +9,12 @@ interface MenuItemProps {
   to: string;
   Icon: ElementType;
   title: string;
+  id: string;
 }
 
-const MenuItem = ({ to, Icon, title }: MenuItemProps) => {
+const MenuItem = ({ to, Icon, title, id }: MenuItemProps) => {
   const pathname = usePathname();
-  const isActive = pathname === to;
+  const isActive = pathname.includes(id);
 
   return (
     <Link

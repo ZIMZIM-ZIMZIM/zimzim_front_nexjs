@@ -8,6 +8,10 @@ const nextConfig = {
 
     return config;
   },
+  i18n: {
+    locales: ['en', 'ko'],
+    defaultLocale: 'ko',
+  },
 };
 
 export default nextConfig;

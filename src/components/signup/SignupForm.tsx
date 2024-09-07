@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -7,14 +9,15 @@ import * as yup from 'yup';
 import Button from '#components/common/Button';
 import Input from '#/components/common/input/Input';
 
-import { usePostSignupMutation } from '#/api/services/authApi';
+import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import MESSAGE from '#/constants/message';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
+import API_ENDPOINT from '#/constants/api';
 
-import EyeSlashIcon from '#assets/icon/eye-slash-regular.svg?react';
-import EyeIcon from '#assets/icon/eye-regular.svg?react';
+import EyeSlashIcon from 'public/icon/eye-slash-regular.svg';
+import EyeIcon from 'public/icon/eye-regular.svg';
 
 export type SignUpFormInput = {
   id: string;
@@ -24,13 +27,24 @@ export type SignUpFormInput = {
 };
 
 const SignupForm = () => {
-  const [postSignup, { isSuccess }] = usePostSignupMutation();
+  const router = useRouter();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
 
-  const navigate = useNavigate();
+  const { mutate } = useCustomMutation<
+    { token: string },
+    Error,
+    { id: string; password: string; nickname: string }
+  >(API_ENDPOINT.AUTH.SIGN_UP, 'post', {
+    onSuccess: () => {
+      router.push(ROUTE.MAIN_PAGE);
+    },
+    onError: () => {
+      console.log('다시 한번 시도해 주세요');
+    },
+  });
 
   const schema = yup
     .object()
@@ -79,19 +93,7 @@ const SignupForm = () => {
     return () => subscription.unsubscribe();
   }, [watch, trigger]);
 
-  const onSubmit = async (data: SignUpFormInput) => {
-    try {
-      await postSignup(data);
-
-      if (isSuccess) {
-        navigate(ROUTE.LOGIN);
-      } else {
-        console.log('다시 한번 시도해 주세요');
-      }
-    } catch (error) {
-      console.log(error, 'error');
-    }
-  };
+  const onSubmit = (data: SignUpFormInput) => mutate(data);
 
   return (
     <form className="flex flex-col gap-12" onSubmit={handleSubmit(onSubmit)}>
@@ -100,12 +102,14 @@ const SignupForm = () => {
           label="ID"
           placeholder={MESSAGE.FORM.REQUIRED('ID를')}
           errorMessage={errors.id?.message}
+          autoComplete="off"
           {...register('id')}
         />
         <Input
           label="Nickname"
           placeholder={MESSAGE.FORM.REQUIRED('닉네임을')}
           errorMessage={errors.nickname?.message}
+          autoComplete="off"
           {...register('nickname')}
         />
         <Input
@@ -113,6 +117,7 @@ const SignupForm = () => {
           type={showPassword ? 'text' : 'password'}
           placeholder={MESSAGE.FORM.REQUIRED('비밀번호를')}
           errorMessage={errors.password?.message}
+          autoComplete="off"
           {...register('password')}
         >
           <div
@@ -131,6 +136,7 @@ const SignupForm = () => {
           type={showConfirmPassword ? 'text' : 'password'}
           placeholder={MESSAGE.FORM.REQUIRED('비밀번호를 한 번 더')}
           errorMessage={errors.passwordConfirm?.message}
+          autoComplete="off"
           {...register('passwordConfirm')}
         >
           <div
