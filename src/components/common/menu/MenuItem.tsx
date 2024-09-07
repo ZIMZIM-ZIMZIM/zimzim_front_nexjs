@@ -22,7 +22,8 @@ const MenuItem = ({ to, Icon, title, id }: MenuItemProps) => {
       className={clsx(
         'group flex flex-row h-12 p-2 items-center gap-3 rounded-lg max-md:px-4',
         {
-          'bg-secondary-light text-white': isActive,
+          'bg-secondary-light text-white shadow-lg shadow-secondary-light/50':
+            isActive,
           'hover:bg-secondary-light/70 hover:text-white text-gray-600':
             !isActive,
         },

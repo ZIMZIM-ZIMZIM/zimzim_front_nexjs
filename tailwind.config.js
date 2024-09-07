@@ -2,10 +2,21 @@
 export default {
   content: [
     'src/app/**/*.{js,ts,jsx,tsx}',
+    'src/components/**/*.{js,ts,jsx,tsx}',
     'src/components/**/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
+      keyframes: {
+        fill: {
+          '0%': { width: '0%' },
+          '50%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
+      },
+      animation: {
+        fill: 'fill 5s linear infinite',
+      },
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
       },

@@ -73,7 +73,7 @@ const TotalChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
   };
 
   return (
-    <div className="w-2/3 bg-white rounded-lg border-1 border-gray-light py-2 px-4 cursor-pointer h-full">
+    <div className="w-2/3 bg-white rounded-lg border-1 border-gray-light py-2 px-4 cursor-pointer h-full shadow-md shadow-gray-dark/25">
       <p className="text-sm font-bold pb-2">Total workout volume</p>
       <Link href={ROUTE.EXERCISE.DEFAULT}>
         <Line data={data} options={options} />

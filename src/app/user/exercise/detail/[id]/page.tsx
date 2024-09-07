@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 import dayjs from 'dayjs';
 
-import { customFetch } from '#/app/user/dashboard/page';
-
 import Button from '#/components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
 
@@ -12,6 +10,20 @@ import { ACTION_BUTTON } from '#/constants/style';
 import FORMAT from '#/constants/format';
 
 import API_ENDPOINT from '#/constants/api';
+import { cookies } from 'next/headers';
+import axios from 'axios';
+
+export const customFetch = async (url: string) => {
+  const cookieStore = cookies();
+  const token = cookieStore.get('token')?.value;
+
+  const response = await axios.get(`${process.env.NEXT_SERVER_URL}${url}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
 
 const ExerciseDetailPage = async ({ params }: { params: { id: string } }) => {
   const exerciseId = params.id;

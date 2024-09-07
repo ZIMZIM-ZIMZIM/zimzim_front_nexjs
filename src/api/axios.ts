@@ -40,8 +40,6 @@ axiosInstance.interceptors.response.use(
 
           return axiosInstance(originalRequest);
         } catch (error) {
-          console.log('here is axiosss');
-
           return Promise.reject(error);
         }
       }

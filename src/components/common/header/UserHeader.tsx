@@ -42,12 +42,7 @@ const UserHeader = () => {
         </Link>
       </div>
       <div className="flex flex-row gap-4">
-        <Button
-          className={twMerge(
-            HEADER_ICON_BUTTON,
-            'rounded-full hover:bg-secondary-light',
-          )}
-        >
+        <Button className={twMerge(HEADER_ICON_BUTTON, 'rounded-full')}>
           <Image
             src="/icon/translate.svg"
             width={20}
@@ -56,12 +51,7 @@ const UserHeader = () => {
           />
         </Button>
         <Link href={ROUTE.USER}>
-          <div
-            className={twMerge(
-              HEADER_ICON_BUTTON,
-              'rounded-full hover:bg-secondary-light',
-            )}
-          >
+          <div className={twMerge(HEADER_ICON_BUTTON, 'rounded-full')}>
             <Image
               src="/icon/user.svg"
               width={20}
@@ -71,10 +61,7 @@ const UserHeader = () => {
           </div>
         </Link>
         <Button
-          className={twMerge(
-            HEADER_ICON_BUTTON,
-            'rounded-md hover:bg-secondary-light',
-          )}
+          className={twMerge(HEADER_ICON_BUTTON, 'rounded-md')}
           onClick={handleLogout}
         >
           <Image

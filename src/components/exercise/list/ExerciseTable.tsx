@@ -158,7 +158,7 @@ const ExerciseTable = ({
       <div className="pt-8 h-6 flex flex-row justify-end gap-2 items-center">
         {exerciseData && exerciseData?.currentPage > 0 && (
           <Button
-            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer"
+            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer shadow-md shadow-gray-dark/25"
             onClick={() => setPage((prev) => prev - 1)}
             disabled={page === 1 || !exerciseData}
           >
@@ -169,7 +169,7 @@ const ExerciseTable = ({
           <p
             key={i + 1}
             className={twMerge(
-              `border-1 border-gray-light w-7 text-center rounded-md cursor-pointer ${exerciseData?.currentPage === i + 1 ? 'bg-primary/25' : 'bg-white'}`,
+              `border-1 border-gray-light w-7 text-center rounded-md cursor-pointer shadow-md shadow-gray-dark/25 ${exerciseData?.currentPage === i + 1 ? 'bg-primary/25' : 'bg-white'}`,
             )}
             onClick={() => setPage(i + 1)}
           >
@@ -178,7 +178,7 @@ const ExerciseTable = ({
         ))}
         {exerciseData && exerciseData?.currentPage > 0 && (
           <Button
-            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer"
+            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer shadow-md shadow-gray-dark/25"
             onClick={() => setPage((prev) => prev + 1)}
             disabled={page >= (exerciseData?.totalPages ?? 1)}
           >

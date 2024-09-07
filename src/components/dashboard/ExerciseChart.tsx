@@ -93,7 +93,7 @@ const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
   };
 
   return (
-    <div className="w-1/3 bg-white rounded-lg border-1 pt-2 px-2 flex flex-col cursor-pointer h-full">
+    <div className="w-1/3 bg-white rounded-lg border-1 pt-2 px-2 flex flex-col cursor-pointer h-full shadow-md shadow-gray-dark/25">
       <p className="text-sm font-bold pl-2">Weight/Cardio</p>
       <div className="w-full flex justify-center h-full p-2 items-center">
         <Link href={ROUTE.EXERCISE.DEFAULT}>
