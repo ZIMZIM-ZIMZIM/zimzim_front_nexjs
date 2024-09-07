@@ -6,7 +6,7 @@ import { ExercisePostFormInput } from '#/components/exercise/post/ExerciseForm';
 
 interface ControllerInputProps {
   name: keyof ExercisePostFormInput;
-  control: Control<ExercisePostFormInput, any>;
+  control: Control<ExercisePostFormInput>;
   placeholder: string;
   error?: FieldError;
   label: string;

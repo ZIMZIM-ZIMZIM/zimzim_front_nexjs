@@ -57,7 +57,7 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
 
   const handleDeleteExercise = async () => {
     if (checkedExercise.length && exerciseData && exerciseData?.items.length) {
-      let temp = checkedExercise.flatMap((exercise) =>
+      const temp = checkedExercise.flatMap((exercise) =>
         exerciseData.items.filter((item: Exercise) =>
           item.detail.find((ele: ExerciseDetail) => ele._id === exercise),
         ),

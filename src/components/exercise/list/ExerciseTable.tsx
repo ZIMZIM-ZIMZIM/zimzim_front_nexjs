@@ -87,7 +87,7 @@ const ExerciseTable = ({
 
   const table = useReactTable({
     data: flattenedData ?? [],
-    columns: columns as ColumnDef<FlattenedExercise, any>[],
+    columns: columns as ColumnDef<FlattenedExercise>[],
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });

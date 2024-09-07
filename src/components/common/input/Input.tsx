@@ -1,10 +1,4 @@
-import React, {
-  InputHTMLAttributes,
-  forwardRef,
-  useState,
-  useEffect,
-  ChangeEvent,
-} from 'react';
+import React, { InputHTMLAttributes, forwardRef, ChangeEvent } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import ErrorMessage from '#components/common/ErrorMessage';
@@ -58,6 +52,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               )}
               onChange={handleChange}
               placeholder={placeholder}
+              defaultValue={defaultValue}
               autoComplete={autoComplete}
               ref={ref}
               value={value}

@@ -7,7 +7,7 @@ import SelectBox from '#/components/common/selectBox/SelectBox';
 
 interface ControllerSelectBoxProps {
   name: keyof ExercisePostFormInput;
-  control: Control<ExercisePostFormInput, any>;
+  control: Control<ExercisePostFormInput>;
   label: string;
   options: { value: string; name: string }[];
   selectId: string;

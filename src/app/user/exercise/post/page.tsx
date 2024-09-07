@@ -34,7 +34,7 @@ const ExercisePostPage = () => {
     QUERY_KEYS.USER,
     API_ENDPOINT.USER.INFO,
   );
-  const { mutate } = useCustomMutation<
+  const { mutateAsync } = useCustomMutation<
     { token: string },
     Error,
     PostExercisePayload
@@ -84,7 +84,7 @@ const ExercisePostPage = () => {
   ) => {
     if (Array.isArray(exerciseList)) {
       try {
-        const promises = [];
+        const promises: Promise<void>[] = [];
 
         const isSameDate =
           exerciseList.length > 1 &&
@@ -92,10 +92,12 @@ const ExercisePostPage = () => {
 
         if (isSameDate) {
           const payload = handleSameDateExercises(exerciseList);
-          promises.push(mutate(payload));
+          promises.push(mutateAsync(payload).then(() => {})); // 반환 값을 무시
         } else {
           exerciseList.forEach((exercise) => {
-            promises.push(mutate(createExercisePayload(exercise)));
+            promises.push(
+              mutateAsync(createExercisePayload(exercise)).then(() => {}),
+            ); // 반환 값을 무시
           });
         }
 

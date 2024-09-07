@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useMemo } from 'react';
 import { ColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
 
-import { FlattenedExercise } from '#hooks/useExerciseData';
+import { FlattenedExercise } from '#/components/exercise/list/ExerciseTable';
 
 const toggleRowSelected = (
   id: string,
@@ -16,7 +16,7 @@ const toggleRowSelected = (
 };
 
 export const useGetExerciseColumns = (
-  columnHelper: ColumnHelper<any>,
+  columnHelper: ColumnHelper<FlattenedExercise>,
   flattenedData: FlattenedExercise[],
   checkedExercise: string[],
   setCheckedExercise: Dispatch<SetStateAction<string[]>>,
@@ -48,11 +48,17 @@ export const useGetExerciseColumns = (
         cell: ({ row }) => (
           <input
             type="checkbox"
-            checked={checkedExercise.includes(row.original._id)}
-            onChange={() =>
-              toggleRowSelected(row.original._id, setCheckedExercise)
+            checked={
+              row.original._id
+                ? checkedExercise.includes(row.original._id)
+                : false
             }
-          />
+            onChange={() =>
+              row.original._id
+                ? toggleRowSelected(row.original._id, setCheckedExercise)
+                : null
+            }
+          ></input>
         ),
         meta: { className: 'w-1/12 text-left pl-4' },
       }),

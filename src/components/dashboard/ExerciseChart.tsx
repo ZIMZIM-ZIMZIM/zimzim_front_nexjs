@@ -62,7 +62,7 @@ const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
 
   const customPlugin = {
     id: 'customPlugin',
-    afterDatasetDraw(chart: ChartJS) {
+    afterDatasetDraw(chart: ChartJS<'doughnut'>) {
       const { ctx } = chart;
       const width = 30;
       ctx.save();

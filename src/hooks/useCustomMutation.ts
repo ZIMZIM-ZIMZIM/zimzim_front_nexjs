@@ -16,7 +16,7 @@ const mutateData = async <TData, TVariables>(
     data,
   });
 
-  return response.data;
+  return response.data as TData;
 };
 
 export const useCustomMutation = <

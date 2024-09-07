@@ -6,27 +6,15 @@ import dayjs from 'dayjs';
 import Button from '#/components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
 
+import { useFetch } from '#/hooks/useFetch';
+
 import { ACTION_BUTTON } from '#/constants/style';
 import FORMAT from '#/constants/format';
-
 import API_ENDPOINT from '#/constants/api';
-import { cookies } from 'next/headers';
-import axios from 'axios';
-
-export const customFetch = async (url: string) => {
-  const cookieStore = cookies();
-  const token = cookieStore.get('token')?.value;
-
-  const response = await axios.get(`${process.env.NEXT_SERVER_URL}${url}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
-};
 
 const ExerciseDetailPage = async ({ params }: { params: { id: string } }) => {
   const exerciseId = params.id;
+  const { customFetch } = useFetch();
 
   const { data } = await customFetch(API_ENDPOINT.EXERCISE.DETAIL(exerciseId));
 

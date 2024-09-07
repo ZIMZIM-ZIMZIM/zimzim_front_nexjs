@@ -33,21 +33,18 @@ interface SelectBoxProps {
 }
 
 const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
-  (
-    {
-      label,
-      options,
-      selectId,
-      selectName,
-      className = '',
-      selectClassName = '',
-      onChange,
-      errorMessage = '',
-      placeHolder,
-      value,
-    },
-    ref,
-  ) => {
+  ({
+    label,
+    options,
+    selectId,
+    selectName,
+    className = '',
+    selectClassName = '',
+    onChange,
+    errorMessage = '',
+    placeHolder,
+    value,
+  }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [internalValue, setInternalValue] = useState<string | undefined>(
       value,
