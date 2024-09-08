@@ -1,18 +1,19 @@
 'use client';
 
-import React, { ElementType } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import Image from 'next/image';
 
 interface MenuItemProps {
   to: string;
-  Icon: ElementType;
+  icon: string;
   title: string;
   id: string;
 }
 
-const MenuItem = ({ to, Icon, title, id }: MenuItemProps) => {
+const MenuItem = ({ to, icon, title, id }: MenuItemProps) => {
   const pathname = usePathname();
   const isActive = pathname.includes(id);
 
@@ -31,7 +32,7 @@ const MenuItem = ({ to, Icon, title, id }: MenuItemProps) => {
     >
       {
         <>
-          <Icon
+          <Image
             className={clsx(
               'group-hover:text-white w-7 h-7 md:w-5 md:h-5 lg:w-7 lg:h-7',
               {
@@ -39,7 +40,9 @@ const MenuItem = ({ to, Icon, title, id }: MenuItemProps) => {
                 'text-gray-600': !isActive,
               },
             )}
+            src={icon}
             width={24}
+            alt="icon"
             height={24}
           />
 

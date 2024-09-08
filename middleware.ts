@@ -1,17 +1,27 @@
-import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(req: NextRequest) {
-  const cookieStore = cookies();
-  const token = cookieStore.get('token')?.value;
-  //   if (!token) {
-  //     return NextResponse.redirect(new URL('/auth/login', req.url));
-  //   }
+  const { nextUrl } = req;
+
+  const acceptLanguage = req.headers.get('accept-language');
+  const defaultLocale = 'ko';
+  let locale = defaultLocale;
+
+  if (acceptLanguage) {
+    const preferredLocale = acceptLanguage.split(',')[0].split('-')[0]; // 'en-US' -> 'en'
+    if (['en', 'ko'].includes(preferredLocale)) {
+      locale = preferredLocale;
+    }
+  }
+
+  if (!nextUrl.pathname.startsWith(`/${locale}`)) {
+    const url = new URL(`/${locale}${nextUrl.pathname}`, req.url);
+    return NextResponse.redirect(url);
+  }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/user/:path*'], // '/user'로 시작하는 모든 경로에 대해 미들웨어 적용
+  matcher: ['/', '/:path*'],
 };

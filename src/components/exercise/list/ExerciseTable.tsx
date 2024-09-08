@@ -11,6 +11,7 @@ import {
   ColumnDef,
 } from '@tanstack/react-table';
 import { twMerge } from 'tailwind-merge';
+import { useTranslation } from 'react-i18next';
 
 import Button from '#components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
@@ -46,6 +47,7 @@ const ExerciseTable = ({
   page,
   setPage,
 }: ExerciseTableProps) => {
+  const { i18n } = useTranslation('common');
   const router = useRouter();
 
   const columnHelper = createColumnHelper<FlattenedExercise>();
@@ -61,6 +63,7 @@ const ExerciseTable = ({
   const [flattenedData, setFlattenData] = useState<FlattenedExercise[] | []>(
     [],
   );
+
   useEffect(() => {
     if (exerciseData?.items) {
       setFlattenData(
@@ -123,7 +126,9 @@ const ExerciseTable = ({
                 <tr
                   key={row.id}
                   onClick={() =>
-                    router.push(`/user/exercise/detail/${row.original._id}`)
+                    router.push(
+                      `/${i18n.language}/user/exercise/detail/${row.original._id}`,
+                    )
                   }
                   className="cursor-pointer hover:bg-secondary-light/20"
                 >

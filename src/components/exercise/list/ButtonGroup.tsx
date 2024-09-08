@@ -4,6 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { twMerge } from 'tailwind-merge';
+import { useTranslation } from 'react-i18next';
 
 import Button from '#components/common/Button';
 
@@ -29,6 +30,7 @@ interface ButtonGroupProps {
 }
 
 const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
+  const { t, i18n } = useTranslation('common');
   const queryClient = useQueryClient();
   const isDeleteDisabled = checkedExercise.length === 0;
 
@@ -99,13 +101,13 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
         disabled={isDeleteDisabled}
         onClick={handleDeleteExercise}
       >
-        삭제
+        {t('EXERCISE.LIST.BUTTON.DELETE')}
       </Button>
       <Button
         className={twMerge(ACTION_BUTTON, 'bg-primary')}
-        onClick={() => router.push(ROUTE.EXERCISE.POST)}
+        onClick={() => router.push(`/${i18n.language}${ROUTE.EXERCISE.POST}`)}
       >
-        추가
+        {t('EXERCISE.LIST.BUTTON.REGISTER')}
       </Button>
     </div>
   );

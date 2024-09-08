@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 import ContentBox from '#components/common/ContentBox';
 import ExerciseForm, {
@@ -26,6 +27,7 @@ import {
 import QUERY_KEYS from '#/constants/queryKey';
 
 const ExercisePostPage = () => {
+  const { i18n } = useTranslation('common');
   const today = getKoreaDate();
 
   const router = useRouter();
@@ -41,7 +43,7 @@ const ExercisePostPage = () => {
   >(API_ENDPOINT.EXERCISE.EXERCISE, 'post', {
     onSuccess: () => {
       alert(MESSAGE.COMPLETED('등록이'));
-      router.push(ROUTE.MAIN_PAGE);
+      router.push(`/${i18n.language}${ROUTE.MAIN_PAGE}`);
     },
   });
 

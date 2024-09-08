@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 
 import ContentBox from '#/components/common/ContentBox';
 import ExerciseForm, {
@@ -22,6 +23,7 @@ import API_ENDPOINT from '#/constants/api';
 import QUERY_KEYS from '#/constants/queryKey';
 
 const ExerciseUpdatePage = () => {
+  const { i18n } = useTranslation('common');
   const router = useRouter();
 
   const queryClient = useQueryClient();
@@ -65,7 +67,7 @@ const ExerciseUpdatePage = () => {
         });
 
         alert(MESSAGE.COMPLETED('수정'));
-        router.push(ROUTE.EXERCISE.DEFAULT);
+        router.push(`/${i18n.language}${ROUTE.EXERCISE.DEFAULT}`);
       } catch (error) {
         console.log('Error updating exercise:', error);
       }

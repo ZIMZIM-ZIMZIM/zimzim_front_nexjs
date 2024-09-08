@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useQueryClient } from '@tanstack/react-query';
 import { twMerge } from 'tailwind-merge';
+import { useTranslation } from 'react-i18next';
 
 import Button from '#components/common/Button';
 
@@ -16,12 +17,13 @@ import { HEADER_ICON_BUTTON } from '#/constants/style';
 import API_ENDPOINT from '#/constants/api';
 
 const UserHeader = () => {
+  const { i18n } = useTranslation('common');
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const { mutate } = useCustomMutation(API_ENDPOINT.AUTH.LOGOUT, 'post', {
     onSuccess: () => {
-      router.push(ROUTE.LOGIN);
+      router.push(`/${i18n.language}${ROUTE.LOGIN}`);
       queryClient.invalidateQueries();
     },
   });

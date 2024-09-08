@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useTranslation } from 'react-i18next';
 
 import ROUTE from '#/constants/route';
 
@@ -12,6 +13,8 @@ import { Exercise, EXERCISE_TYPE } from '#/api/types';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
+  const { t } = useTranslation('common');
+
   const { weight, cardio } = useMemo(() => {
     let cardio = 0;
     let weight = 0;
@@ -94,7 +97,9 @@ const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
 
   return (
     <div className="w-1/3 bg-white rounded-lg border-1 pt-2 px-2 flex flex-col cursor-pointer h-full shadow-md shadow-gray-dark/25">
-      <p className="text-sm font-bold pl-2">Weight/Cardio</p>
+      <p className="text-sm font-bold pl-2">
+        {t('DASHBOARD.CHART.WIEGHT_CARDIO.TITLE')}
+      </p>
       <div className="w-full flex justify-center h-full p-2 items-center">
         <Link href={ROUTE.EXERCISE.DEFAULT}>
           <Doughnut data={data} options={options} plugins={[customPlugin]} />

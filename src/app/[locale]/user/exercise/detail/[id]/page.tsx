@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 import dayjs from 'dayjs';
+// import { useTranslation } from 'react-i18next';
 
 import Button from '#/components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
@@ -12,7 +13,13 @@ import { ACTION_BUTTON } from '#/constants/style';
 import FORMAT from '#/constants/format';
 import API_ENDPOINT from '#/constants/api';
 
+export async function generateStaticParams() {
+  return ['ko', 'en'].map((locale) => ({ locale }));
+}
+
 const ExerciseDetailPage = async ({ params }: { params: { id: string } }) => {
+  // const { t } = useTranslation('common');
+
   const exerciseId = params.id;
   const { customFetch } = useFetch();
 
@@ -24,7 +31,7 @@ const ExerciseDetailPage = async ({ params }: { params: { id: string } }) => {
         <div className="flex justify-end">
           <Link href={`/user/exercise/update/${exerciseId}`}>
             <Button className={twMerge(ACTION_BUTTON, 'bg-primary')}>
-              수정
+              {/* {t('EXERCISE.DETAIL.BUTTON')} */}eee
             </Button>
           </Link>
         </div>

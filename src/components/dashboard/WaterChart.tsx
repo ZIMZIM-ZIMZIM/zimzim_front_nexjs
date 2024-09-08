@@ -13,6 +13,7 @@ import {
 } from 'chart.js';
 import ROUTE from '#/constants/route';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +25,8 @@ ChartJS.register(
 );
 
 const WaterChart = () => {
+  const { t } = useTranslation('common');
+
   const data = {
     labels: ['January'],
     datasets: [
@@ -69,7 +72,7 @@ const WaterChart = () => {
 
   return (
     <div className="bg-white rounded-lg border-1 h-32 pt-2 px-4 w-full cursor-pointer shadow-md shadow-gray-dark/25">
-      <p className="text-sm font-bold">Water Total Volume</p>
+      <p className="text-sm font-bold">{t('DASHBOARD.CHART.WATER.TITLE')}</p>
       <Link href={ROUTE.WATER}>
         <Bar data={data} options={options} />
       </Link>

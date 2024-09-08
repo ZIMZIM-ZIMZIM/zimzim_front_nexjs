@@ -1,5 +1,8 @@
-const nextConfig = {
+const { i18n } = require('./next-i18next.config.cjs');
+
+module.exports = {
   reactStrictMode: true,
+  i18n,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -8,10 +11,4 @@ const nextConfig = {
 
     return config;
   },
-  i18n: {
-    locales: ['en', 'ko'],
-    defaultLocale: 'ko',
-  },
 };
-
-export default nextConfig;

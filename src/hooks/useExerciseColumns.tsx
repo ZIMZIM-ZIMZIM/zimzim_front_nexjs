@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useMemo } from 'react';
 import { ColumnHelper } from '@tanstack/react-table';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 
 import { FlattenedExercise } from '#/components/exercise/list/ExerciseTable';
 
@@ -21,6 +22,8 @@ export const useGetExerciseColumns = (
   checkedExercise: string[],
   setCheckedExercise: Dispatch<SetStateAction<string[]>>,
 ) => {
+  const { t } = useTranslation('common');
+
   const colums = useMemo(
     () => [
       columnHelper.display({
@@ -65,32 +68,36 @@ export const useGetExerciseColumns = (
       columnHelper.accessor('date', {
         id: 'date',
         cell: (info) => dayjs(info.getValue()).format('YYYY-MM-DD'),
-        header: () => '날짜',
+        header: () => t('EXERCISE.TABLE.COLUMN.DATE'),
         meta: { className: 'w-1/6 text-left' },
       }),
       columnHelper.accessor('isPT', {
         id: 'isPT',
-        header: () => 'PT 여부',
+        header: () => t('EXERCISE.TABLE.COLUMN.PT'),
         cell: (info) => (
-          <span>{info.getValue() === 'Y' ? 'PT' : '개인운동'}</span>
+          <span>
+            {info.getValue() === 'Y'
+              ? t('EXERCISE.TABLE.ROW.PT')
+              : t('EXERCISE.TABLE.ROW.FREE_EXERCISE')}
+          </span>
         ),
         meta: { className: 'w-1/6 text-right' },
       }),
       columnHelper.accessor('type', {
         id: 'type',
-        header: () => '종류',
+        header: () => t('EXERCISE.TABLE.COLUMN.TYPE'),
         cell: (info) => info.renderValue(),
         meta: { className: 'w-1/6 text-right' },
       }),
       columnHelper.accessor('duration', {
         id: 'duration',
-        header: () => '시간(분)',
-        cell: (info) => info.renderValue() + '분',
+        header: () => t('EXERCISE.TABLE.COLUMN.MIN'),
+        cell: (info) => info.renderValue() ?? '' + t('EXERCISE.TABLE.ROW.TIME'),
         meta: { className: 'w-1/6 text-right' },
       }),
       columnHelper.accessor('force', {
         id: 'force',
-        header: () => '강도',
+        header: () => t('EXERCISE.TABLE.COLUMN.FORCE'),
         cell: (info) => info.renderValue(),
         meta: { className: 'w-1/6 text-right pr-4' },
       }),

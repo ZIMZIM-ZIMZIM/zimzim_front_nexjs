@@ -3,6 +3,7 @@
 import React, { useRef, useState, FormEvent } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 import Button from '#components/common/Button';
 import Input from '#/components/common/input/Input';
@@ -16,6 +17,7 @@ import { PRIMARY_BUTTON } from '#/constants/style';
 import API_ENDPOINT from '#/constants/api';
 
 const LoginForm = () => {
+  const { t, i18n } = useTranslation('common');
   const router = useRouter();
 
   const { mutate } = useCustomMutation<
@@ -24,7 +26,9 @@ const LoginForm = () => {
     { id: string; password: string }
   >(API_ENDPOINT.AUTH.LOGIN, 'post', {
     onSuccess: () => {
-      router.push(ROUTE.MAIN_PAGE);
+      if (i18n.language) {
+        router.push(ROUTE.MAIN_PAGE);
+      }
     },
     onError: (error) => {
       console.error('Error during login:', error);
@@ -56,7 +60,7 @@ const LoginForm = () => {
       <div className="flex flex-col gap-4">
         <Input
           label="ID"
-          placeholder={MESSAGE.FORM.REQUIRED('ID를')}
+          placeholder={t('AUTH.LOGIN.ID')}
           autoComplete="username"
           defaultValue=""
           name="id"
@@ -66,7 +70,7 @@ const LoginForm = () => {
           name="password"
           label="Password"
           type="password"
-          placeholder={MESSAGE.FORM.REQUIRED('비밀번호를')}
+          placeholder={t('AUTH.LOGIN.PASSWORD')}
           autoComplete="current-password"
           defaultValue=""
           ref={passwordRef}
@@ -74,7 +78,7 @@ const LoginForm = () => {
         {<ErrorMessage message={hasError ? MESSAGE.FORM.LOGIN.FAILURE : ''} />}
       </div>
       <Button type="submit" className={twMerge(PRIMARY_BUTTON, 'h-14')}>
-        Sign In
+        {t('AUTH.LOGIN.BUTTON')}
       </Button>
     </form>
   );
