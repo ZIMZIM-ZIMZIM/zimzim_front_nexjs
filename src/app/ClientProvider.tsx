@@ -34,7 +34,6 @@ export default function ClientProvider({
 
     if (!pathname.startsWith(`/${locale}`)) {
       router.replace(`/${locale}${pathname}`);
-      return;
     }
 
     setIsReady(true);

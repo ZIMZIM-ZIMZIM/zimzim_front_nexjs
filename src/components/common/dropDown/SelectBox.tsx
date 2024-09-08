@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, {
   ChangeEvent,
   useState,
@@ -6,7 +7,6 @@ import React, {
   forwardRef,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
-import Image from 'next/image';
 
 import ErrorMessage from '#components/common/ErrorMessage';
 import useSelectBox from '#hooks/useSelectBox';
@@ -30,21 +30,18 @@ interface SelectBoxProps {
 }
 
 const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
-  (
-    {
-      label,
-      options,
-      selectId,
-      selectName,
-      className = '',
-      selectClassName = '',
-      onChange,
-      errorMessage = '',
-      placeHolder,
-      value,
-    },
-    ref,
-  ) => {
+  ({
+    label,
+    options,
+    selectId,
+    selectName,
+    className = '',
+    selectClassName = '',
+    onChange,
+    errorMessage = '',
+    placeHolder,
+    value,
+  }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [internalValue, setInternalValue] = useState<string | undefined>(
       value,

@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import LoginForm from '#components/login/LoginForm';
-import SocialLoginButton from '#components/login/SocialLoginButton';
-import SignUpLink from '#components/login/SignUpLink';
 import ContentBox from '#components/common/ContentBox';
+import LoginForm from '#components/login/LoginForm';
+import SignUpLink from '#components/login/SignUpLink';
+import SocialLoginButton from '#components/login/SocialLoginButton';
 
 const LoginPage = () => {
   const { t } = useTranslation('common');

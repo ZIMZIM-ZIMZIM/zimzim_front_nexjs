@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,9 +9,12 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import ROUTE from '#/constants/route';
 import Link from 'next/link';
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
+
+import ROUTE from '#/constants/route';
 
 ChartJS.register(
   CategoryScale,

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Control, Controller, FieldError } from 'react-hook-form';
 
-import Input from '#components/common/input/Input';
 import { ExercisePostFormInput } from '#/components/exercise/post/ExerciseForm';
+
+import Input from '#components/common/input/Input';
 
 interface ControllerInputProps {
   name: keyof ExercisePostFormInput;

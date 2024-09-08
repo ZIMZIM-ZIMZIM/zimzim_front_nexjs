@@ -1,10 +1,11 @@
-import axiosInstance from '#/api/axios';
 import {
   useQuery,
   UseQueryOptions,
   UseQueryResult,
   QueryKey,
 } from '@tanstack/react-query';
+
+import axiosInstance from '#/api/axios';
 
 const fetchData = async (url: string) => {
   const response = await axiosInstance.get(url, {});

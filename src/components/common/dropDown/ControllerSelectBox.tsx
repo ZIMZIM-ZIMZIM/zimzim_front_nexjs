@@ -1,9 +1,8 @@
 import React from 'react';
 import { Control, Controller, FieldError } from 'react-hook-form';
 
-import { ExercisePostFormInput } from '#/components/exercise/post/ExerciseForm';
-
 import SelectBox from '#/components/common/dropDown/SelectBox';
+import { ExercisePostFormInput } from '#/components/exercise/post/ExerciseForm';
 
 interface ControllerSelectBoxProps {
   name: keyof ExercisePostFormInput;

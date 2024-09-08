@@ -1,21 +1,23 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { twMerge } from 'tailwind-merge';
 import dayjs from 'dayjs';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { twMerge } from 'tailwind-merge';
 
 import Button from '#/components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
 
-import { ACTION_BUTTON } from '#/constants/style';
-import FORMAT from '#/constants/format';
-import API_ENDPOINT from '#/constants/api';
 import { useCustomQuery } from '#/hooks/useCustomQuery';
-import QUERY_KEYS from '#/constants/queryKey';
-import { usePathname } from 'next/navigation';
+
 import { Exercise } from '#/api/types';
+
+import API_ENDPOINT from '#/constants/api';
+import FORMAT from '#/constants/format';
+import QUERY_KEYS from '#/constants/queryKey';
+import { ACTION_BUTTON } from '#/constants/style';
 
 const ExerciseDetailPage = () => {
   const { t } = useTranslation('common');

@@ -1,8 +1,5 @@
 'use client';
 
-import React, { useMemo } from 'react';
-import Link from 'next/link';
-import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,12 +8,15 @@ import {
   LineElement,
 } from 'chart.js';
 import dayjs from 'dayjs';
+import Link from 'next/link';
+import React, { useMemo } from 'react';
+import { Line } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
+
+import { Exercise } from '#/api/types';
 
 import FORMAT from '#/constants/format';
 import ROUTE from '#/constants/route';
-
-import { Exercise } from '#/api/types';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 

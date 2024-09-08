@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import Menu from '#components/common/menu/Menu';
 import UserHeader from '#components/common/header/UserHeader';
+import Menu from '#components/common/menu/Menu';
 
 const UserLayout = ({ children }: { children: ReactNode }) => {
   return (

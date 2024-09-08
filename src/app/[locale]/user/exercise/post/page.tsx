@@ -1,22 +1,11 @@
 'use client';
 
-import React from 'react';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-import ContentBox from '#components/common/ContentBox';
-import ExerciseForm, {
-  ExercisePostFormInput,
-} from '#components/exercise/post/ExerciseForm';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 import { useCustomQuery } from '#/hooks/useCustomQuery';
-
-import { getKoreaDate } from '#/util';
-
-import ROUTE from '#/constants/route';
-import MESSAGE from '#/constants/message';
-import API_ENDPOINT from '#/constants/api';
 
 import {
   EXERCISE_FORCE_TYPE,
@@ -24,7 +13,17 @@ import {
   PostExercisePayload,
   User,
 } from '#/api/types';
+
+import API_ENDPOINT from '#/constants/api';
+import MESSAGE from '#/constants/message';
 import QUERY_KEYS from '#/constants/queryKey';
+import ROUTE from '#/constants/route';
+
+import { getKoreaDate } from '#/util';
+import ContentBox from '#components/common/ContentBox';
+import ExerciseForm, {
+  ExercisePostFormInput,
+} from '#components/exercise/post/ExerciseForm';
 
 const ExercisePostPage = () => {
   const { i18n, t } = useTranslation('common');

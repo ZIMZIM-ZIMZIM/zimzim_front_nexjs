@@ -1,23 +1,23 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { useRouter } from 'next/navigation';
+import EyeIcon from 'public/icon/eye-regular.svg';
+import EyeSlashIcon from 'public/icon/eye-slash-regular.svg';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import * as yup from 'yup';
 
-import Button from '#components/common/Button';
 import Input from '#/components/common/input/Input';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
+import API_ENDPOINT from '#/constants/api';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
-import API_ENDPOINT from '#/constants/api';
 
-import EyeSlashIcon from 'public/icon/eye-slash-regular.svg';
-import EyeIcon from 'public/icon/eye-regular.svg';
+import Button from '#components/common/Button';
 
 export type SignUpFormInput = {
   id: string;

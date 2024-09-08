@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useMemo } from 'react';
-import Link from 'next/link';
-import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import Link from 'next/link';
+import React, { useMemo } from 'react';
+import { Doughnut } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 
-import ROUTE from '#/constants/route';
-
 import { Exercise, EXERCISE_TYPE } from '#/api/types';
+
+import ROUTE from '#/constants/route';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

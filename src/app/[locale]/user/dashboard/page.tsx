@@ -1,26 +1,27 @@
 'use client';
 
-import React, { useMemo } from 'react';
-import Link from 'next/link';
 import dayjs from 'dayjs';
-import { twMerge } from 'tailwind-merge';
+import Link from 'next/link';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { twMerge } from 'tailwind-merge';
 
-import TotalChart from '#components/dashboard/TotalChart';
+import FallbackView from '#/components/common/FallbackView';
+import LoadingBar from '#/components/common/LoadingBar';
 import ExerciseChart from '#/components/dashboard/ExerciseChart';
 import WaterChart from '#/components/dashboard/WaterChart';
-import LoadingBar from '#/components/common/LoadingBar';
-import FallbackView from '#/components/common/FallbackView';
 
 import { useCustomQuery } from '#/hooks/useCustomQuery';
 
 import { Exercise, User } from '#/api/types';
 
+import API_ENDPOINT from '#/constants/api';
 import FORMAT from '#/constants/format';
+import QUERY_KEYS from '#/constants/queryKey';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
-import API_ENDPOINT from '#/constants/api';
-import QUERY_KEYS from '#/constants/queryKey';
+
+import TotalChart from '#components/dashboard/TotalChart';
 
 const DashboardPage = () => {
   const { t } = useTranslation('common');

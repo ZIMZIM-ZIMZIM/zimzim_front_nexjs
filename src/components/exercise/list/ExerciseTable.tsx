@@ -1,7 +1,5 @@
 'use client';
 
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import {
   createColumnHelper,
   flexRender,
@@ -10,22 +8,24 @@ import {
   getPaginationRowModel,
   ColumnDef,
 } from '@tanstack/react-table';
-import { twMerge } from 'tailwind-merge';
+import { useRouter } from 'next/navigation';
+import LeftArrowIcon from 'public/icon/left-arrow.svg';
+import RightArrowIcon from 'public/icon/right-arrow.svg';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { twMerge } from 'tailwind-merge';
 
-import Button from '#components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
 
 import { useCustomQuery } from '#/hooks/useCustomQuery';
 import { useGetExerciseColumns } from '#/hooks/useExerciseColumns';
 
+import { Exercise, ExerciseDetail, ExerciseList, User } from '#/api/types';
+
 import API_ENDPOINT from '#/constants/api';
 import QUERY_KEYS from '#/constants/queryKey';
 
-import { Exercise, ExerciseDetail, ExerciseList, User } from '#/api/types';
-
-import LeftArrowIcon from 'public/icon/left-arrow.svg';
-import RightArrowIcon from 'public/icon/right-arrow.svg';
+import Button from '#components/common/Button';
 
 export type FlattenedExercise = Pick<Exercise, 'date' | 'isPT'> &
   Pick<Exercise['detail'][number], 'type' | 'duration' | 'force' | '_id'>;
