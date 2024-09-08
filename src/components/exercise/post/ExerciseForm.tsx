@@ -8,11 +8,6 @@ import { twMerge } from 'tailwind-merge';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#components/common/Button';
-import Badge from '#/components/exercise/post/Badge';
-import ControllerInput from '#/components/common/input/ControllerInput';
-import RadioInput from '#/components/common/input/RadioInput';
-import ControllerSelectBox from '#/components/common/dropDown/ControllerSelectBox';
-
 import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
 
 import MESSAGE from '#/constants/message';
@@ -23,6 +18,10 @@ import {
 import { PRIMARY_BUTTON } from '#/constants/style';
 
 import DeleteIcon from 'public/icon/delete.svg';
+import Badge from './Badge';
+import ControllerInput from '#/components/common/input/ControllerInput';
+import RadioInput from '#/components/common/input/RadioInput';
+import ControllerSelectBox from '#/components/common/dropDown/ControllerSelectBox';
 
 export type ExercisePostFormInput = {
   _id?: string | null;
@@ -145,7 +144,7 @@ const ExerciseForm = ({
         <ControllerInput
           name="date"
           control={control}
-          defaultValue={defaultValues?.date ?? ''}
+          value={defaultValues?.date ?? ''}
           label={t('EXERCISE.FORM.LABEL.DATE')}
           type="date"
           placeholder={t('EXERCISE.FORM.PLACEHOLDER.DATE')}
@@ -162,7 +161,7 @@ const ExerciseForm = ({
           render={({ field }) => (
             <div {...field} className="flex justify-between gap-1">
               <label className="text-neutral-500">
-                {t('EXERCISE.FORM.LABEL.PT')}
+                {t('EXERCISE.FORM.LABEL.PT.')}
               </label>
               <div className="flex gap-4">
                 <RadioInput
@@ -195,9 +194,9 @@ const ExerciseForm = ({
           selectClassName="w-52"
         />
         <ControllerInput
+          value=""
           name="duration"
           control={control}
-          defaultValue=""
           label={t('EXERCISE.FORM.LABEL.DURATION')}
           type="number"
           placeholder={t('EXERCISE.FORM.PLACEHOLDER.DURATION')}

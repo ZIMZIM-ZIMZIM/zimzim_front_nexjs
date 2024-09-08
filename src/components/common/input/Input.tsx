@@ -4,7 +4,6 @@ import { twMerge } from 'tailwind-merge';
 import ErrorMessage from '#components/common/ErrorMessage';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  defaultValue?: string;
   className?: string;
   inputClassName?: string;
   label?: string;
@@ -25,7 +24,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       label,
       errorMessage,
       value,
-      defaultValue = '',
       name,
       ...props
     },
@@ -52,7 +50,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               )}
               onChange={handleChange}
               placeholder={placeholder}
-              defaultValue={defaultValue}
               autoComplete={autoComplete}
               ref={ref}
               value={value}

@@ -37,10 +37,10 @@
     }
   },
   "DASHBOARD": {
-    "WAITING_MESSAGE": "잠시만 기다려주세요... 운동 기록을 확인하고 있습니다",
+    "WAITING_MESSAGE": "Please wait... We are checking your workout records",
     "WELCOME_MESSAGE": "{{name}}, you’ve completed {{count}} sessions for {{min}} minutes",
-    "NO_DATA_MESSAGE": "{{name}}님, 운동 기록을 등록하고 이번주의 운동량을 확인해 보세요",
-    "REGISTER_BUTTON": "운동 기록 등록하기",
+    "NO_DATA_MESSAGE": "{{name}}, please register your workout record and check this week's activity.",
+    "REGISTER_BUTTON": "Register workout record",
     "CHART": {
       "TOTAL": {
         "TITLE": "Total workout volume"
@@ -56,61 +56,68 @@
   "EXERCISE": {
     "LIST": {
       "BUTTON": {
-        "DELETE": "삭제",
-        "REGISTER": "등록"
+        "DELETE": "Delete",
+        "REGISTER": "Register"
       }
     },
     "TABLE": {
       "COLUMN": {
-        "DATE": "날짜",
-        "PT": "PT 여부",
-        "TYPE": "종류",
-        "MIN": "시간(분)",
-        "FORCE": "강도"
+        "DATE": "Date",
+        "PT": "PT",
+        "TYPE": "Type",
+        "MIN": "Minutes",
+        "FORCE": "Force"
       },
       "ROW": {
         "PT": "PT",
-        "FREE_EXERCISE": "자유 운동",
-        "TIME": "분"
+        "FREE_EXERCISE": "Free Exercise",
+        "TIME": "minutes"
       }
     },
     "FORM": {
       "LABEL": {
-        "DATE": "운동 날짜",
+        "DATE": "Workout date",
         "PT": {
-          "": "PT 여부",
+          "": "PT",
           "YES": "PT",
-          "NO": "개인 운동"
+          "NO": "Self Exercise"
         },
-        "DURATION": "운동 시간",
-        "TYPE": "운동 종류",
-        "FORCE": "운동 강도"
+        "DURATION": "Duration",
+        "TYPE": "Type",
+        "FORCE": "Force"
       },
       "PLACEHOLDER": {
         "DATE": "2024/00/00",
-        "DURATION": "0분",
-        "TYPE": "종류를 선택해 주세요",
-        "FORCE": "강도를 선택해 주세요"
+        "DURATION": "0 minutes",
+        "TYPE": "Please select a type",
+        "FORCE": "Please select a force level"
       },
       "REQUIRED": {
-        "DATE": "날짜를 입력해주세요",
-        "PT": "PT 여부를 선택해주세요",
-        "DURATION": "운동 시간을 입력해 주세요",
-        "TYPE": "운동 종류를 입력해주세요",
-        "FORCE": "운동 강도를 입력해주세요"
+        "DATE": "Please enter the date",
+        "PT": "Please select PT",
+        "DURATION": "Please enter the duration",
+        "TYPE": "Please enter the type",
+        "FORCE": "Please enter the force level"
       }
     },
     "DETAIL": {
-      "BUTTON": "수정",
+      "BUTTON": "Edit",
       "": {
-        "TITLE": "운동기록",
+        "TITLE": "Workout Record",
         "CONTENT": {
-          "IS_PT": "PT 여부",
-          "TYPE": "종류",
-          "MIN": "시간(분)",
-          "FORCE": "강도"
+          "IS_PT": "PT",
+          "TYPE": "Type",
+          "MIN": "Time",
+          "FORCE": "Force",
+          "UNIT": "min"
         }
       }
+    },
+    "UPDATE": {
+      "BUTTON": "Submit"
+    },
+    "POST": {
+      "BUTTON": "Submit"
     }
   }
 }

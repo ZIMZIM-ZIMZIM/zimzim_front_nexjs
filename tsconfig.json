@@ -15,7 +15,6 @@
     "paths": {
       "#/*": ["src/*"],
       "#api/*": ["src/api/*"],
-      "#pages/*": ["src/app/*"],
       "#layout/*": ["src/layout/*"],
       "#components/*": ["src/components/*"],
       "#assets/*": ["src/assets/*"],

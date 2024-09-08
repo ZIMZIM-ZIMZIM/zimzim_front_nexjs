@@ -1,18 +1,15 @@
 import React, {
-  forwardRef,
   ChangeEvent,
   useState,
   MouseEvent,
   useEffect,
+  forwardRef,
 } from 'react';
 import { twMerge } from 'tailwind-merge';
+import Image from 'next/image';
 
 import ErrorMessage from '#components/common/ErrorMessage';
-
 import useSelectBox from '#hooks/useSelectBox';
-
-import ArrowDownIcon from 'public/icon/angle-down-solid.svg';
-import ArrowUPIcon from 'public/icon/angle-up-solid.svg';
 
 type Option = {
   value: string;
@@ -33,18 +30,21 @@ interface SelectBoxProps {
 }
 
 const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
-  ({
-    label,
-    options,
-    selectId,
-    selectName,
-    className = '',
-    selectClassName = '',
-    onChange,
-    errorMessage = '',
-    placeHolder,
-    value,
-  }) => {
+  (
+    {
+      label,
+      options,
+      selectId,
+      selectName,
+      className = '',
+      selectClassName = '',
+      onChange,
+      errorMessage = '',
+      placeHolder,
+      value,
+    },
+    ref,
+  ) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [internalValue, setInternalValue] = useState<string | undefined>(
       value,
@@ -54,26 +54,25 @@ const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
 
     useEffect(() => {
       document.addEventListener('click', handleClcikWithoutSelectBox);
-
-      return () =>
+      return () => {
         document.removeEventListener('click', handleClcikWithoutSelectBox);
+      };
     }, [handleClcikWithoutSelectBox]);
 
     useEffect(() => {
       if (value !== internalValue) {
         setInternalValue(value);
       }
-    }, [internalValue, value]);
+    }, [value, internalValue]);
 
-    const handleSelect = (e: MouseEvent, value: Option['value']) => {
+    const handleSelect = (e: MouseEvent, selectedValue: Option['value']) => {
       e.stopPropagation();
-
       setIsOpen(false);
-      setInternalValue(value);
+      setInternalValue(selectedValue);
 
       if (onChange) {
         onChange({
-          target: { value, name: selectName, id: selectId },
+          target: { value: selectedValue, name: selectName, id: selectId },
         } as ChangeEvent<HTMLSelectElement>);
       }
     };
@@ -96,12 +95,22 @@ const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
           >
             <div
               className={twMerge(
-                `custom-selected-box selected flex justify-between items-center ${internalValue ?? 'text-gray-dark'}`,
+                `custom-selected-box selected flex justify-between items-center ${
+                  internalValue ? '' : 'text-gray-dark'
+                }`,
               )}
             >
               <span>{internalValue ?? placeHolder}</span>
-              {!isOpen && <ArrowDownIcon width={12} />}
-              {isOpen && <ArrowUPIcon width={12} />}
+              <Image
+                src={
+                  isOpen
+                    ? '/icon/angle-up-solid.svg'
+                    : '/icon/angle-down-solid.svg'
+                }
+                width={12}
+                height={12}
+                alt={isOpen ? 'up icon' : 'down icon'}
+              />
             </div>
             {isOpen && (
               <ul className="custom-selected-box options absolute left-0 right-0 mt-3.5 z-10 bg-white border-gray-dark last:border-b-1 border-t-1 border-l-1 border-r-1 rounded-md">

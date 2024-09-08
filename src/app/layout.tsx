@@ -1,6 +1,5 @@
 import ClientProvider from './ClientProvider';
-import '../../styles/index.css';
-import { dir } from 'i18next';
+import '../styles/index.css';
 
 export const metadata = {
   title: 'ZIMZIM',
@@ -18,7 +17,7 @@ export default async function RootLayout({
   params: { locale: string };
 }) {
   return (
-    <html lang={locale} dir={dir(locale)}>
+    <html lang={locale} dir="ltr">
       <body>
         <ClientProvider>{children}</ClientProvider>
       </body>

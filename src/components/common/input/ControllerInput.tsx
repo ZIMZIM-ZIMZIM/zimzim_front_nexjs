@@ -11,11 +11,11 @@ interface ControllerInputProps {
   error?: FieldError;
   label: string;
   type: string;
-  defaultValue: string;
   inputClassName?: string;
   max?: string | number;
   min?: number;
   disabled?: boolean;
+  value: string;
 }
 
 const ControllerInput = ({
@@ -25,18 +25,18 @@ const ControllerInput = ({
   error,
   label,
   type,
-  defaultValue,
   inputClassName,
   max,
   disabled,
   min,
+  value,
   ...props
 }: ControllerInputProps) => {
   return (
     <Controller
       name={name}
       control={control}
-      defaultValue={defaultValue}
+      defaultValue={value}
       render={({ field }) => (
         <Input
           {...field}
@@ -49,7 +49,7 @@ const ControllerInput = ({
           max={max}
           min={min}
           disabled={disabled}
-          value={field.value ?? ''}
+          value={field.value ?? value}
           {...props}
         />
       )}

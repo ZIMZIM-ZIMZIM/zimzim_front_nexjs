@@ -23,7 +23,7 @@ import API_ENDPOINT from '#/constants/api';
 import QUERY_KEYS from '#/constants/queryKey';
 
 const ExerciseUpdatePage = () => {
-  const { i18n } = useTranslation('common');
+  const { i18n, t } = useTranslation('common');
   const router = useRouter();
 
   const queryClient = useQueryClient();
@@ -91,7 +91,7 @@ const ExerciseUpdatePage = () => {
       <ContentBox className="rounded-2xl">
         {defaultValues && (
           <ExerciseForm
-            submitButtonTitle="수정"
+            submitButtonTitle={t('EXERCISE.UPDATE.BUTTON')}
             defaultValues={defaultValues}
             isUseBadge={false}
             submitFunction={(

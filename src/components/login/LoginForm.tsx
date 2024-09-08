@@ -27,7 +27,7 @@ const LoginForm = () => {
   >(API_ENDPOINT.AUTH.LOGIN, 'post', {
     onSuccess: () => {
       if (i18n.language) {
-        router.push(ROUTE.MAIN_PAGE);
+        router.push(`/${i18n.language}${ROUTE.MAIN_PAGE}`);
       }
     },
     onError: (error) => {

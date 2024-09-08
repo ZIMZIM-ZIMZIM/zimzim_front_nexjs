@@ -27,7 +27,7 @@ import {
 import QUERY_KEYS from '#/constants/queryKey';
 
 const ExercisePostPage = () => {
-  const { i18n } = useTranslation('common');
+  const { i18n, t } = useTranslation('common');
   const today = getKoreaDate();
 
   const router = useRouter();
@@ -99,7 +99,7 @@ const ExercisePostPage = () => {
           exerciseList.forEach((exercise) => {
             promises.push(
               mutateAsync(createExercisePayload(exercise)).then(() => {}),
-            ); // 반환 값을 무시
+            );
           });
         }
 
@@ -114,7 +114,7 @@ const ExercisePostPage = () => {
     <div className="flex justify-center">
       <ContentBox className="rounded-2xl gap-8 w-2/5">
         <ExerciseForm
-          submitButtonTitle="등록"
+          submitButtonTitle={t('EXERCISE.POST.BUTTON')}
           isUseBadge
           submitFunction={(
             exerciseList: ExercisePostFormInput | ExercisePostFormInput[],
