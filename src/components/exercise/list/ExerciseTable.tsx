@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import { useNavigate } from 'react-router-dom';
+'use client';
+
 import {
   createColumnHelper,
   flexRender,
@@ -8,16 +8,27 @@ import {
   getPaginationRowModel,
   ColumnDef,
 } from '@tanstack/react-table';
+import { useRouter } from 'next/navigation';
+import LeftArrowIcon from 'public/icon/left-arrow.svg';
+import RightArrowIcon from 'public/icon/right-arrow.svg';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
-import Button from '#components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
 
-import useExerciseData, { FlattenedExercise } from '#/hooks/useExerciseData';
+import { useCustomQuery } from '#/hooks/useCustomQuery';
 import { useGetExerciseColumns } from '#/hooks/useExerciseColumns';
 
-import LeftArrowIcon from '#assets/icon/left-arrow.svg?react';
-import RightArrowIcon from '#assets/icon/right-arrow.svg?react';
+import { Exercise, ExerciseDetail, ExerciseList, User } from '#/api/types';
+
+import API_ENDPOINT from '#/constants/api';
+import QUERY_KEYS from '#/constants/queryKey';
+
+import Button from '#components/common/Button';
+
+export type FlattenedExercise = Pick<Exercise, 'date' | 'isPT'> &
+  Pick<Exercise['detail'][number], 'type' | 'duration' | 'force' | '_id'>;
 
 interface ExerciseTableProps {
   checkedExercise: string[];
@@ -36,11 +47,39 @@ const ExerciseTable = ({
   page,
   setPage,
 }: ExerciseTableProps) => {
-  const navigate = useNavigate();
+  const { i18n } = useTranslation('common');
+  const router = useRouter();
 
   const columnHelper = createColumnHelper<FlattenedExercise>();
 
-  const { exerciseData, flattenedData } = useExerciseData(page);
+  const { data: userInfo } = useCustomQuery<User>(
+    QUERY_KEYS.USER,
+    API_ENDPOINT.USER.INFO,
+  );
+  const { data: exerciseData } = useCustomQuery<ExerciseList>(
+    QUERY_KEYS.EXERCISE.LIST(),
+    `${API_ENDPOINT.EXERCISE.LIST}?id=${userInfo?.id}&page=${page}&limit=10`,
+  );
+  const [flattenedData, setFlattenData] = useState<FlattenedExercise[] | []>(
+    [],
+  );
+
+  useEffect(() => {
+    if (exerciseData?.items) {
+      setFlattenData(
+        exerciseData?.items.flatMap((exercise: Exercise) =>
+          exercise.detail.map((element: ExerciseDetail) => ({
+            _id: element._id,
+            date: exercise.date,
+            type: element.type,
+            force: element.force,
+            duration: element.duration,
+            isPT: exercise.isPT,
+          })),
+        ),
+      );
+    }
+  }, [exerciseData]);
 
   const columns = useGetExerciseColumns(
     columnHelper,
@@ -51,14 +90,17 @@ const ExerciseTable = ({
 
   const table = useReactTable({
     data: flattenedData ?? [],
-    columns: columns as ColumnDef<FlattenedExercise, any>[],
+    columns: columns as ColumnDef<FlattenedExercise>[],
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
     <div className="w-full">
-      <ContentBox className="rounded-2xl w-full py-4">
+      <ContentBox
+        className="rounded-2xl w-full py-4"
+        contentTitle="exercise-table"
+      >
         <table className="table-auto">
           <thead className="border-b-1">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -87,7 +129,9 @@ const ExerciseTable = ({
                 <tr
                   key={row.id}
                   onClick={() =>
-                    navigate(`/exercise/detail/${row.original._id}`)
+                    router.push(
+                      `/${i18n.language}/user/exercise/detail/${row.original._id}`,
+                    )
                   }
                   className="cursor-pointer hover:bg-secondary-light/20"
                 >
@@ -119,10 +163,11 @@ const ExerciseTable = ({
           </tbody>
         </table>
       </ContentBox>
-      <div className="pt-8 h-6 flex flex-row justify-end gap-2 items-center">
+
+      <nav className="pt-8 h-6 flex flex-row justify-end gap-2 items-center">
         {exerciseData && exerciseData?.currentPage > 0 && (
           <Button
-            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer"
+            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer shadow-md shadow-gray-dark/25"
             onClick={() => setPage((prev) => prev - 1)}
             disabled={page === 1 || !exerciseData}
           >
@@ -133,7 +178,7 @@ const ExerciseTable = ({
           <p
             key={i + 1}
             className={twMerge(
-              `border-1 border-gray-light w-7 text-center rounded-md cursor-pointer ${exerciseData?.currentPage === i + 1 ? 'bg-primary/25' : 'bg-white'}`,
+              `border-1 border-gray-light w-7 text-center rounded-md cursor-pointer shadow-md shadow-gray-dark/25 ${exerciseData?.currentPage === i + 1 ? 'bg-primary/25' : 'bg-white'}`,
             )}
             onClick={() => setPage(i + 1)}
           >
@@ -142,14 +187,14 @@ const ExerciseTable = ({
         ))}
         {exerciseData && exerciseData?.currentPage > 0 && (
           <Button
-            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer"
+            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer shadow-md shadow-gray-dark/25"
             onClick={() => setPage((prev) => prev + 1)}
             disabled={page >= (exerciseData?.totalPages ?? 1)}
           >
             <RightArrowIcon />
           </Button>
         )}
-      </div>
+      </nav>
     </div>
   );
 };

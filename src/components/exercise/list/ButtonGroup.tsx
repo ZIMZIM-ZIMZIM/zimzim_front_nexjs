@@ -1,17 +1,28 @@
+'use client';
+
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
-import Button from '#components/common/Button';
+import { useCustomMutation } from '#/hooks/useCustomMutation';
+import { useCustomQuery } from '#/hooks/useCustomQuery';
 
 import {
-  useDeleteExerciseDetailMutation,
-  useGetExerciseListQuery,
-} from '#/api/services/exerciseApi';
-import { useGetUserInfoQuery } from '#/api/services/userApi';
-import { ExerciseDetail } from '#/api/types';
-import { ACTION_BUTTON } from '#/constants/style';
+  DeleteExerciseDetailPayload,
+  Exercise,
+  ExerciseDetail,
+  ExerciseList,
+  User,
+} from '#/api/types';
+
+import API_ENDPOINT from '#/constants/api';
+import QUERY_KEYS from '#/constants/queryKey';
 import ROUTE from '#/constants/route';
+import { ACTION_BUTTON } from '#/constants/style';
+
+import Button from '#components/common/Button';
 
 interface ButtonGroupProps {
   checkedExercise: string[];
@@ -19,26 +30,38 @@ interface ButtonGroupProps {
 }
 
 const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
+  const { t, i18n } = useTranslation('common');
+  const queryClient = useQueryClient();
   const isDeleteDisabled = checkedExercise.length === 0;
 
-  const navigate = useNavigate();
+  const router = useRouter();
 
-  const [deleteExerciseDetail] = useDeleteExerciseDetailMutation();
-  const { data: userInfo } = useGetUserInfoQuery();
-  const { data: exerciseData } = useGetExerciseListQuery(
-    {
-      userId: userInfo?.id ?? '',
-      page,
-      limit: 10,
-    },
-    { skip: !userInfo?.id },
+  const { data: userInfo } = useCustomQuery<User>(
+    QUERY_KEYS.USER,
+    API_ENDPOINT.USER.INFO,
   );
+  const { data: exerciseData } = useCustomQuery<ExerciseList>(
+    ['exercise'],
+    `${API_ENDPOINT.EXERCISE.LIST}?id=${userInfo?.id}&page=${page}&limit=10`,
+  );
+
+  const { mutate } = useCustomMutation<
+    { token: string },
+    Error,
+    {
+      exerciseDetails: DeleteExerciseDetailPayload[];
+    }
+  >(API_ENDPOINT.EXERCISE.DETAILS, 'post', {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.EXERCISE.LIST() });
+    },
+  });
 
   const handleDeleteExercise = async () => {
     if (checkedExercise.length && exerciseData && exerciseData?.items.length) {
-      let temp = checkedExercise.flatMap((exercise) =>
-        exerciseData.items.filter((item) =>
-          item.detail.find((ele) => ele._id === exercise),
+      const temp = checkedExercise.flatMap((exercise) =>
+        exerciseData.items.filter((item: Exercise) =>
+          item.detail.find((ele: ExerciseDetail) => ele._id === exercise),
         ),
       );
 
@@ -60,7 +83,7 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
         };
       });
       try {
-        await deleteExerciseDetail(payload).unwrap();
+        mutate({ exerciseDetails: payload });
       } catch (error) {
         console.log(error);
       }
@@ -68,25 +91,25 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
   };
 
   return (
-    <div className="flex flex-row justify-end gap-4">
+    <section className="flex flex-row justify-end gap-4">
       <Button
         className={twMerge(
           ACTION_BUTTON,
-          `bg-red-500
+          `bg-red-500 
           ${isDeleteDisabled && 'cursor-not-allowed'}`,
         )}
         disabled={isDeleteDisabled}
         onClick={handleDeleteExercise}
       >
-        삭제
+        {t('EXERCISE.LIST.BUTTON.DELETE')}
       </Button>
       <Button
         className={twMerge(ACTION_BUTTON, 'bg-primary')}
-        onClick={() => navigate(ROUTE.EXERCISE.POST)}
+        onClick={() => router.push(`/${i18n.language}${ROUTE.EXERCISE.POST}`)}
       >
-        추가
+        {t('EXERCISE.LIST.BUTTON.REGISTER')}
       </Button>
-    </div>
+    </section>
   );
 };
 

@@ -1,16 +1,16 @@
 const ROUTE = {
-  MAIN_PAGE: '/',
-  SIGN_UP: '/sign-up',
+  MAIN_PAGE: '/user/dashboard',
+  SIGN_UP: '/auth/signup',
   USER: '/user',
-  LOGIN: '/login',
+  LOGIN: '/auth/login',
   EXERCISE: {
-    DEFAULT: '/exercise',
-    LIST: '',
-    POST: '/exercise/post',
-    DETAIL: '/exercise/detail/:id',
-    UPDATE: '/exercise/update/:id',
+    DEFAULT: '/user/exercise/list',
+    LIST: '/user/list',
+    POST: '/user/exercise/post',
+    DETAIL: '/user/exercise/detail/:id',
+    UPDATE: '/user/exercise/update/:id',
   },
-  WATER: '/water',
+  WATER: '/user/water',
 };
 
 export default ROUTE;

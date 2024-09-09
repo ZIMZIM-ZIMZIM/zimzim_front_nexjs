@@ -1,0 +1,123 @@
+{
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Welcome back to the ZIMZIM",
+      "ID": "Please enter your username",
+      "PASSWORD": "Please enter your password",
+      "BUTTON": "Sign In",
+      "SOCIAL_LOGIN": {
+        "GOOGLE": "Login with Google",
+        "APPLE": "Login with Apple"
+      },
+      "NEW_USER": "Are you new user?",
+      "SIGN_UP": "SIGN UP HERE",
+      "FAILURE": "The username or password is incorrect. Please enter the correct username and password"
+    },
+    "SIGN_UP": {
+      "FORM": {
+        "ID": {
+          "VALIDATION": "Please enter a valid username",
+          "REQUIRED": "Please enter your username"
+        },
+        "NICKNAME": {
+          "MAX_LENGTH": "Must be 10 characters or fewer",
+          "VALIDATION": "Please enter a valid nickname",
+          "REQUIRED": "Please enter your nickname"
+        },
+        "PASSWORD": {
+          "MIN_LENGTH": "Must be at least 8 characters long",
+          "REQUIRED": "Please enter your password"
+        },
+        "PASSWORD_CONFIRM": {
+          "NOT_MATCH": "Passwords do not match",
+          "REQUIRED": "Please enter your password again"
+        }
+      },
+      "BUTTON": "Sign Up"
+    }
+  },
+  "DASHBOARD": {
+    "WAITING_MESSAGE": "Please wait... We are checking your workout records",
+    "WELCOME_MESSAGE": "{{name}}, you’ve completed {{count}} sessions for {{min}} minutes",
+    "NO_DATA_MESSAGE": "{{name}}, please register your workout record and check this week's activity.",
+    "REGISTER_BUTTON": "Register workout record",
+    "CHART": {
+      "TOTAL": {
+        "TITLE": "Total workout volume"
+      },
+      "WIEGHT_CARDIO": {
+        "TITLE": "Weight/Cardio"
+      },
+      "WATER": {
+        "TITLE": "Water Total Volume"
+      }
+    }
+  },
+  "EXERCISE": {
+    "LIST": {
+      "BUTTON": {
+        "DELETE": "Delete",
+        "REGISTER": "Register"
+      }
+    },
+    "TABLE": {
+      "COLUMN": {
+        "DATE": "Date",
+        "PT": "PT",
+        "TYPE": "Type",
+        "MIN": "Minutes",
+        "FORCE": "Force"
+      },
+      "ROW": {
+        "PT": "PT",
+        "FREE_EXERCISE": "Free Exercise",
+        "TIME": "minutes"
+      }
+    },
+    "FORM": {
+      "LABEL": {
+        "DATE": "Workout date",
+        "PT": {
+          "": "PT",
+          "YES": "PT",
+          "NO": "Self Exercise"
+        },
+        "DURATION": "Duration",
+        "TYPE": "Type",
+        "FORCE": "Force"
+      },
+      "PLACEHOLDER": {
+        "DATE": "2024/00/00",
+        "DURATION": "0 minutes",
+        "TYPE": "Please select a type",
+        "FORCE": "Please select a force level"
+      },
+      "REQUIRED": {
+        "DATE": "Please enter the date",
+        "PT": "Please select PT",
+        "DURATION": "Please enter the duration",
+        "TYPE": "Please enter the type",
+        "FORCE": "Please enter the force level"
+      }
+    },
+    "DETAIL": {
+      "BUTTON": "Edit",
+      "": {
+        "TITLE": "Workout Record",
+        "CONTENT": {
+          "IS_PT": "PT",
+          "TYPE": "Type",
+          "MIN": "Time",
+          "FORCE": "Force",
+          "UNIT": "min"
+        }
+      }
+    },
+    "UPDATE": {
+      "BUTTON": "Submit"
+    },
+    "POST": {
+      "BUTTON": "Submit"
+    }
+  }
+}

@@ -1,13 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+'use client';
 
-const SignUpLink = () => (
-  <p className="flex space-x-2 justify-center">
-    <span className="text-[#757575] text-sm self-end">Are you new user?</span>
-    <Link to="/sign-up" className="font-semibold underline">
-      SIGN UP HERE
-    </Link>
-  </p>
-);
+import Link from 'next/link';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import ROUTE from '#/constants/route';
+
+const SignUpLink = () => {
+  const { t } = useTranslation('common');
+
+  return (
+    <p className="flex space-x-2 justify-center">
+      <span className="text-[#757575] text-sm self-end">
+        {t('AUTH.LOGIN.NEW_USER')}
+      </span>
+      <Link
+        href={ROUTE.SIGN_UP}
+        className="font-semibold underline"
+        aria-label={t('AUTH.LOGIN.SIGN_UP')}
+      >
+        {t('AUTH.LOGIN.SIGN_UP')}
+      </Link>
+    </p>
+  );
+};
 
 export default SignUpLink;

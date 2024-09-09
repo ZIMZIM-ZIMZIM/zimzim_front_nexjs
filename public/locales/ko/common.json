@@ -1,0 +1,123 @@
+{
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "ZIMZIM에 오신 것을 환영합니다",
+      "ID": "사용자 이름을 입력하세요",
+      "PASSWORD": "비밀번호를 입력하세요",
+      "BUTTON": "로그인",
+      "SOCIAL_LOGIN": {
+        "GOOGLE": "Google로 로그인",
+        "APPLE": "Apple로 로그인"
+      },
+      "NEW_USER": "새 사용자이신가요?",
+      "SIGN_UP": "여기서 가입하세요",
+      "FAILURE": "사용자 이름 또는 비밀번호가 잘못되었습니다. 올바른 사용자 이름과 비밀번호를 입력하세요."
+    },
+    "SIGN_UP": {
+      "FORM": {
+        "ID": {
+          "VALIDATION": "올바른 사용자 이름을 입력하세요",
+          "REQUIRED": "사용자 이름을 입력하세요"
+        },
+        "NICKNAME": {
+          "MAX_LENGTH": "닉네임은 10자 이하로 입력해야 합니다",
+          "VALIDATION": "올바른 닉네임을 입력하세요",
+          "REQUIRED": "닉네임을 입력하세요"
+        },
+        "PASSWORD": {
+          "MIN_LENGTH": "비밀번호는 최소 8자 이상이어야 합니다",
+          "REQUIRED": "비밀번호를 입력하세요"
+        },
+        "PASSWORD_CONFIRM": {
+          "NOT_MATCH": "비밀번호가 일치하지 않습니다",
+          "REQUIRED": "비밀번호를 다시 입력하세요"
+        }
+      },
+      "BUTTON": "가입하기"
+    }
+  },
+  "DASHBOARD": {
+    "WAITING_MESSAGE": "잠시만 기다려주세요... 운동 기록을 확인하고 있습니다",
+    "WELCOME_MESSAGE": "{{name}}님, {{count}}번의 운동을 완료하셨고 총 {{min}}분 동안 운동하셨습니다",
+    "NO_DATA_MESSAGE": "{{name}}님, 운동 기록을 등록하고 이번 주의 운동량을 확인해 보세요",
+    "REGISTER_BUTTON": "운동 기록 등록하기",
+    "CHART": {
+      "TOTAL": {
+        "TITLE": "총 운동량"
+      },
+      "WIEGHT_CARDIO": {
+        "TITLE": "무게/유산소 운동"
+      },
+      "WATER": {
+        "TITLE": "물 총 섭취량"
+      }
+    }
+  },
+  "EXERCISE": {
+    "LIST": {
+      "BUTTON": {
+        "DELETE": "삭제",
+        "REGISTER": "등록"
+      }
+    },
+    "TABLE": {
+      "COLUMN": {
+        "DATE": "날짜",
+        "PT": "PT 여부",
+        "TYPE": "종류",
+        "MIN": "시간(분)",
+        "FORCE": "강도"
+      },
+      "ROW": {
+        "PT": "PT",
+        "FREE_EXERCISE": "자유 운동",
+        "TIME": "분"
+      }
+    },
+    "FORM": {
+      "LABEL": {
+        "DATE": "운동 날짜",
+        "PT": {
+          "": "PT 여부",
+          "YES": "PT",
+          "NO": "개인 운동"
+        },
+        "DURATION": "운동 시간",
+        "TYPE": "운동 종류",
+        "FORCE": "운동 강도"
+      },
+      "PLACEHOLDER": {
+        "DATE": "2024/00/00",
+        "DURATION": "0분",
+        "TYPE": "종류를 선택해 주세요",
+        "FORCE": "강도를 선택해 주세요"
+      },
+      "REQUIRED": {
+        "DATE": "날짜를 입력해 주세요",
+        "PT": "PT 여부를 선택해 주세요",
+        "DURATION": "운동 시간을 입력해 주세요",
+        "TYPE": "운동 종류를 입력해 주세요",
+        "FORCE": "운동 강도를 입력해 주세요"
+      }
+    },
+    "DETAIL": {
+      "BUTTON": "수정",
+      "": {
+        "TITLE": "운동 기록",
+        "CONTENT": {
+          "IS_PT": "PT 여부",
+          "TYPE": "종류",
+          "MIN": "시간",
+          "FORCE": "강도",
+          "UNIT": "분"
+        }
+      }
+    },
+    "UPDATE": {
+      "BUTTON": "완료"
+    },
+    "POST": {
+      "BUTTON": "등록"
+    }
+  }
+}

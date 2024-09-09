@@ -1,39 +1,19 @@
-import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import dayjs from 'dayjs';
+'use client';
 
-import { useGetUserInfoQuery } from '#/api/services/userApi';
-import { useGetExerciseQuery } from '#/api/services/exerciseApi';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import Link from 'next/link';
+import React, { useMemo } from 'react';
+import { Doughnut } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
+
+import { Exercise, EXERCISE_TYPE } from '#/api/types';
 
 import ROUTE from '#/constants/route';
-import FORMAT from '#/constants/format';
-
-import WeightIcon from '#assets/icon/chart/weight.svg';
-import CardioIcon from '#assets/icon/chart/cardio.svg';
-import { EXERCISE_TYPE } from '#/api/types';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const ExerciseChart = () => {
-  const navigate = useNavigate();
-
-  const { data: userInfo } = useGetUserInfoQuery();
-
-  const { data: exerciseData, isLoading: isExerciseLoading } =
-    useGetExerciseQuery(
-      {
-        userId: userInfo?.id ?? '',
-        startDate: dayjs().subtract(7, 'day').format(FORMAT.DATE),
-        endDate: dayjs().format(FORMAT.DATE),
-      },
-      { skip: !userInfo },
-    );
-
-  if (isExerciseLoading) {
-    return <div>loading~</div>;
-  }
+const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
+  const { t, i18n } = useTranslation('common');
 
   const { weight, cardio } = useMemo(() => {
     let cardio = 0;
@@ -69,19 +49,23 @@ const ExerciseChart = () => {
     ],
   };
 
-  const images = useMemo(
-    () =>
-      [weight ? WeightIcon : '', cardio ? CardioIcon : ''].map((src) => {
-        const img = new Image();
-        img.src = src;
-        return img;
-      }),
-    [weight, cardio],
-  );
+  const images = [
+    weight ? '/icon/chart/weight.svg' : '',
+    cardio ? '/icon/chart/cardio.svg' : '',
+  ].map((src) => {
+    if (src !== '') {
+      const img = new Image();
+      img.src = src;
+      img.width = 40;
+      img.height = 40;
+
+      return img;
+    }
+  });
 
   const customPlugin = {
     id: 'customPlugin',
-    afterDatasetDraw(chart: ChartJS) {
+    afterDatasetDraw(chart: ChartJS<'doughnut'>) {
       const { ctx } = chart;
       const width = 30;
       ctx.save();
@@ -92,7 +76,9 @@ const ExerciseChart = () => {
 
           const image = images[index];
 
-          ctx.drawImage(image, x - width / 2, y - width / 2, width, width);
+          if (image) {
+            ctx.drawImage(image, x - width / 2, y - width / 2, width, width);
+          }
         },
       );
 
@@ -101,7 +87,7 @@ const ExerciseChart = () => {
   };
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     plugins: {
       legend: {
         display: false,
@@ -110,15 +96,16 @@ const ExerciseChart = () => {
   };
 
   return (
-    <div
-      className="w-1/3 bg-white rounded-lg border-1 pt-2 px-2 flex flex-col cursor-pointer h-full"
-      onClick={() => navigate(ROUTE.EXERCISE.DEFAULT)}
-    >
-      <p className="text-sm font-bold pl-2">Weight/Cardio</p>
+    <section className="w-1/3 bg-white rounded-lg border-1 pt-2 px-2 flex flex-col cursor-pointer h-full shadow-md shadow-gray-dark/25">
+      <p className="text-sm font-bold pl-2">
+        {t('DASHBOARD.CHART.WIEGHT_CARDIO.TITLE')}
+      </p>
       <div className="w-full flex justify-center h-full p-2 items-center">
-        <Doughnut data={data} options={options} plugins={[customPlugin]} />
+        <Link href={`/${i18n.language}${ROUTE.EXERCISE.DEFAULT}`}>
+          <Doughnut data={data} options={options} plugins={[customPlugin]} />
+        </Link>
       </div>
-    </div>
+    </section>
   );
 };
 
