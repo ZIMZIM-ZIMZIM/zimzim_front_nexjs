@@ -23,23 +23,19 @@ const UserHeader = () => {
 
   const { mutate } = useCustomMutation(API_ENDPOINT.AUTH.LOGOUT, 'post', {
     onSuccess: () => {
+      localStorage.removeItem('ZimZimLogin');
+
       router.push(`/${i18n.language}${ROUTE.LOGIN}`);
       queryClient.invalidateQueries();
     },
   });
 
-  const handleLogout = async () => {
-    try {
-      mutate();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const handleLogout = () => mutate();
 
   return (
     <header className="flex justify-between w-full h-16 bg-white items-center px-8">
       <div className="flex flex-row items-center w-32 justify-center">
-        <Link href={ROUTE.MAIN_PAGE}>
+        <Link href={`/${i18n.language}${ROUTE.MAIN_PAGE}`}>
           <Image src="/icon/icon.svg" width={48} height={48} alt="user icon" />
         </Link>
       </div>

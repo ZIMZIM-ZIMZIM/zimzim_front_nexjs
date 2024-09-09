@@ -26,7 +26,7 @@ ChartJS.register(
 );
 
 const WaterChart = () => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
 
   const data = {
     labels: ['January'],
@@ -74,7 +74,7 @@ const WaterChart = () => {
   return (
     <section className="bg-white rounded-lg border-1 h-32 pt-2 px-4 w-full cursor-pointer shadow-md shadow-gray-dark/25">
       <p className="text-sm font-bold">{t('DASHBOARD.CHART.WATER.TITLE')}</p>
-      <Link href={ROUTE.WATER}>
+      <Link href={`/${i18n.language}${ROUTE.WATER}`}>
         <Bar data={data} options={options} />
       </Link>
     </section>

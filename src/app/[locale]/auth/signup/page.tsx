@@ -2,8 +2,9 @@
 
 import React from 'react';
 
-import ContentBox from '#components/common/ContentBox';
 import SignupForm from '#/components/signup/SignupForm';
+
+import ContentBox from '#components/common/ContentBox';
 
 const SignUpPage = () => (
   <div className="flex justify-center pb-16">

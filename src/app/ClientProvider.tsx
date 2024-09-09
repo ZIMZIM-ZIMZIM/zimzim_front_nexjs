@@ -6,6 +6,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
+import ROUTE from '#/constants/route';
+
 import i18n from '../../i18n';
 
 const queryClient = new QueryClient();
@@ -22,17 +24,36 @@ export default function ClientProvider({
   useEffect(() => {
     let locale = 'ko';
 
+    const langluage = localStorage.getItem('ZimZimLang');
+    const isLogin = localStorage.getItem('ZimZimLogin');
+
+    if (langluage) {
+      locale = langluage;
+    } else {
+      localStorage.setItem('ZimZimLangauge', locale);
+    }
+
     if (pathname === '/') {
-      router.replace(`/${locale}/auth/login`);
+      if (isLogin) {
+        router.replace(`/${locale}${ROUTE.MAIN_PAGE}`);
+      } else {
+        router.replace(`/${locale}${ROUTE.LOGIN}`);
+      }
+
       return;
     }
 
-    const browserLanguage = navigator.language.split('-')[0];
-    if (['en', 'ko'].includes(browserLanguage)) {
-      locale = browserLanguage;
+    if (pathname.includes('user')) {
+      if (isLogin) {
+        router.replace(pathname);
+      } else {
+        router.replace(`/${locale}${ROUTE.LOGIN}`);
+      }
     }
 
-    if (!pathname.startsWith(`/${locale}`)) {
+    const currentLocale = pathname.split('/')[1];
+
+    if (!['en', 'ko'].includes(currentLocale)) {
       router.replace(`/${locale}${pathname}`);
     }
 

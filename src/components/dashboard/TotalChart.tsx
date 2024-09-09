@@ -21,7 +21,7 @@ import ROUTE from '#/constants/route';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
 const TotalChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
 
   const dateRagne = useMemo(
     () =>
@@ -80,7 +80,7 @@ const TotalChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
       <p className="text-sm font-bold pb-2">
         {t('DASHBOARD.CHART.TOTAL.TITLE')}
       </p>
-      <Link href={ROUTE.EXERCISE.DEFAULT}>
+      <Link href={`/${i18n.language}${ROUTE.EXERCISE.DEFAULT}`}>
         <Line data={data} options={options} />
       </Link>
     </section>

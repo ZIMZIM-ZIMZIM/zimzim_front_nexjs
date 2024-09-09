@@ -2,9 +2,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import MenuItem from '#components/common/menu/MenuItem';
-
 import ROUTE from '#/constants/route';
+
+import MenuItem from '#components/common/menu/MenuItem';
 
 const Menu = () => {
   const { i18n } = useTranslation('common');

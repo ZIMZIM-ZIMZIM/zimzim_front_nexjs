@@ -1,9 +1,9 @@
 module.exports = {
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: 'ko',
     locales: ['en', 'ko'],
   },
-  fallbackLng: 'en',
+  fallbackLng: 'ko',
   localePath: require('path').resolve('./public/locales'),
   localeDetection: true,
 };

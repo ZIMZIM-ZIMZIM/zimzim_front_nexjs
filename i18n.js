@@ -6,7 +6,7 @@ i18n
   .use(Backend)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: 'ko',
     lng: 'ko',
     defaultLocale: 'ko',
     ns: ['common'],

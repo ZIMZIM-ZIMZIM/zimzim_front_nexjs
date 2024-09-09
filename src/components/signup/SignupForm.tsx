@@ -1,21 +1,22 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
-import Image from 'next/image';
 
 import Input from '#/components/common/input/Input';
-import Button from '#components/common/Button';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import API_ENDPOINT from '#/constants/api';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
+
+import Button from '#components/common/Button';
 
 export type SignUpFormInput = {
   id: string;

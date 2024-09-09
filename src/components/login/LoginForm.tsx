@@ -27,6 +27,7 @@ const LoginForm = () => {
     { id: string; password: string }
   >(API_ENDPOINT.AUTH.LOGIN, 'post', {
     onSuccess: () => {
+      localStorage.setItem('ZimZimLogin', 'success');
       if (i18n.language) {
         router.push(`/${i18n.language}${ROUTE.MAIN_PAGE}`);
       }

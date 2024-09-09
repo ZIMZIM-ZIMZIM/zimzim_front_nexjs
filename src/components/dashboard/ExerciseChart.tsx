@@ -13,7 +13,7 @@ import ROUTE from '#/constants/route';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
 
   const { weight, cardio } = useMemo(() => {
     let cardio = 0;
@@ -101,7 +101,7 @@ const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
         {t('DASHBOARD.CHART.WIEGHT_CARDIO.TITLE')}
       </p>
       <div className="w-full flex justify-center h-full p-2 items-center">
-        <Link href={ROUTE.EXERCISE.DEFAULT}>
+        <Link href={`/${i18n.language}${ROUTE.EXERCISE.DEFAULT}`}>
           <Doughnut data={data} options={options} plugins={[customPlugin]} />
         </Link>
       </div>
