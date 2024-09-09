@@ -1,15 +1,13 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-import CIIcon from '#assets/icon/icon.svg?react';
-import ROUTE from '#/constants/route';
 
 const Header = () => (
-  <header>
+  <header className="bg-gradient-to-r from-secondary-light to-[#8d98c4] h-20 w-full flex items-center px-8">
     <div className="w-16">
-      <NavLink to={ROUTE.MAIN_PAGE}>
-        <CIIcon width={52} height={52} />
-      </NavLink>
+      <Link href="/">
+        <Image src="/icon/icon.svg" width={52} height={52} alt="icon" />
+      </Link>
     </div>
   </header>
 );

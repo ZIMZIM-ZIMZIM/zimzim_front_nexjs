@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Line } from 'react-chartjs-2';
+'use client';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,19 +8,20 @@ import {
   LineElement,
 } from 'chart.js';
 import dayjs from 'dayjs';
+import Link from 'next/link';
+import React, { useMemo } from 'react';
+import { Line } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
 
-import { useGetUserInfoQuery } from '#/api/services/userApi';
-import { useGetExerciseQuery } from '#/api/services/exerciseApi';
+import { Exercise } from '#/api/types';
 
 import FORMAT from '#/constants/format';
 import ROUTE from '#/constants/route';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
-const TotalChart = () => {
-  const navigate = useNavigate();
-
-  const { data: userInfo } = useGetUserInfoQuery();
+const TotalChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
+  const { t, i18n } = useTranslation('common');
 
   const dateRagne = useMemo(
     () =>
@@ -30,20 +30,6 @@ const TotalChart = () => {
       ),
     [],
   );
-
-  const { data: exerciseData, isLoading: isExerciseLoading } =
-    useGetExerciseQuery(
-      {
-        userId: userInfo?.id ?? '',
-        startDate: dayjs().subtract(7, 'day').format(FORMAT.DATE),
-        endDate: dayjs().format(FORMAT.DATE),
-      },
-      { skip: !userInfo },
-    );
-
-  if (isExerciseLoading) {
-    return <div>loading~</div>;
-  }
 
   const data = {
     labels: dateRagne,
@@ -90,15 +76,14 @@ const TotalChart = () => {
   };
 
   return (
-    <div className="w-2/3 bg-white rounded-lg border-1 border-gray-light py-2 px-4 cursor-pointer h-full">
-      <p className="text-sm font-bold pb-2">Total workout volume</p>
-
-      <Line
-        data={data}
-        options={options}
-        onClick={() => navigate(ROUTE.EXERCISE.DEFAULT)}
-      />
-    </div>
+    <section className="w-2/3 bg-white rounded-lg border-1 border-gray-light py-2 px-4 cursor-pointer h-full shadow-md shadow-gray-dark/25">
+      <p className="text-sm font-bold pb-2">
+        {t('DASHBOARD.CHART.TOTAL.TITLE')}
+      </p>
+      <Link href={`/${i18n.language}${ROUTE.EXERCISE.DEFAULT}`}>
+        <Line data={data} options={options} />
+      </Link>
+    </section>
   );
 };
 

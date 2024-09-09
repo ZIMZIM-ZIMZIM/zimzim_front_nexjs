@@ -1,21 +1,43 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import React, { useRef, useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import Button from '#components/common/Button';
-import Input from '#/components/common/input/Input';
-import ErrorMessage from '#components/common/ErrorMessage';
-
-import { usePostLoginMutation } from '#/api/services/authApi';
-
-import ROUTE from '#/constants/route';
-import MESSAGE from '#/constants/message';
-import { PRIMARY_BUTTON } from '#/constants/style';
+import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
-const LoginForm = () => {
-  const navigate = useNavigate();
+import Input from '#/components/common/input/Input';
 
-  const [postLogin] = usePostLoginMutation();
+import { useCustomMutation } from '#/hooks/useCustomMutation';
+
+import API_ENDPOINT from '#/constants/api';
+import MESSAGE from '#/constants/message';
+import ROUTE from '#/constants/route';
+import { PRIMARY_BUTTON } from '#/constants/style';
+
+import Button from '#components/common/Button';
+import ErrorMessage from '#components/common/ErrorMessage';
+
+const LoginForm = () => {
+  const { t, i18n } = useTranslation('common');
+  const router = useRouter();
+
+  const { mutate } = useCustomMutation<
+    { token: string },
+    Error,
+    { id: string; password: string }
+  >(API_ENDPOINT.AUTH.LOGIN, 'post', {
+    onSuccess: () => {
+      localStorage.setItem('ZimZimLogin', 'success');
+      if (i18n.language) {
+        router.push(`/${i18n.language}${ROUTE.MAIN_PAGE}`);
+      }
+    },
+    onError: (error) => {
+      console.error('Error during login:', error);
+
+      setHasError(true);
+    },
+  });
 
   const idRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -28,27 +50,19 @@ const LoginForm = () => {
     if (idRef.current?.value === '' || passwordRef.current?.value === '') {
       setHasError(true);
     } else {
-      try {
-        await postLogin({
-          id: idRef.current?.value ?? '',
-          password: passwordRef.current?.value ?? '',
-        }).unwrap();
-
-        navigate(ROUTE.MAIN_PAGE);
-      } catch (error) {
-        console.error('Error during login:', error);
-
-        setHasError(true);
-      }
+      mutate({
+        id: idRef.current?.value ?? '',
+        password: passwordRef.current?.value ?? '',
+      });
     }
   };
 
   return (
     <form className="flex flex-col gap-5" onSubmit={handleLogin}>
-      <div className="flex flex-col gap-4">
+      <fieldset className="flex flex-col gap-4">
         <Input
           label="ID"
-          placeholder={MESSAGE.FORM.REQUIRED('ID를')}
+          placeholder={t('AUTH.LOGIN.ID')}
           autoComplete="username"
           defaultValue=""
           name="id"
@@ -58,15 +72,17 @@ const LoginForm = () => {
           name="password"
           label="Password"
           type="password"
-          placeholder={MESSAGE.FORM.REQUIRED('비밀번호를')}
+          placeholder={t('AUTH.LOGIN.PASSWORD')}
           autoComplete="current-password"
           defaultValue=""
           ref={passwordRef}
         />
-        {<ErrorMessage message={hasError ? MESSAGE.FORM.LOGIN.FAILURE : ''} />}
-      </div>
+        <div aria-live="polite">
+          <ErrorMessage message={hasError ? MESSAGE.FORM.LOGIN.FAILURE : ''} />
+        </div>
+      </fieldset>
       <Button type="submit" className={twMerge(PRIMARY_BUTTON, 'h-14')}>
-        Sign In
+        {t('AUTH.LOGIN.BUTTON')}
       </Button>
     </form>
   );

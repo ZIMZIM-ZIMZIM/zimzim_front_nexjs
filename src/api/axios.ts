@@ -1,10 +1,9 @@
-import API_ENDPOINT from '#/constants/api';
 import axios from 'axios';
 
-let navigateFunction: (path: string) => void;
+import API_ENDPOINT from '#/constants/api';
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_SERVER_URL,
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -12,11 +11,8 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const { url } = config;
+    config.withCredentials = true;
 
-    if (!url?.startsWith(API_ENDPOINT.AUTH.SIGN_UP)) {
-      config.withCredentials = true;
-    }
     return config;
   },
   (error) => {
@@ -29,14 +25,14 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   async (error) => {
-    if (navigateFunction && error.response) {
+    if (error.response) {
       const originalRequest = error.config;
       const { status } = error.response;
 
       if (status === 401 || status === 403) {
         try {
           const response = await axios.post(
-            `${import.meta.env.VITE_SERVER_URL}${API_ENDPOINT.AUTH.REFRESH_TOKEN}`,
+            `${import.meta.env.NEXT_PUBLIC_SERVER_URL}${API_ENDPOINT.AUTH.REFRESH_TOKEN}`,
           );
 
           originalRequest.headers['Authorization'] =
@@ -44,8 +40,6 @@ axiosInstance.interceptors.response.use(
 
           return axiosInstance(originalRequest);
         } catch (error) {
-          navigateFunction('/login');
-
           return Promise.reject(error);
         }
       }
@@ -53,9 +47,5 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-export const setNavigateFunction = (navigate: (path: string) => void) => {
-  navigateFunction = navigate;
-};
 
 export default axiosInstance;

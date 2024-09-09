@@ -9,21 +9,38 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "noEmit": true,
-    "jsx": "react",
+    "jsx": "preserve",
+    "noImplicitAny": false,
     "baseUrl": ".",
     "paths": {
       "#/*": ["src/*"],
       "#api/*": ["src/api/*"],
-      "#pages/*": ["src/pages/*"],
-      "#layout/*": ["src/layout/*"],
       "#components/*": ["src/components/*"],
-      "#assets/*": ["src/assets/*"],
-      "#stores/*": ["src/stores/*"],
       "#hooks/*": ["src/hooks/*"],
       "#util/*": ["src/util/*"],
       "#constants/*": ["src/constants/*"]
-    }
+    },
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["src", "vite.config.ts"],
-  "files": ["src/custom.d.ts"]
+  "include": [
+    "src",
+    "src/**/*",
+    "next-i18next.config.cjs",
+    "i18n.js",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "next.config.js"
+  ],
+  "files": ["src/custom.d.ts"],
+  "exclude": ["node_modules"]
 }

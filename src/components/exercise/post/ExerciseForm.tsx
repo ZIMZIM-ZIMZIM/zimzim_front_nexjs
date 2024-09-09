@@ -1,14 +1,16 @@
+'use client';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import DeleteIcon from 'public/icon/delete.svg';
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
+import * as yup from 'yup';
 
-import Button from '#components/common/Button';
-import Badge from '#/components/exercise/post/Badge';
+import ControllerSelectBox from '#/components/common/dropDown/ControllerSelectBox';
 import ControllerInput from '#/components/common/input/ControllerInput';
 import RadioInput from '#/components/common/input/RadioInput';
-import ControllerSelectBox from '#/components/common/selectBox/ControllerSelectBox';
 
 import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
 
@@ -19,7 +21,9 @@ import {
 } from '#/constants/option';
 import { PRIMARY_BUTTON } from '#/constants/style';
 
-import DeleteIcon from '#assets/icon/delete.svg?react';
+import Badge from './Badge';
+
+import Button from '#components/common/Button';
 
 export type ExercisePostFormInput = {
   _id?: string | null;
@@ -45,21 +49,23 @@ const ExerciseForm = ({
   isUseBadge,
   submitFunction,
 }: ExerciseFormProps) => {
+  const { t } = useTranslation('common');
+
   const [exerciseList, setExerciseList] = useState<ExercisePostFormInput[]>([]);
 
   const schema: yup.ObjectSchema<ExercisePostFormInput> = yup.object().shape({
     _id: yup.string().notRequired(),
-    date: yup.string().required(MESSAGE.FORM.EXERCISE.DATE),
-    isPT: yup.string().required(MESSAGE.FORM.EXERCISE.PT),
-    duration: yup.string().required(MESSAGE.FORM.EXERCISE.DURATION),
+    date: yup.string().required(t('EXERCISE.FORM.REQUIRED.DATE')),
+    isPT: yup.string().required(t('EXERCISE.FORM.REQUIRED.PT')),
+    duration: yup.string().required(t('EXERCISE.FORM.REQUIRED.DURATION')),
     type: yup
       .mixed<EXERCISE_TYPE>()
       .oneOf(Object.values(EXERCISE_TYPE))
-      .required(MESSAGE.FORM.EXERCISE.TYPE),
+      .required(t('EXERCISE.FORM.REQUIRED.TYPE')),
     force: yup
       .mixed<EXERCISE_FORCE_TYPE>()
       .oneOf(Object.values(EXERCISE_FORCE_TYPE))
-      .required(MESSAGE.FORM.EXERCISE.FORCE),
+      .required(t('EXERCISE.FORM.REQUIRED.FORCE')),
   });
 
   const {
@@ -113,14 +119,14 @@ const ExerciseForm = ({
       return (
         <Badge content={content} key={content}>
           <Button
-            className="p-1"
+            className="px-1"
             onClick={() => {
               setExerciseList((prev: ExercisePostFormInput[]) =>
                 prev.filter((element) => element !== exercise),
               );
             }}
           >
-            <DeleteIcon width={8} height={10} />
+            <DeleteIcon className="w-2 h-2" />
           </Button>
         </Badge>
       );
@@ -140,10 +146,10 @@ const ExerciseForm = ({
         <ControllerInput
           name="date"
           control={control}
-          defaultValue={defaultValues?.date ?? ''}
-          label="운동 날짜"
+          value={defaultValues?.date ?? ''}
+          label={t('EXERCISE.FORM.LABEL.DATE')}
           type="date"
-          placeholder="2024/00/00"
+          placeholder={t('EXERCISE.FORM.PLACEHOLDER.DATE')}
           inputClassName={twMerge(
             `w-52 ${!isUseBadge && 'cursor-not-allowed'}`,
           )}
@@ -156,17 +162,19 @@ const ExerciseForm = ({
           control={control}
           render={({ field }) => (
             <div {...field} className="flex justify-between gap-1">
-              <label className="text-neutral-500">PT 여부</label>
+              <label className="text-neutral-500">
+                {t('EXERCISE.FORM.LABEL.PT.')}
+              </label>
               <div className="flex gap-4">
                 <RadioInput
-                  label="PT"
+                  label={t('EXERCISE.FORM.LABEL.PT.YES')}
                   name="isPT"
                   value="Y"
                   checked={field.value === 'Y'}
                   onChange={field.onChange}
                 />
                 <RadioInput
-                  label="개인운동"
+                  label={t('EXERCISE.FORM.LABEL.PT.NO')}
                   name="isPT"
                   value="N"
                   checked={field.value === 'N'}
@@ -179,21 +187,21 @@ const ExerciseForm = ({
         <ControllerSelectBox
           name="type"
           control={control}
-          label="운동 종류"
+          label={t('EXERCISE.FORM.LABEL.TYPE')}
           options={EXERCISE_TYPE_OPTION}
           selectId="type"
           selectName="type"
-          placeHolder="종류를 선택해 주세요"
+          placeHolder={t('EXERCISE.FORM.PLACEHOLDER.TYPE')}
           error={errors?.type}
           selectClassName="w-52"
         />
         <ControllerInput
+          value=""
           name="duration"
           control={control}
-          defaultValue=""
-          label="운동 시간"
+          label={t('EXERCISE.FORM.LABEL.DURATION')}
           type="number"
-          placeholder="0분"
+          placeholder={t('EXERCISE.FORM.PLACEHOLDER.DURATION')}
           inputClassName="w-52"
           error={errors?.duration}
           min={1}
@@ -202,12 +210,12 @@ const ExerciseForm = ({
         <ControllerSelectBox
           name="force"
           control={control}
-          label="운동 강도"
+          label={t('EXERCISE.FORM.LABEL.FORCE')}
           options={EXERCISE_FORCE_OPTION}
           selectId="force"
           selectName="force"
           selectClassName="w-52"
-          placeHolder="강도를 선택해 주세요"
+          placeHolder={t('EXERCISE.FORM.PLACEHOLDER.FORCE')}
           error={errors?.force}
         />
       </div>
