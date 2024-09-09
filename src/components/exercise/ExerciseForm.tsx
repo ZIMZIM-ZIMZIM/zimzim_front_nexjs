@@ -1,13 +1,14 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import DeleteIcon from 'public/icon/delete.svg';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 import * as yup from 'yup';
 
+import Button from '#/components/common/Button';
 import ControllerSelectBox from '#/components/common/dropDown/ControllerSelectBox';
 import ControllerInput from '#/components/common/input/ControllerInput';
 import RadioInput from '#/components/common/input/RadioInput';
@@ -21,9 +22,7 @@ import {
 } from '#/constants/option';
 import { PRIMARY_BUTTON } from '#/constants/style';
 
-import Badge from './Badge';
-
-import Button from '#components/common/Button';
+import Badge from '#components/exercise/post/Badge';
 
 export type ExercisePostFormInput = {
   _id?: string | null;
@@ -111,7 +110,10 @@ const ExerciseForm = ({
     exerciseList.map((exercise: ExercisePostFormInput) => {
       const info = Object.entries(exercise).map((element) =>
         element[0] === 'duration'
-          ? (element = [element[0], element[1] + '분'])
+          ? (element = [
+              element[0],
+              element[1] + t('EXERCISE.DETAIL..CONTENT.UNIT'),
+            ])
           : element,
       );
       const content = info?.reduce((acc, cur) => acc + ' ' + cur[1], '');
@@ -126,7 +128,12 @@ const ExerciseForm = ({
               );
             }}
           >
-            <DeleteIcon className="w-2 h-2" />
+            <Image
+              alt="delete icon"
+              src="/icon/delete.svg"
+              width={20}
+              height={20}
+            />
           </Button>
         </Badge>
       );

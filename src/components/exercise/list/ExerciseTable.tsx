@@ -9,13 +9,12 @@ import {
   ColumnDef,
 } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
-import LeftArrowIcon from 'public/icon/left-arrow.svg';
-import RightArrowIcon from 'public/icon/right-arrow.svg';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import ContentBox from '#/components/common/ContentBox';
+import Pagination from '#/components/common/Pagination';
 
 import { useCustomQuery } from '#/hooks/useCustomQuery';
 import { useGetExerciseColumns } from '#/hooks/useExerciseColumns';
@@ -24,8 +23,6 @@ import { Exercise, ExerciseDetail, ExerciseList, User } from '#/api/types';
 
 import API_ENDPOINT from '#/constants/api';
 import QUERY_KEYS from '#/constants/queryKey';
-
-import Button from '#components/common/Button';
 
 export type FlattenedExercise = Pick<Exercise, 'date' | 'isPT'> &
   Pick<Exercise['detail'][number], 'type' | 'duration' | 'force' | '_id'>;
@@ -48,6 +45,7 @@ const ExerciseTable = ({
   setPage,
 }: ExerciseTableProps) => {
   const { i18n } = useTranslation('common');
+
   const router = useRouter();
 
   const columnHelper = createColumnHelper<FlattenedExercise>();
@@ -60,6 +58,7 @@ const ExerciseTable = ({
     QUERY_KEYS.EXERCISE.LIST(),
     `${API_ENDPOINT.EXERCISE.LIST}?id=${userInfo?.id}&page=${page}&limit=10`,
   );
+
   const [flattenedData, setFlattenData] = useState<FlattenedExercise[] | []>(
     [],
   );
@@ -164,37 +163,9 @@ const ExerciseTable = ({
         </table>
       </ContentBox>
 
-      <nav className="pt-8 h-6 flex flex-row justify-end gap-2 items-center">
-        {exerciseData && exerciseData?.currentPage > 0 && (
-          <Button
-            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer shadow-md shadow-gray-dark/25"
-            onClick={() => setPage((prev) => prev - 1)}
-            disabled={page === 1 || !exerciseData}
-          >
-            <LeftArrowIcon />
-          </Button>
-        )}
-        {Array.from({ length: exerciseData?.totalPages ?? 0 }, (_, i) => (
-          <p
-            key={i + 1}
-            className={twMerge(
-              `border-1 border-gray-light w-7 text-center rounded-md cursor-pointer shadow-md shadow-gray-dark/25 ${exerciseData?.currentPage === i + 1 ? 'bg-primary/25' : 'bg-white'}`,
-            )}
-            onClick={() => setPage(i + 1)}
-          >
-            {i + 1}
-          </p>
-        ))}
-        {exerciseData && exerciseData?.currentPage > 0 && (
-          <Button
-            className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer shadow-md shadow-gray-dark/25"
-            onClick={() => setPage((prev) => prev + 1)}
-            disabled={page >= (exerciseData?.totalPages ?? 1)}
-          >
-            <RightArrowIcon />
-          </Button>
-        )}
-      </nav>
+      {exerciseData && (
+        <Pagination data={exerciseData} page={page} setPage={setPage} />
+      )}
     </div>
   );
 };

@@ -13,3 +13,5 @@ export const EXERCISE_FORCE_OPTION = [
   },
   { value: EXERCISE_FORCE_TYPE.HARD, name: EXERCISE_FORCE_TYPE.HARD },
 ];
+
+export const LANGUAGE = ['en', 'ko'];

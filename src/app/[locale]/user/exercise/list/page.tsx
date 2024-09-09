@@ -7,7 +7,7 @@ import ExerciseTable from '#/components/exercise/list/ExerciseTable';
 
 const ExerciseListPage = () => {
   const [checkedExercise, setCheckedExercise] = useState<string[]>([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
 
   return (
     <div className="flex flex-col items-center">

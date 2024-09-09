@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
+import { LANGUAGE } from '#/constants/option';
 import ROUTE from '#/constants/route';
 
 import i18n from '../../i18n';
@@ -19,7 +20,8 @@ export default function ClientProvider({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [isReady, setIsReady] = useState(false);
+
+  const [isReady, setIsReady] = useState<boolean>(false);
 
   useEffect(() => {
     let locale = 'ko';
@@ -53,7 +55,7 @@ export default function ClientProvider({
 
     const currentLocale = pathname.split('/')[1];
 
-    if (!['en', 'ko'].includes(currentLocale)) {
+    if (!LANGUAGE.includes(currentLocale)) {
       router.replace(`/${locale}${pathname}`);
     }
 

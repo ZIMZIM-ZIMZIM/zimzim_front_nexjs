@@ -8,8 +8,9 @@ import React, {
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import ErrorMessage from '#components/common/ErrorMessage';
-import useSelectBox from '#hooks/useSelectBox';
+import ErrorMessage from '#/components/common/ErrorMessage';
+
+import useSelectBox from '#/hooks/useSelectBox';
 
 type Option = {
   value: string;
