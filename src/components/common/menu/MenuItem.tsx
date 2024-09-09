@@ -33,17 +33,11 @@ const MenuItem = ({ to, icon, title, id }: MenuItemProps) => {
       {
         <>
           <Image
-            className={clsx(
-              'group-hover:text-white w-7 h-7 md:w-5 md:h-5 lg:w-7 lg:h-7',
-              {
-                'text-white': isActive,
-                'text-gray-600': !isActive,
-              },
-            )}
             src={icon}
             width={24}
             alt="icon"
             height={24}
+            style={{ filter: isActive ? 'brightness(0) invert(1)' : 'none' }}
           />
 
           <p className="text-xl md:text-sm hidden md:block lg:text-lg">
