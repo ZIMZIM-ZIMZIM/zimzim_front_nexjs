@@ -6,6 +6,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
+import { LOCAL_STORAGE } from '#/constants/key';
+import { LANGUAGE } from '#/constants/option';
 import ROUTE from '#/constants/route';
 
 import i18n from '../../i18n';
@@ -19,19 +21,22 @@ export default function ClientProvider({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [isReady, setIsReady] = useState(false);
+
+  const [isReady, setIsReady] = useState<boolean>(false);
 
   useEffect(() => {
     let locale = 'ko';
 
-    const langluage = localStorage.getItem('ZimZimLang');
-    const isLogin = localStorage.getItem('ZimZimLogin');
+    const langluage = localStorage.getItem(LOCAL_STORAGE.LANGUAGE);
+    const isLogin = localStorage.getItem(LOCAL_STORAGE.LOGIN);
 
     if (langluage) {
       locale = langluage;
     } else {
-      localStorage.setItem('ZimZimLangauge', locale);
+      localStorage.setItem(LOCAL_STORAGE.LANGUAGE, locale);
     }
+
+    i18n.changeLanguage(locale);
 
     if (pathname === '/') {
       if (isLogin) {
@@ -53,7 +58,7 @@ export default function ClientProvider({
 
     const currentLocale = pathname.split('/')[1];
 
-    if (!['en', 'ko'].includes(currentLocale)) {
+    if (!LANGUAGE.includes(currentLocale)) {
       router.replace(`/${locale}${pathname}`);
     }
 

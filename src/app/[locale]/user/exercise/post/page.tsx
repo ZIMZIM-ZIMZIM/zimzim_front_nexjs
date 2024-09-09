@@ -4,6 +4,10 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import ExerciseForm, {
+  ExercisePostFormInput,
+} from '#/components/exercise/ExerciseForm';
+
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 import { useCustomQuery } from '#/hooks/useCustomQuery';
 
@@ -21,12 +25,10 @@ import ROUTE from '#/constants/route';
 
 import { getKoreaDate } from '#/util';
 import ContentBox from '#components/common/ContentBox';
-import ExerciseForm, {
-  ExercisePostFormInput,
-} from '#components/exercise/post/ExerciseForm';
 
 const ExercisePostPage = () => {
   const { i18n, t } = useTranslation('common');
+
   const today = getKoreaDate();
 
   const router = useRouter();

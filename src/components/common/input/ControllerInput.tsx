@@ -1,7 +1,7 @@
 import React from 'react';
 import { Control, Controller, FieldError } from 'react-hook-form';
 
-import { ExercisePostFormInput } from '#/components/exercise/post/ExerciseForm';
+import { ExercisePostFormInput } from '#/components/exercise/ExerciseForm';
 
 import Input from '#components/common/input/Input';
 

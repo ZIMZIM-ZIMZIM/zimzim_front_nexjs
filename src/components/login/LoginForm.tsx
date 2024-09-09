@@ -10,6 +10,7 @@ import Input from '#/components/common/input/Input';
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import API_ENDPOINT from '#/constants/api';
+import { LOCAL_STORAGE } from '#/constants/key';
 import MESSAGE from '#/constants/message';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
@@ -27,7 +28,7 @@ const LoginForm = () => {
     { id: string; password: string }
   >(API_ENDPOINT.AUTH.LOGIN, 'post', {
     onSuccess: () => {
-      localStorage.setItem('ZimZimLogin', 'success');
+      localStorage.setItem(LOCAL_STORAGE.LOGIN, 'success');
       if (i18n.language) {
         router.push(`/${i18n.language}${ROUTE.MAIN_PAGE}`);
       }

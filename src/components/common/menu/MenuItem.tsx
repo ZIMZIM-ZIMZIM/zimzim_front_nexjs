@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface MenuItemProps {
   to: string;
@@ -16,6 +16,8 @@ interface MenuItemProps {
 const MenuItem = ({ to, icon, title, id }: MenuItemProps) => {
   const pathname = usePathname();
   const isActive = pathname.includes(id);
+
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
     <Link
@@ -29,6 +31,8 @@ const MenuItem = ({ to, icon, title, id }: MenuItemProps) => {
             !isActive,
         },
       )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {
         <>
@@ -37,7 +41,10 @@ const MenuItem = ({ to, icon, title, id }: MenuItemProps) => {
             width={24}
             alt="icon"
             height={24}
-            style={{ filter: isActive ? 'brightness(0) invert(1)' : 'none' }}
+            style={{
+              filter:
+                isActive || isHovered ? 'brightness(0) invert(1)' : 'none',
+            }}
           />
 
           <p className="text-xl md:text-sm hidden md:block lg:text-lg">

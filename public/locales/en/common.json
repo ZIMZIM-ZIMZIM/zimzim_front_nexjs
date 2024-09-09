@@ -40,7 +40,7 @@
     "WAITING_MESSAGE": "Please wait... We are checking your workout records",
     "WELCOME_MESSAGE": "{{name}}, you’ve completed {{count}} sessions for {{min}} minutes",
     "NO_DATA_MESSAGE": "{{name}}, please register your workout record and check this week's activity.",
-    "REGISTER_BUTTON": "Register workout record",
+    "REGISTER_BUTTON": "Register record",
     "CHART": {
       "TOTAL": {
         "TITLE": "Total workout volume"
@@ -90,7 +90,7 @@
         "DATE": "2024/00/00",
         "DURATION": "0 minutes",
         "TYPE": "Please select a type",
-        "FORCE": "Please select a force level"
+        "FORCE": "Please select a level"
       },
       "REQUIRED": {
         "DATE": "Please enter the date",

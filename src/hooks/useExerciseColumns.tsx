@@ -81,25 +81,25 @@ export const useGetExerciseColumns = (
               : t('EXERCISE.TABLE.ROW.FREE_EXERCISE')}
           </span>
         ),
-        meta: { className: 'w-1/6 text-right' },
+        meta: { className: 'w-1/6 text-center' },
       }),
       columnHelper.accessor('type', {
         id: 'type',
         header: () => t('EXERCISE.TABLE.COLUMN.TYPE'),
         cell: (info) => info.renderValue(),
-        meta: { className: 'w-1/6 text-right' },
+        meta: { className: 'w-1/6 text-center' },
       }),
       columnHelper.accessor('duration', {
         id: 'duration',
         header: () => t('EXERCISE.TABLE.COLUMN.MIN'),
         cell: (info) => info.renderValue() ?? '' + t('EXERCISE.TABLE.ROW.TIME'),
-        meta: { className: 'w-1/6 text-right' },
+        meta: { className: 'w-1/6 text-center' },
       }),
       columnHelper.accessor('force', {
         id: 'force',
         header: () => t('EXERCISE.TABLE.COLUMN.FORCE'),
         cell: (info) => info.renderValue(),
-        meta: { className: 'w-1/6 text-right pr-4' },
+        meta: { className: 'w-1/6 text-center pr-4' },
       }),
     ],
     [columnHelper, flattenedData, checkedExercise, setCheckedExercise],
