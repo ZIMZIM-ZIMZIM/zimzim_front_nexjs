@@ -2,22 +2,20 @@
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
-import EyeIcon from 'public/icon/eye-regular.svg';
-import EyeSlashIcon from 'public/icon/eye-slash-regular.svg';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
+import Image from 'next/image';
 
 import Input from '#/components/common/input/Input';
+import Button from '#components/common/Button';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import API_ENDPOINT from '#/constants/api';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
-
-import Button from '#components/common/Button';
 
 export type SignUpFormInput = {
   id: string;
@@ -123,12 +121,24 @@ const SignupForm = () => {
         >
           <div
             className="absolute inset-y-4 right-4"
+            role="button"
             onClick={() => setShowPassword((prev) => !prev)}
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
           >
             {showPassword ? (
-              <EyeIcon width={16} />
+              <Image
+                width={16}
+                height={16}
+                src="/icon/eye-regular.svg"
+                alt="eye"
+              />
             ) : (
-              <EyeSlashIcon width={16} />
+              <Image
+                width={16}
+                height={16}
+                src="/icon/eye-slash-regular.svg"
+                alt="eye"
+              />
             )}
           </div>
         </Input>
@@ -142,12 +152,29 @@ const SignupForm = () => {
         >
           <div
             className="absolute inset-y-4 right-4"
+            role="button"
             onClick={() => setShowConfirmPassword((prev) => !prev)}
+            aria-label={
+              showConfirmPassword
+                ? 'Hide password confirm'
+                : 'Show password confirm'
+            }
           >
             {showConfirmPassword ? (
-              <EyeIcon width={16} className="text-gray-dark" />
+              <Image
+                width={16}
+                height={16}
+                src="/icon/eye-regular.svg"
+                alt="eye"
+                className="text-gray-dark"
+              />
             ) : (
-              <EyeSlashIcon width={16} />
+              <Image
+                width={16}
+                height={16}
+                src="/icon/eye-slash-regular.svg"
+                alt="eye"
+              />
             )}
           </div>
         </Input>
@@ -158,4 +185,5 @@ const SignupForm = () => {
     </form>
   );
 };
+
 export default SignupForm;

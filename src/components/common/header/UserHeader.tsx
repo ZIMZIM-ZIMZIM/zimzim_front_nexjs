@@ -37,19 +37,22 @@ const UserHeader = () => {
   };
 
   return (
-    <div className="flex justify-between w-full h-16 bg-white items-center px-8">
+    <header className="flex justify-between w-full h-16 bg-white items-center px-8">
       <div className="flex flex-row items-center w-32 justify-center">
         <Link href={ROUTE.MAIN_PAGE}>
           <Image src="/icon/icon.svg" width={48} height={48} alt="user icon" />
         </Link>
       </div>
       <div className="flex flex-row gap-4">
-        <Button className={twMerge(HEADER_ICON_BUTTON, 'rounded-full')}>
+        <Button
+          className={twMerge(HEADER_ICON_BUTTON, 'rounded-full')}
+          aria-label="change langauge icon"
+        >
           <Image
             src="/icon/translate.svg"
             width={20}
             height={20}
-            alt="translate icon"
+            alt="change langauge icon"
           />
         </Button>
         <Link href={ROUTE.USER}>
@@ -65,6 +68,7 @@ const UserHeader = () => {
         <Button
           className={twMerge(HEADER_ICON_BUTTON, 'rounded-md')}
           onClick={handleLogout}
+          aria-label="log out"
         >
           <Image
             src="/icon/logout.svg"
@@ -74,7 +78,7 @@ const UserHeader = () => {
           />
         </Button>
       </div>
-    </div>
+    </header>
   );
 };
 

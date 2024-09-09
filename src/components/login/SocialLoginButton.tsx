@@ -8,11 +8,18 @@ const SocialLoginButton = () => {
   const { t } = useTranslation('common');
 
   return (
-    <div className="flex flex-row gap-4 justify-between">
+    <section
+      className="flex flex-row gap-4 justify-between"
+      aria-labelledby="social-login"
+    >
+      <h2 id="social-login" className="sr-only">
+        Social Login Options
+      </h2>
       {['Google', 'Apple'].map((ele: string) => (
         <Button
           key={ele}
           className="px-4 flex flex-1 flex-row items-center gap-2 border-1 border-gray-light h-12 rounded-lg text-black text-sm text-left"
+          aria-label={t(`AUTH.LOGIN.SOCIAL_LOGIN.${ele.toUpperCase()}`)}
         >
           {ele === 'Google' && (
             <Image
@@ -35,7 +42,7 @@ const SocialLoginButton = () => {
           {t(`AUTH.LOGIN.SOCIAL_LOGIN.${ele.toUpperCase()}`)}
         </Button>
       ))}
-    </div>
+    </section>
   );
 };
 

@@ -5,13 +5,13 @@ import Menu from '#components/common/menu/Menu';
 
 const UserLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen w-screen flex flex-col bg-secondary-light/50">
+    <main className="min-h-screen w-screen flex flex-col bg-secondary-light/50">
       <UserHeader />
       <div className="flex flex-1 overflow-hidden">
         <Menu />
-        <main className="flex-1 overflow-auto p-6">{children}</main>
+        <section className="flex-1 overflow-auto p-6">{children}</section>
       </div>
-    </div>
+    </main>
   );
 };
 

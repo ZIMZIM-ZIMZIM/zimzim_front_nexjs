@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 
-import ButtonGroup from '#/components/exercise/list/ButtonGroup';
 import ExerciseTable from '#/components/exercise/list/ExerciseTable';
+import ButtonGroup from '#/components/exercise/list/ButtonGroup';
 
 const ExerciseListPage = () => {
   const [checkedExercise, setCheckedExercise] = useState<string[]>([]);

@@ -97,7 +97,10 @@ const ExerciseTable = ({
 
   return (
     <div className="w-full">
-      <ContentBox className="rounded-2xl w-full py-4">
+      <ContentBox
+        className="rounded-2xl w-full py-4"
+        contentTitle="exercise-table"
+      >
         <table className="table-auto">
           <thead className="border-b-1">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -160,7 +163,8 @@ const ExerciseTable = ({
           </tbody>
         </table>
       </ContentBox>
-      <div className="pt-8 h-6 flex flex-row justify-end gap-2 items-center">
+
+      <nav className="pt-8 h-6 flex flex-row justify-end gap-2 items-center">
         {exerciseData && exerciseData?.currentPage > 0 && (
           <Button
             className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer shadow-md shadow-gray-dark/25"
@@ -190,7 +194,7 @@ const ExerciseTable = ({
             <RightArrowIcon />
           </Button>
         )}
-      </div>
+      </nav>
     </div>
   );
 };

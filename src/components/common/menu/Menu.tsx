@@ -2,15 +2,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import ROUTE from '#/constants/route';
-
 import MenuItem from '#components/common/menu/MenuItem';
+
+import ROUTE from '#/constants/route';
 
 const Menu = () => {
   const { i18n } = useTranslation('common');
+
   return (
-    <header className="w-48 justify-center algin-center border-b-1 border-slate-900/10 bg-white">
-      <nav className="h-full flex flex-col gap-6 pt-4 items-center">
+    <nav className="w-48 justify-center algin-center border-b-1 border-slate-900/10 bg-white">
+      <div className="h-full flex flex-col gap-6 pt-4 items-center">
         <div className="flex flex-col gap-8 w-5/6 text-gray-600 max-md:items-center">
           <MenuItem
             to={`/${i18n.language + ROUTE.MAIN_PAGE}`}
@@ -31,8 +32,8 @@ const Menu = () => {
             id="/user/water"
           />
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 };
 

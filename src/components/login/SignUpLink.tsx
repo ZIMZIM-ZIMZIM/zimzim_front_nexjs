@@ -14,7 +14,11 @@ const SignUpLink = () => {
       <span className="text-[#757575] text-sm self-end">
         {t('AUTH.LOGIN.NEW_USER')}
       </span>
-      <Link href={ROUTE.SIGN_UP} className="font-semibold underline">
+      <Link
+        href={ROUTE.SIGN_UP}
+        className="font-semibold underline"
+        aria-label={t('AUTH.LOGIN.SIGN_UP')}
+      >
         {t('AUTH.LOGIN.SIGN_UP')}
       </Link>
     </p>

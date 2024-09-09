@@ -31,17 +31,21 @@ const ExerciseDetailPage = () => {
   );
 
   return (
-    <div className=" flex flex-row justify-center">
+    <article className=" flex flex-row justify-center">
       <div className="flex flex-col gap-8 w-2/5">
-        <div className="flex justify-end">
+        <header className="flex justify-end">
           <Link href={`/user/exercise/update/${id}`}>
             <Button className={twMerge(ACTION_BUTTON, 'bg-primary')}>
               {t('EXERCISE.DETAIL.BUTTON')}
             </Button>
           </Link>
-        </div>
-        <div className="flex justify-center w-full">
-          <ContentBox className="rounded-2xl w-full">
+        </header>
+
+        <section className="flex justify-center w-full">
+          <ContentBox
+            className="rounded-2xl w-full"
+            contentTitle="exercise-detail"
+          >
             <h1 className="text-center pb-8">
               🏋️‍♀️ {dayjs(data?.date).format(FORMAT.DATE)}{' '}
               {t('EXERCISE.DETAIL..TITLE')} 🏋️‍♀️
@@ -71,9 +75,9 @@ const ExerciseDetailPage = () => {
               )}
             </div>
           </ContentBox>
-        </div>
+        </section>
       </div>
-    </div>
+    </article>
   );
 };
 

@@ -110,8 +110,11 @@ const ExercisePostPage = () => {
   };
 
   return (
-    <div className="flex justify-center">
-      <ContentBox className="rounded-2xl gap-8 w-2/5">
+    <section className="flex justify-center">
+      <ContentBox
+        className="rounded-2xl gap-8 w-2/5"
+        contentTitle="exercise post"
+      >
         <ExerciseForm
           submitButtonTitle={t('EXERCISE.POST.BUTTON')}
           isUseBadge
@@ -127,7 +130,7 @@ const ExercisePostPage = () => {
           }}
         />
       </ContentBox>
-    </div>
+    </section>
   );
 };
 

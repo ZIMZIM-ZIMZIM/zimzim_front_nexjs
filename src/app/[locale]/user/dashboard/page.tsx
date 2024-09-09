@@ -60,14 +60,14 @@ const DashboardPage = () => {
       )}
       {isSuccess && exerciseData && exerciseData.length && (
         <div className="flex flex-col gap-4 px-10 h-full">
-          <p className="text-lg h-1/12">
+          <h1 className="text-lg h-1/12">
             ✅
             {t('DASHBOARD.WELCOME_MESSAGE', {
               name: userInfo?.nickname,
               count: exerciseData?.length ?? 0,
               min: totalDuration,
             })}
-          </p>
+          </h1>
 
           <div className="flex flex-col gap-6 h-11/12">
             <div className="flex flex-row justify-between items-cetner gap-6">

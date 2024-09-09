@@ -88,7 +88,7 @@ const ExerciseUpdatePage = () => {
 
   return (
     <div className="flex justify-center">
-      <ContentBox className="rounded-2xl">
+      <ContentBox className="rounded-2xl" contentTitle="exercise update">
         {defaultValues && (
           <ExerciseForm
             submitButtonTitle={t('EXERCISE.UPDATE.BUTTON')}

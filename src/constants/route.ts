@@ -1,6 +1,6 @@
 const ROUTE = {
   MAIN_PAGE: '/user/dashboard',
-  SIGN_UP: '/auth/sign-up',
+  SIGN_UP: '/auth/signup',
   USER: '/user',
   LOGIN: '/auth/login',
   EXERCISE: {

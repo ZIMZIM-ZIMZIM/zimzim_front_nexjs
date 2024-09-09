@@ -91,7 +91,7 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
   };
 
   return (
-    <div className="flex flex-row justify-end gap-4">
+    <section className="flex flex-row justify-end gap-4">
       <Button
         className={twMerge(
           ACTION_BUTTON,
@@ -109,7 +109,7 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
       >
         {t('EXERCISE.LIST.BUTTON.REGISTER')}
       </Button>
-    </div>
+    </section>
   );
 };
 

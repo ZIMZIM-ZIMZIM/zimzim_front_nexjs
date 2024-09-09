@@ -58,7 +58,7 @@ const LoginForm = () => {
 
   return (
     <form className="flex flex-col gap-5" onSubmit={handleLogin}>
-      <div className="flex flex-col gap-4">
+      <fieldset className="flex flex-col gap-4">
         <Input
           label="ID"
           placeholder={t('AUTH.LOGIN.ID')}
@@ -76,8 +76,10 @@ const LoginForm = () => {
           defaultValue=""
           ref={passwordRef}
         />
-        {<ErrorMessage message={hasError ? MESSAGE.FORM.LOGIN.FAILURE : ''} />}
-      </div>
+        <div aria-live="polite">
+          <ErrorMessage message={hasError ? MESSAGE.FORM.LOGIN.FAILURE : ''} />
+        </div>
+      </fieldset>
       <Button type="submit" className={twMerge(PRIMARY_BUTTON, 'h-14')}>
         {t('AUTH.LOGIN.BUTTON')}
       </Button>
