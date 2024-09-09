@@ -10,7 +10,7 @@ const Menu = () => {
   const { i18n } = useTranslation('common');
 
   return (
-    <nav className="w-48 justify-center algin-center border-b-1 border-slate-900/10 bg-white">
+    <nav className="w-48 justify-center algin-center border-b-1 border-slate-900/10 bg-white min-h-[calc(100vh-4rem)]">
       <div className="h-full flex flex-col gap-6 pt-4 items-center">
         <div className="flex flex-col gap-8 w-5/6 text-gray-600 max-md:items-center">
           <MenuItem

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import ContentBox from '#/components/common/ContentBox';
 import ExerciseForm, {
   ExercisePostFormInput,
-} from '#/components/exercise/post/ExerciseForm';
+} from '#/components/exercise/ExerciseForm';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 import { useCustomQuery } from '#/hooks/useCustomQuery';
@@ -24,9 +24,11 @@ import ROUTE from '#/constants/route';
 
 const ExerciseUpdatePage = () => {
   const { i18n, t } = useTranslation('common');
+
   const router = useRouter();
 
   const queryClient = useQueryClient();
+
   const pathname = usePathname();
   const id = pathname.split('update/')[1];
 
@@ -46,7 +48,9 @@ const ExerciseUpdatePage = () => {
     }
   >(API_ENDPOINT.EXERCISE.DETAIL(id), 'post', {
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.EXERCISE.LIST() });
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.EXERCISE.LIST(),
+      });
     },
   });
 

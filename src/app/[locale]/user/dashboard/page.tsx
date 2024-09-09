@@ -1,6 +1,7 @@
 'use client';
 
 import dayjs from 'dayjs';
+import i18n from 'i18n';
 import Link from 'next/link';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +10,7 @@ import { twMerge } from 'tailwind-merge';
 import FallbackView from '#/components/common/FallbackView';
 import LoadingBar from '#/components/common/LoadingBar';
 import ExerciseChart from '#/components/dashboard/ExerciseChart';
+import TotalChart from '#/components/dashboard/TotalChart';
 import WaterChart from '#/components/dashboard/WaterChart';
 
 import { useCustomQuery } from '#/hooks/useCustomQuery';
@@ -20,8 +22,6 @@ import FORMAT from '#/constants/format';
 import QUERY_KEYS from '#/constants/queryKey';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
-
-import TotalChart from '#components/dashboard/TotalChart';
 
 const DashboardPage = () => {
   const { t } = useTranslation('common');
@@ -51,7 +51,7 @@ const DashboardPage = () => {
   );
 
   return (
-    <div className="flex flex-col gap-4 h-full relative">
+    <div className="flex flex-col gap-4 h-full relative min-h-[calc(100vh-4rem)] pt-8 items-center w-full">
       {isLoading && (
         <FallbackView>
           <p className="text-xl">🏋🏻{t('DASHBOARD.WAITING_MESSAGE')}🏋🏻</p>
@@ -59,12 +59,12 @@ const DashboardPage = () => {
         </FallbackView>
       )}
       {isSuccess && exerciseData && exerciseData.length && (
-        <div className="flex flex-col gap-4 px-10 h-full">
+        <div className="flex flex-col gap-4 h-full w-5/6">
           <h1 className="text-lg h-1/12">
             ✅
             {t('DASHBOARD.WELCOME_MESSAGE', {
               name: userInfo?.nickname,
-              count: exerciseData?.length ?? 0,
+              count: exerciseData?.length,
               min: totalDuration,
             })}
           </h1>
@@ -88,7 +88,7 @@ const DashboardPage = () => {
             🏋🏻
           </p>
           <Link
-            href={ROUTE.EXERCISE.POST}
+            href={`/${i18n.language}${ROUTE.EXERCISE.POST}`}
             className={twMerge(
               PRIMARY_BUTTON,
               'w-52 flex justify-center items-center hover:bg-primary/75 animate-bounce',

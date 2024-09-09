@@ -3,19 +3,26 @@ import '../styles/index.css';
 
 export const metadata = {
   title: 'ZIMZIM',
-  description: 'Exercise saves you',
+  description: 'Record your workouts. Exercise saves you',
   icons: {
     icon: '/icon/icon.svg',
   },
+  openGraph: {
+    images: [''],
+    title: 'ZIMZIM',
+    description: 'Record your workouts. Exercise saves you.',
+  },
 };
+
+interface RootLayoutProps {
+  children: React.ReactNode;
+  params: { locale: string };
+}
 
 export default async function RootLayout({
   children,
   params: { locale },
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
+}: RootLayoutProps) {
   return (
     <html lang={locale} dir="ltr">
       <body>

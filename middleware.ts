@@ -8,7 +8,7 @@ export function middleware(req: NextRequest) {
   let locale = defaultLocale;
 
   if (acceptLanguage) {
-    const preferredLocale = acceptLanguage.split(',')[0].split('-')[0]; // 'en-US' -> 'en'
+    const preferredLocale = acceptLanguage.split(',')[0].split('-')[0];
     if (['en', 'ko'].includes(preferredLocale)) {
       locale = preferredLocale;
     }
