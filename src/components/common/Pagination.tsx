@@ -49,7 +49,7 @@ const Pagination = <T extends PaginationData>({
           {i + 1}
         </p>
       ))}
-      {data.currentPage < data.totalPages && (
+      {data.currentPage + 1 < data.totalPages && (
         <Button
           className="bg-white h-6 flex items-center justify-center w-6 rounded-md cursor-pointer shadow-md shadow-gray-dark/25"
           onClick={() => setPage((prev) => prev + 1)}

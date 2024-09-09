@@ -51,7 +51,7 @@ const DashboardPage = () => {
   );
 
   return (
-    <div className="flex flex-col gap-4 h-full relative">
+    <div className="flex flex-col gap-4 h-full relative min-h-[calc(100vh-4rem)] pt-8">
       {isLoading && (
         <FallbackView>
           <p className="text-xl">🏋🏻{t('DASHBOARD.WAITING_MESSAGE')}🏋🏻</p>

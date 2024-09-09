@@ -82,11 +82,8 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
           detailIds: detailIds ?? [],
         };
       });
-      try {
-        mutate({ exerciseDetails: payload });
-      } catch (error) {
-        console.log(error);
-      }
+
+      mutate({ exerciseDetails: payload });
     }
   };
 

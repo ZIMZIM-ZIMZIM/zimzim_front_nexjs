@@ -20,7 +20,7 @@ import QUERY_KEYS from '#/constants/queryKey';
 import { ACTION_BUTTON } from '#/constants/style';
 
 const ExerciseDetailPage = () => {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
 
   const pathname = usePathname();
   const id = pathname.split('detail/')[1];
@@ -31,10 +31,10 @@ const ExerciseDetailPage = () => {
   );
 
   return (
-    <article className=" flex flex-row justify-center">
+    <article className="flex flex-row justify-center min-h-[calc(100vh-4rem)] pt-8">
       <div className="flex flex-col gap-8 w-2/5">
         <header className="flex justify-end">
-          <Link href={`/user/exercise/update/${id}`}>
+          <Link href={`/${i18n.language}/user/exercise/update/${id}`}>
             <Button className={twMerge(ACTION_BUTTON, 'bg-primary')}>
               {t('EXERCISE.DETAIL.BUTTON')}
             </Button>

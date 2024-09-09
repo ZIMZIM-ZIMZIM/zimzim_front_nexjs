@@ -11,8 +11,9 @@ import { twMerge } from 'tailwind-merge';
 import ErrorMessage from '#/components/common/ErrorMessage';
 
 import useSelectBox from '#/hooks/useSelectBox';
+import DropDown from './DropDown';
 
-type Option = {
+export type Option = {
   value: string;
   name: string;
 };
@@ -110,7 +111,12 @@ const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
                 alt={isOpen ? 'up icon' : 'down icon'}
               />
             </div>
-            {isOpen && (
+            <DropDown
+              isOpen={isOpen}
+              options={options}
+              handleSelect={handleSelect}
+            />
+            {/* {isOpen && (
               <ul className="custom-selected-box options absolute left-0 right-0 mt-3.5 z-10 bg-white border-gray-dark last:border-b-1 border-t-1 border-l-1 border-r-1 rounded-md">
                 {options.map((option) => (
                   <li
@@ -122,7 +128,7 @@ const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
                   </li>
                 ))}
               </ul>
-            )}
+            )} */}
           </div>
         </div>
         <ErrorMessage message={errorMessage ?? ''} />

@@ -12,6 +12,7 @@ import Button from '#/components/common/Button';
 import ControllerSelectBox from '#/components/common/dropDown/ControllerSelectBox';
 import ControllerInput from '#/components/common/input/ControllerInput';
 import RadioInput from '#/components/common/input/RadioInput';
+import Badge from '#/components/exercise/post/Badge';
 
 import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
 
@@ -21,8 +22,6 @@ import {
   EXERCISE_TYPE_OPTION,
 } from '#/constants/option';
 import { PRIMARY_BUTTON } from '#/constants/style';
-
-import Badge from '#components/exercise/post/Badge';
 
 export type ExercisePostFormInput = {
   _id?: string | null;

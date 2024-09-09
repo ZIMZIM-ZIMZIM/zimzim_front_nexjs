@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
@@ -33,24 +33,30 @@ const UserHeader = () => {
   const handleLogout = () => mutate();
 
   return (
-    <header className="flex justify-between w-full h-16 bg-white items-center px-8">
-      <div className="flex flex-row items-center w-32 justify-center">
+    <header className="flex justify-between w-full h-16 bg-white items-center px-12">
+      <div className="flex flex-row items-center w-24 justify-center">
         <Link href={`/${i18n.language}${ROUTE.MAIN_PAGE}`}>
           <Image src="/icon/icon.svg" width={48} height={48} alt="user icon" />
         </Link>
       </div>
-      <div className="flex flex-row gap-4">
-        <Button
-          className={twMerge(HEADER_ICON_BUTTON, 'rounded-full')}
-          aria-label="change langauge icon"
-        >
-          <Image
-            src="/icon/translate.svg"
-            width={20}
-            height={20}
-            alt="change langauge icon"
-          />
-        </Button>
+      <div className="flex flex-row gap-8 ">
+        <div className="w-10 relative ml-2">
+          <Button
+            className={twMerge(
+              HEADER_ICON_BUTTON,
+              'rounded-full relative text-center',
+            )}
+            aria-label="change langauge icon"
+          >
+            <Image
+              src="/icon/translate.svg"
+              width={20}
+              height={20}
+              alt="change langauge icon"
+            />
+          </Button>
+        </div>
+
         <Link href={ROUTE.USER}>
           <div className={twMerge(HEADER_ICON_BUTTON, 'rounded-full')}>
             <Image

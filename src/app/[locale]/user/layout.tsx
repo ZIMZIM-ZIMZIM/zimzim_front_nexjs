@@ -7,9 +7,9 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
   return (
     <main className="min-h-screen w-screen flex flex-col bg-secondary-light/50">
       <UserHeader />
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden min-h-[calc(100vh-7rem)] items-center">
         <Menu />
-        <section className="flex-1 overflow-auto p-6">{children}</section>
+        <section className="flex-1 overflow-auto h-full">{children}</section>
       </div>
     </main>
   );
