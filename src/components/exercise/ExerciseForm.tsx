@@ -130,8 +130,8 @@ const ExerciseForm = ({
             <Image
               alt="delete icon"
               src="/icon/delete.svg"
-              width={20}
-              height={20}
+              width={8}
+              height={8}
             />
           </Button>
         </Badge>

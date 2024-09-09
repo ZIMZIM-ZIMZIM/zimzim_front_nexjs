@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
@@ -13,6 +13,7 @@ import Button from '#/components/common/Button';
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import API_ENDPOINT from '#/constants/api';
+import { LOCAL_STORAGE } from '#/constants/key';
 import ROUTE from '#/constants/route';
 import { HEADER_ICON_BUTTON } from '#/constants/style';
 
@@ -23,7 +24,7 @@ const UserHeader = () => {
 
   const { mutate } = useCustomMutation(API_ENDPOINT.AUTH.LOGOUT, 'post', {
     onSuccess: () => {
-      localStorage.removeItem('ZimZimLogin');
+      localStorage.removeItem(LOCAL_STORAGE.LOGIN);
 
       router.push(`/${i18n.language}${ROUTE.LOGIN}`);
       queryClient.invalidateQueries();
