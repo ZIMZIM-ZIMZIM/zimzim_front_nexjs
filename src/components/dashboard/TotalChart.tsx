@@ -21,7 +21,7 @@ import ROUTE from '#/constants/route';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
 const TotalChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation();
 
   const dateRagne = useMemo(
     () =>
@@ -76,7 +76,10 @@ const TotalChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
   };
 
   return (
-    <section className="w-2/3 bg-white rounded-lg border-1 border-gray-light py-2 px-4 cursor-pointer shadow-md shadow-gray-dark/25">
+    <section
+      className="w-2/3 bg-white rounded-lg border-1 border-gray-light py-2 px-4 cursor-pointer shadow-md shadow-gray-dark/25"
+      aria-labelledby="total-chart-title"
+    >
       <p className="text-sm font-bold pb-2">
         {t('DASHBOARD.CHART.TOTAL.TITLE')}
       </p>

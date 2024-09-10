@@ -22,7 +22,7 @@ export const useGetExerciseColumns = (
   checkedExercise: string[],
   setCheckedExercise: Dispatch<SetStateAction<string[]>>,
 ) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   const colums = useMemo(
     () => [

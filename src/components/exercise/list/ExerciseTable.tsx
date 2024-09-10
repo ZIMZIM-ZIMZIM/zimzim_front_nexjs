@@ -44,7 +44,7 @@ const ExerciseTable = ({
   page,
   setPage,
 }: ExerciseTableProps) => {
-  const { i18n } = useTranslation('common');
+  const { i18n } = useTranslation();
 
   const router = useRouter();
 

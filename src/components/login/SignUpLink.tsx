@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import ROUTE from '#/constants/route';
 
 const SignUpLink = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   return (
     <p className="flex space-x-2 justify-center">

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Button from '#components/common/Button';
 
 const SocialLoginButton = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   return (
     <section
