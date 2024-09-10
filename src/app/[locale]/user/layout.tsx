@@ -4,13 +4,14 @@ import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import Button from '#/components/common/Button';
 import Header from '#/components/common/Header';
 import Menu from '#/components/common/menu/Menu';
+import Modal from '#/components/common/Modal';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
@@ -23,6 +24,8 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
   const { i18n } = useTranslation('common');
   const queryClient = useQueryClient();
   const router = useRouter();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const { mutate } = useCustomMutation(API_ENDPOINT.AUTH.LOGOUT, 'post', {
     onSuccess: () => {
@@ -46,6 +49,7 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
                 'rounded-full relative text-center hover:bg-secondary-light',
               )}
               aria-label="change langauge icon"
+              onClick={() => setIsOpen(true)}
             >
               <Image
                 src="/icon/translate.svg"
@@ -54,6 +58,21 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
                 alt="change langauge icon"
               />
             </Button>
+            {isOpen && (
+              <Modal closeModal={() => setIsOpen(false)}>
+                <div className="modal flex flex-col items-center gap-4">
+                  <h1 className="text-xl">언어 선택</h1>
+                  <section className="modal flex flex-col gap-2">
+                    <Button className="modal bg-primary/25 border-1 rounded-md px-24 py-2 hover:bg-primary/75">
+                      English
+                    </Button>
+                    <Button className="modal bg-primary/25 border-1 rounded-md px-24 py-2 hover:bg-primary/75">
+                      한국어
+                    </Button>
+                  </section>
+                </div>
+              </Modal>
+            )}
           </div>
 
           <Link href={ROUTE.USER}>
