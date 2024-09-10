@@ -20,7 +20,7 @@ import QUERY_KEYS from '#/constants/queryKey';
 import { ACTION_BUTTON } from '#/constants/style';
 
 const ExerciseDetailPage = () => {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation();
 
   const pathname = usePathname();
   const id = pathname.split('detail/')[1];
@@ -44,7 +44,7 @@ const ExerciseDetailPage = () => {
         <section className="flex justify-center w-full">
           <ContentBox
             className="rounded-2xl w-full"
-            contentTitle="exercise-detail"
+            contentTitle="exercise detail"
           >
             <h1 className="text-center pb-8">
               🏋️‍♀️ {dayjs(data?.date).format(FORMAT.DATE)}{' '}

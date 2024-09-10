@@ -7,7 +7,7 @@ import ROUTE from '#/constants/route';
 import MenuItem from '#components/common/menu/MenuItem';
 
 const Menu = () => {
-  const { i18n } = useTranslation('common');
+  const { i18n } = useTranslation();
 
   return (
     <nav className="w-1/6 justify-center algin-center border-b-1 border-slate-900/10 bg-white h-full">

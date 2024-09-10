@@ -19,7 +19,7 @@ import Button from '#components/common/Button';
 import ErrorMessage from '#components/common/ErrorMessage';
 
 const LoginForm = () => {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation();
   const router = useRouter();
 
   const { mutate } = useCustomMutation<

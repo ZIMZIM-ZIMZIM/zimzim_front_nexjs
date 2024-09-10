@@ -23,7 +23,7 @@ import QUERY_KEYS from '#/constants/queryKey';
 import ROUTE from '#/constants/route';
 
 const ExerciseUpdatePage = () => {
-  const { i18n, t } = useTranslation('common');
+  const { i18n, t } = useTranslation();
 
   const router = useRouter();
 

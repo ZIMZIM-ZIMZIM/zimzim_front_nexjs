@@ -27,7 +27,7 @@ import { getKoreaDate } from '#/util';
 import ContentBox from '#components/common/ContentBox';
 
 const ExercisePostPage = () => {
-  const { i18n, t } = useTranslation('common');
+  const { i18n, t } = useTranslation();
 
   const today = getKoreaDate();
 

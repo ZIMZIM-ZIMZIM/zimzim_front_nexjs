@@ -10,7 +10,7 @@ import SignUpLink from '#components/login/SignUpLink';
 import SocialLoginButton from '#components/login/SocialLoginButton';
 
 const LoginPage = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   return (
     <section className="flex flex-row h-full justify-between px-24 max-xl:justify-center max-md:px-0">

@@ -26,7 +26,7 @@ export type SignUpFormInput = {
 };
 
 const SignupForm = () => {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation();
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState<boolean>(false);

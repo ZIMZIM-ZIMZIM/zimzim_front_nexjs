@@ -24,7 +24,7 @@ import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
 
 const DashboardPage = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   const { data: userInfo } = useCustomQuery<User>(
     QUERY_KEYS.USER,

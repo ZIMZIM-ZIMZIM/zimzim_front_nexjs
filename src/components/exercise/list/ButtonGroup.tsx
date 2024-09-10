@@ -30,7 +30,7 @@ interface ButtonGroupProps {
 }
 
 const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation();
   const queryClient = useQueryClient();
   const isDeleteDisabled = checkedExercise.length === 0;
 

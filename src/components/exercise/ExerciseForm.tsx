@@ -47,7 +47,7 @@ const ExerciseForm = ({
   isUseBadge,
   submitFunction,
 }: ExerciseFormProps) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   const [exerciseList, setExerciseList] = useState<ExercisePostFormInput[]>([]);
 
