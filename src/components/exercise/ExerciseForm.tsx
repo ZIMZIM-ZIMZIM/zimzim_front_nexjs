@@ -148,7 +148,7 @@ const ExerciseForm = ({
       onSubmit={handleSubmit((data: ExercisePostFormInput) => onSubmit(data))}
       className="flex flex-col gap-6"
     >
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-8">
         <ControllerInput
           name="date"
           control={control}
