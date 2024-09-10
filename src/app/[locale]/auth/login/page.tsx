@@ -13,7 +13,7 @@ const LoginPage = () => {
   const { t } = useTranslation('common');
 
   return (
-    <section className="min-h-[calc(100vh-7rem)] flex flex-row h-full justify-between px-24 max-xl:justify-center max-md:px-0">
+    <section className="flex flex-row h-full justify-between px-24 max-xl:justify-center max-md:px-0">
       <div className="flex flex-row relative items-center max-xl:hidden">
         <div className="z-1 absolute pt-2.5 ">
           <Image

@@ -31,7 +31,7 @@ const ExerciseDetailPage = () => {
   );
 
   return (
-    <article className="flex flex-row justify-center min-h-[calc(100vh-4rem)] pt-8">
+    <article className="flex flex-row justify-center">
       <div className="flex flex-col gap-8 w-2/5">
         <header className="flex justify-end">
           <Link href={`/${i18n.language}/user/exercise/update/${id}`}>

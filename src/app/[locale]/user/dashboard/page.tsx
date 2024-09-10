@@ -51,7 +51,7 @@ const DashboardPage = () => {
   );
 
   return (
-    <div className="flex flex-col gap-4 h-full relative min-h-[calc(100vh-4rem)] pt-8 items-center w-full">
+    <div className="flex flex-col gap-4 relative items-center w-full">
       {isLoading && (
         <FallbackView>
           <p className="text-xl">🏋🏻{t('DASHBOARD.WAITING_MESSAGE')}🏋🏻</p>
@@ -59,7 +59,7 @@ const DashboardPage = () => {
         </FallbackView>
       )}
       {isSuccess && exerciseData && exerciseData.length && (
-        <div className="flex flex-col gap-4 h-full w-5/6">
+        <div className="flex flex-col gap-4 min-h-full w-full">
           <h1 className="text-lg h-1/12">
             ✅
             {t('DASHBOARD.WELCOME_MESSAGE', {

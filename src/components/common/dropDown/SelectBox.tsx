@@ -8,11 +8,10 @@ import React, {
 } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+import DropDown from '#/components/common/dropDown/DropDown';
 import ErrorMessage from '#/components/common/ErrorMessage';
 
-import useSelectBox from '#/hooks/useSelectBox';
-
-import DropDown from './DropDown';
+import useBox from '#/hooks/useBox';
 
 export type Option = {
   value: string;
@@ -50,14 +49,14 @@ const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
       value,
     );
 
-    const { handleClcikWithoutSelectBox } = useSelectBox(setIsOpen);
+    const { handleClcikWithoutBox } = useBox(setIsOpen, 'custom-selected-box');
 
     useEffect(() => {
-      document.addEventListener('click', handleClcikWithoutSelectBox);
+      document.addEventListener('click', handleClcikWithoutBox);
       return () => {
-        document.removeEventListener('click', handleClcikWithoutSelectBox);
+        document.removeEventListener('click', handleClcikWithoutBox);
       };
-    }, [handleClcikWithoutSelectBox]);
+    }, [handleClcikWithoutBox]);
 
     useEffect(() => {
       if (value !== internalValue) {
@@ -117,19 +116,6 @@ const SelectBox = forwardRef<HTMLSelectElement, SelectBoxProps>(
               options={options}
               handleSelect={handleSelect}
             />
-            {/* {isOpen && (
-              <ul className="custom-selected-box options absolute left-0 right-0 mt-3.5 z-10 bg-white border-gray-dark last:border-b-1 border-t-1 border-l-1 border-r-1 rounded-md">
-                {options.map((option) => (
-                  <li
-                    key={option.name}
-                    className="option px-4 py-1"
-                    onClick={(e: MouseEvent) => handleSelect(e, option.value)}
-                  >
-                    {option.name}
-                  </li>
-                ))}
-              </ul>
-            )} */}
           </div>
         </div>
         <ErrorMessage message={errorMessage ?? ''} />

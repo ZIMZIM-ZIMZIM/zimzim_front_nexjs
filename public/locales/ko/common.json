@@ -119,5 +119,14 @@
     "POST": {
       "BUTTON": "등록"
     }
+  },
+  "MODAL": {
+    "SELECT_LANGUAGE": {
+      "TITLE": "언어 선택",
+      "OPTION": {
+        "EN": "English",
+        "KO": "한국어"
+      }
+    }
   }
 }
