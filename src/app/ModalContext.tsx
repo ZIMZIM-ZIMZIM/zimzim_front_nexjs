@@ -16,7 +16,7 @@ const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const [modals, setModals] = useState<Modal[]>([]);
-  console.log('modals provider', modals);
+
   const createModal = (modal: Modal) => {
     setModals((prev) => [...prev, modal]);
   };
