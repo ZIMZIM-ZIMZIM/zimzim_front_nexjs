@@ -5,4 +5,4 @@
 ## 기술적인 고민
 
 1. [next.js로 마이그레이션 하기](https://ramirami.tistory.com/203)
-2. 시맨틱 마크업을 사용하여 seo를 높이자.
+2. [시맨틱 마크업을 사용하여 seo를 높이자.](https://ramirami.tistory.com/204)

@@ -47,7 +47,7 @@ const ExerciseForm = ({
   isUseBadge,
   submitFunction,
 }: ExerciseFormProps) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   const [exerciseList, setExerciseList] = useState<ExercisePostFormInput[]>([]);
 
@@ -148,7 +148,7 @@ const ExerciseForm = ({
       onSubmit={handleSubmit((data: ExercisePostFormInput) => onSubmit(data))}
       className="flex flex-col gap-6"
     >
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-8">
         <ControllerInput
           name="date"
           control={control}

@@ -13,7 +13,7 @@ import ROUTE from '#/constants/route';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation();
 
   const { weight, cardio } = useMemo(() => {
     let cardio = 0;
@@ -96,7 +96,10 @@ const ExerciseChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
   };
 
   return (
-    <section className="w-1/3 bg-white rounded-lg border-1 pt-2 px-2 flex flex-col cursor-pointer shadow-md shadow-gray-dark/25">
+    <section
+      className="w-1/3 bg-white rounded-lg border-1 pt-2 px-2 flex flex-col cursor-pointer shadow-md shadow-gray-dark/25"
+      aria-labelledby="exercise-chart-title"
+    >
       <p className="text-sm font-bold pl-2">
         {t('DASHBOARD.CHART.WIEGHT_CARDIO.TITLE')}
       </p>

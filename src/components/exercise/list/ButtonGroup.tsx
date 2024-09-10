@@ -30,7 +30,7 @@ interface ButtonGroupProps {
 }
 
 const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation();
   const queryClient = useQueryClient();
   const isDeleteDisabled = checkedExercise.length === 0;
 
@@ -92,8 +92,8 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
       <Button
         className={twMerge(
           ACTION_BUTTON,
-          `bg-red-500 
-          ${isDeleteDisabled && 'cursor-not-allowed'}`,
+          `bg-red-500
+          ${isDeleteDisabled && ' cursor-not-allowed'}`,
         )}
         disabled={isDeleteDisabled}
         onClick={handleDeleteExercise}

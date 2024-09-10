@@ -24,7 +24,7 @@ import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
 
 const DashboardPage = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   const { data: userInfo } = useCustomQuery<User>(
     QUERY_KEYS.USER,
@@ -51,7 +51,7 @@ const DashboardPage = () => {
   );
 
   return (
-    <div className="flex flex-col gap-4 relative items-center w-full">
+    <div className="flex flex-col h-full gap-4 relative justify-between items-center w-full">
       {isLoading && (
         <FallbackView>
           <p className="text-xl">🏋🏻{t('DASHBOARD.WAITING_MESSAGE')}🏋🏻</p>
@@ -59,7 +59,7 @@ const DashboardPage = () => {
         </FallbackView>
       )}
       {isSuccess && exerciseData && exerciseData.length && (
-        <div className="flex flex-col gap-4 min-h-full w-full">
+        <div className="flex flex-col gap-4 w-full">
           <h1 className="text-lg h-1/12">
             ✅
             {t('DASHBOARD.WELCOME_MESSAGE', {
@@ -69,7 +69,7 @@ const DashboardPage = () => {
             })}
           </h1>
 
-          <div className="flex flex-col gap-6 h-11/12">
+          <div className="flex flex-col gap-6">
             <div className="flex flex-row justify-between items-cetner gap-6">
               <TotalChart exerciseData={exerciseData} />
               <ExerciseChart exerciseData={exerciseData} />

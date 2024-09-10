@@ -27,7 +27,7 @@ interface UserLayoutProps {
 }
 
 const UserLayout = ({ children }: UserLayoutProps) => {
-  const { i18n } = useTranslation('common');
+  const { i18n } = useTranslation();
   const queryClient = useQueryClient();
   const router = useRouter();
 

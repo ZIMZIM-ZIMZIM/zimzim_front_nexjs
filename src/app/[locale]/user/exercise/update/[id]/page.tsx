@@ -23,7 +23,7 @@ import QUERY_KEYS from '#/constants/queryKey';
 import ROUTE from '#/constants/route';
 
 const ExerciseUpdatePage = () => {
-  const { i18n, t } = useTranslation('common');
+  const { i18n, t } = useTranslation();
 
   const router = useRouter();
 
@@ -92,7 +92,7 @@ const ExerciseUpdatePage = () => {
 
   return (
     <div className="flex justify-center">
-      <ContentBox className="rounded-2xl" contentTitle="exercise update">
+      <ContentBox className="rounded-2xl w-5/12" contentTitle="exercise update">
         {defaultValues && (
           <ExerciseForm
             submitButtonTitle={t('EXERCISE.UPDATE.BUTTON')}

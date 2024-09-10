@@ -27,7 +27,7 @@ import { getKoreaDate } from '#/util';
 import ContentBox from '#components/common/ContentBox';
 
 const ExercisePostPage = () => {
-  const { i18n, t } = useTranslation('common');
+  const { i18n, t } = useTranslation();
 
   const today = getKoreaDate();
 
@@ -112,9 +112,9 @@ const ExercisePostPage = () => {
   };
 
   return (
-    <section className="flex justify-center">
+    <div className="flex justify-center">
       <ContentBox
-        className="rounded-2xl gap-8 w-2/5"
+        className="rounded-2xl gap-8 w-5/12"
         contentTitle="exercise post"
       >
         <ExerciseForm
@@ -132,7 +132,7 @@ const ExercisePostPage = () => {
           }}
         />
       </ContentBox>
-    </section>
+    </div>
   );
 };
 

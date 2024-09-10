@@ -26,7 +26,7 @@ ChartJS.register(
 );
 
 const WaterChart = () => {
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation();
 
   const data = {
     labels: ['January'],
@@ -44,7 +44,7 @@ const WaterChart = () => {
   const options = {
     indexAxis: 'y' as const,
     responsive: true,
-    barThickness: 44,
+    barThickness: 40,
     maintainAspectRatio: false,
     plugins: {
       legend: {
@@ -63,19 +63,16 @@ const WaterChart = () => {
         max: 100,
       },
     },
-    layout: {
-      padding: {
-        top: 0,
-        bottom: 60,
-      },
-    },
   };
 
   return (
-    <section className="bg-white rounded-lg border-1 h-32 pt-2 px-4 w-full cursor-pointer shadow-md shadow-gray-dark/25">
+    <section
+      className="h-36 bg-white rounded-lg border-1 pt-2 px-4 w-full cursor-pointer shadow-md shadow-gray-dark/25"
+      aria-labelledby="water-chart-title"
+    >
       <p className="text-sm font-bold">{t('DASHBOARD.CHART.WATER.TITLE')}</p>
       <Link href={`/${i18n.language}${ROUTE.WATER}`}>
-        <Bar data={data} options={options} />
+        <Bar data={data} options={options} height={100} />
       </Link>
     </section>
   );
