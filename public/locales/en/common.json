@@ -119,5 +119,14 @@
     "POST": {
       "BUTTON": "Submit"
     }
+  },
+  "MODAL": {
+    "SELECT_LANGUAGE": {
+      "TITLE": "Select Language",
+      "OPTION": {
+        "EN": "English",
+        "KO": "Korean"
+      }
+    }
   }
 }

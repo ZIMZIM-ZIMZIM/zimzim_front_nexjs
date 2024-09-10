@@ -4,28 +4,41 @@ import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import Button from '#/components/common/Button';
 import Header from '#/components/common/Header';
 import Menu from '#/components/common/menu/Menu';
-import Modal from '#/components/common/Modal';
+import LanguageSelectModal from '#/components/header/LanguageSelectModal';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import API_ENDPOINT from '#/constants/api';
-import { LOCAL_STORAGE } from '#/constants/key';
+import { LOCAL_STORAGE, MODAL } from '#/constants/key';
 import ROUTE from '#/constants/route';
 import { HEADER_ICON_BUTTON } from '#/constants/style';
 
-const UserLayout = ({ children }: { children: ReactNode }) => {
+import { useModal } from '#/app/ModalContext';
+
+interface UserLayoutProps {
+  children: ReactNode;
+}
+
+const UserLayout = ({ children }: UserLayoutProps) => {
   const { i18n } = useTranslation('common');
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const { createModal } = useModal();
+
+  const langugageSelectModal = () => {
+    createModal({
+      id: MODAL.LANGUGAGE_SELECT,
+      component: <LanguageSelectModal />,
+    });
+  };
 
   const { mutate } = useCustomMutation(API_ENDPOINT.AUTH.LOGOUT, 'post', {
     onSuccess: () => {
@@ -41,15 +54,15 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
   return (
     <main className="h-screen w-screen flex flex-col bg-secondary-light/50 overflow-hidden">
       <Header className="bg-none bg-white">
-        <div className="flex flex-row gap-8 ">
-          <div className="w-10 relative ml-2">
+        <div className="flex flex-row gap-4 ">
+          <div className="w-10 relative">
             <Button
               className={twMerge(
                 HEADER_ICON_BUTTON,
                 'rounded-full relative text-center hover:bg-secondary-light',
               )}
               aria-label="change langauge icon"
-              onClick={() => setIsOpen(true)}
+              onClick={langugageSelectModal}
             >
               <Image
                 src="/icon/translate.svg"
@@ -58,23 +71,7 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
                 alt="change langauge icon"
               />
             </Button>
-            {isOpen && (
-              <Modal closeModal={() => setIsOpen(false)}>
-                <div className="modal flex flex-col items-center gap-4">
-                  <h1 className="text-xl">언어 선택</h1>
-                  <section className="modal flex flex-col gap-2">
-                    <Button className="modal bg-primary/25 border-1 rounded-md px-24 py-2 hover:bg-primary/75">
-                      English
-                    </Button>
-                    <Button className="modal bg-primary/25 border-1 rounded-md px-24 py-2 hover:bg-primary/75">
-                      한국어
-                    </Button>
-                  </section>
-                </div>
-              </Modal>
-            )}
           </div>
-
           <Link href={ROUTE.USER}>
             <div
               className={twMerge(

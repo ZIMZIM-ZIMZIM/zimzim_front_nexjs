@@ -9,7 +9,7 @@ const useBox = (setIsOpen: Dispatch<SetStateAction<boolean>>, name: string) => {
         setIsOpen(false);
       }
     },
-    [setIsOpen],
+    [setIsOpen, name],
   );
 
   const handleEscape = useCallback(

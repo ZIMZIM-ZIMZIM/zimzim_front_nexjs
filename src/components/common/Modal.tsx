@@ -1,10 +1,8 @@
 import Image from 'next/image';
-import React, { ReactNode, useEffect, useRef } from 'react';
+import React, { ReactNode, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import Button from '#/components/common/Button';
-
-import useBox from '#/hooks/useBox';
 
 interface ModalProps {
   closeModal: () => void;
@@ -13,17 +11,6 @@ interface ModalProps {
 
 const Modal = ({ closeModal, children }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
-
-  const { handleClcikWithoutBox, handleEscape } = useBox(closeModal, 'modal');
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleEscape);
-    document.addEventListener('click', handleClcikWithoutBox);
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('click', handleClcikWithoutBox);
-    };
-  }, [handleClcikWithoutBox]);
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
