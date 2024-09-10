@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import Button from '#/components/common/Button';
-import Header from '#/components/common/header/Header';
+import Header from '#/components/common/Header';
 import Menu from '#/components/common/menu/Menu';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
@@ -36,8 +36,8 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
   const handleLogout = () => mutate();
 
   return (
-    <main className="min-h-screen w-screen flex flex-col bg-secondary-light/50">
-      <Header className="bg-none bg-white ">
+    <main className="h-screen w-screen flex flex-col bg-secondary-light/50 overflow-hidden">
+      <Header className="bg-none bg-white">
         <div className="flex flex-row gap-8 ">
           <div className="w-10 relative ml-2">
             <Button
@@ -88,9 +88,11 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
           </Button>
         </div>
       </Header>
-      <div className="flex flex-1 overflow-hidden min-h-[calc(100vh-7rem)] items-center">
+      <div className="flex h-full h-[calc(100vh-5rem)]">
         <Menu />
-        <section className="flex-1 overflow-auto h-full">{children}</section>
+        <section className="h-full w-5/6 flex flex-col justify-between p-8">
+          {children}
+        </section>
       </div>
     </main>
   );

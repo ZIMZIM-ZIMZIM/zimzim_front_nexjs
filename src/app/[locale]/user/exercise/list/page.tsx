@@ -10,7 +10,7 @@ const ExerciseListPage = () => {
   const [page, setPage] = useState<number>(1);
 
   return (
-    <div className="flex flex-col items-center min-h-[calc(100vh-4rem)] py-8">
+    <div className="flex flex-col items-center">
       <div className="w-4/5 flex flex-col gap-8">
         <ButtonGroup checkedExercise={checkedExercise} page={page} />
         <ExerciseTable

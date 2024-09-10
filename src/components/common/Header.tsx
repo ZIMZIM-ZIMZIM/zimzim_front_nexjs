@@ -14,7 +14,7 @@ const Header = ({ children, className = '' }: HeaderProps) => (
       `bg-gradient-to-r from-secondary-light to-[#8d98c4] h-20 w-full flex items-center px-8 justify-between ${className}`,
     )}
   >
-    <div className="flex flex-row items-center w-32 justify-center">
+    <div className="flex flex-row items-center w-40 justify-center">
       <Link href="/">
         <Image src="/icon/icon.svg" width={52} height={52} alt="icon" />
       </Link>
