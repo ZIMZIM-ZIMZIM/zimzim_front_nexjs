@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { cookies } from 'next/headers';
 
-export const useFetch = () => {
+const useFetch = () => {
   const customFetch = async (url: string) => {
     try {
       const cookieStore = cookies();
@@ -23,3 +23,5 @@ export const useFetch = () => {
     customFetch,
   };
 };
+
+export default useFetch;

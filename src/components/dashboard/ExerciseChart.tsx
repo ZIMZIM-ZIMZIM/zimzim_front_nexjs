@@ -6,7 +6,7 @@ import React, { useMemo } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 
-import { Exercise, EXERCISE_TYPE } from '#/api/types';
+import { Exercise, EXERCISE_TYPE } from '#/api/type';
 
 import ROUTE from '#/constants/route';
 
