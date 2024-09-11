@@ -13,7 +13,7 @@ import React, { useMemo } from 'react';
 import { Line } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
 
-import { Exercise } from '#/api/types';
+import { Exercise } from '#/api/type';
 
 import FORMAT from '#/constants/format';
 import ROUTE from '#/constants/route';

@@ -15,7 +15,7 @@ import {
   ExerciseDetail,
   ExerciseList,
   User,
-} from '#/api/types';
+} from '#/api/type';
 
 import API_ENDPOINT from '#/constants/api';
 import QUERY_KEYS from '#/constants/queryKey';

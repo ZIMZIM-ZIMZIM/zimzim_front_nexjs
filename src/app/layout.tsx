@@ -1,4 +1,7 @@
+import localFont from 'next/font/local';
+
 import ClientProvider from './ClientProvider';
+
 import '../styles/index.css';
 
 export const metadata = {
@@ -14,6 +17,27 @@ export const metadata = {
   },
 };
 
+const roboto = localFont({
+  src: [
+    {
+      path: '../fonts/Roboto-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/Roboto-Medium.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/Roboto-Bold.ttf',
+      weight: '800',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+});
+
 interface RootLayoutProps {
   children: React.ReactNode;
   params: { locale: string };
@@ -25,7 +49,7 @@ export default async function RootLayout({
 }: RootLayoutProps) {
   return (
     <html lang={locale} dir="ltr">
-      <body>
+      <body className={roboto.className}>
         <ClientProvider>{children}</ClientProvider>
       </body>
     </html>

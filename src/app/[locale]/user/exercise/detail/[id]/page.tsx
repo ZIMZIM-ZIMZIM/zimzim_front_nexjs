@@ -12,7 +12,7 @@ import ContentBox from '#/components/common/ContentBox';
 
 import { useCustomQuery } from '#/hooks/useCustomQuery';
 
-import { Exercise } from '#/api/types';
+import { Exercise } from '#/api/type';
 
 import API_ENDPOINT from '#/constants/api';
 import FORMAT from '#/constants/format';

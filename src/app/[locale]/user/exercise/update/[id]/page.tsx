@@ -14,7 +14,7 @@ import ExerciseForm, {
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 import { useCustomQuery } from '#/hooks/useCustomQuery';
 
-import { Exercise, EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
+import { Exercise, EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/type';
 
 import API_ENDPOINT from '#/constants/api';
 import FORMAT from '#/constants/format';

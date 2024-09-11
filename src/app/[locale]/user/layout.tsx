@@ -104,7 +104,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           </Button>
         </div>
       </Header>
-      <div className="flex h-full h-[calc(100vh-5rem)]">
+      <div className="flex h-[calc(100vh-4.95rem)]">
         <Menu />
         <section className="h-full w-5/6 flex flex-col justify-between p-8">
           {children}

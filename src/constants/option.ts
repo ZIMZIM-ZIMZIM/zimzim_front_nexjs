@@ -1,4 +1,4 @@
-import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
+import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/type';
 
 export const EXERCISE_TYPE_OPTION = [
   { value: EXERCISE_TYPE.WEIGHT, name: EXERCISE_TYPE.WEIGHT },
