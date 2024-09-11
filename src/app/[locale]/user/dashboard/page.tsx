@@ -1,12 +1,14 @@
-import { Exercise, User } from '#/api/type';
-import API_ENDPOINT from '#/constants/api';
-import FORMAT from '#/constants/format';
-import useFetch from '#/hooks/useFetch';
 import dayjs from 'dayjs';
 import React from 'react';
-import DashboardPage from './DashboardPage';
 
-const { customFetch } = useFetch();
+import customFetch from '#/util/customFetch';
+
+import { Exercise, User } from '#/api/type';
+
+import API_ENDPOINT from '#/constants/api';
+import FORMAT from '#/constants/format';
+
+import DashboardPage from './DashboardPage';
 
 const fetchUserInfo = async (): Promise<User> => {
   const response = await customFetch(API_ENDPOINT.USER.INFO);
