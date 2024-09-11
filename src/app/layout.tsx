@@ -1,6 +1,8 @@
-import ClientProvider from './ClientProvider';
-import '../styles/index.css';
 import localFont from 'next/font/local';
+
+import ClientProvider from './ClientProvider';
+
+import '../styles/index.css';
 
 export const metadata = {
   title: 'ZIMZIM',

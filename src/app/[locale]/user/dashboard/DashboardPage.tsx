@@ -16,13 +16,12 @@ import { Exercise, User } from '#/api/type';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
 
-const DashboardPage = ({
-  exerciseData,
-  userInfo,
-}: {
+interface DashboardPageProps {
   exerciseData: Exercise[];
   userInfo: User;
-}) => {
+}
+
+const DashboardPage = ({ exerciseData, userInfo }: DashboardPageProps) => {
   const { t } = useTranslation();
 
   const totalDuration = useMemo(
