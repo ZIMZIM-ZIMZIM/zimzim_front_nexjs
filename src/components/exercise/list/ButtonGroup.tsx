@@ -92,7 +92,7 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
       <Button
         className={twMerge(
           ACTION_BUTTON,
-          `bg-red-500
+          `bg-red-500 w-32 
           ${isDeleteDisabled && ' cursor-not-allowed'}`,
         )}
         disabled={isDeleteDisabled}
