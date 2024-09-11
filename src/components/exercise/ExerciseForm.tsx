@@ -14,7 +14,7 @@ import ControllerInput from '#/components/common/input/ControllerInput';
 import RadioInput from '#/components/common/input/RadioInput';
 import Badge from '#/components/exercise/post/Badge';
 
-import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/types';
+import { EXERCISE_FORCE_TYPE, EXERCISE_TYPE } from '#/api/type';
 
 import MESSAGE from '#/constants/message';
 import {

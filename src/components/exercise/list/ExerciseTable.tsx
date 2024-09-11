@@ -19,7 +19,7 @@ import Pagination from '#/components/common/Pagination';
 import { useCustomQuery } from '#/hooks/useCustomQuery';
 import { useGetExerciseColumns } from '#/hooks/useExerciseColumns';
 
-import { Exercise, ExerciseDetail, ExerciseList, User } from '#/api/types';
+import { Exercise, ExerciseDetail, ExerciseList, User } from '#/api/type';
 
 import API_ENDPOINT from '#/constants/api';
 import QUERY_KEYS from '#/constants/queryKey';

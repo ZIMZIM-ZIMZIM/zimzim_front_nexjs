@@ -16,7 +16,7 @@ import {
   EXERCISE_TYPE,
   PostExercisePayload,
   User,
-} from '#/api/types';
+} from '#/api/type';
 
 import API_ENDPOINT from '#/constants/api';
 import MESSAGE from '#/constants/message';
