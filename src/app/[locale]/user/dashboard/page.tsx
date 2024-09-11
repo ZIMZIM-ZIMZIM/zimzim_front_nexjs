@@ -8,7 +8,7 @@ import { Exercise, User } from '#/api/type';
 import API_ENDPOINT from '#/constants/api';
 import FORMAT from '#/constants/format';
 
-import DashboardPage from './DashboardPage';
+import DashboardPage from '#/app/[locale]/user/dashboard/DashboardPage';
 
 const fetchUserInfo = async (): Promise<User> => {
   const response = await customFetch(API_ENDPOINT.USER.INFO);
