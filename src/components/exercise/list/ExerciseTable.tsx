@@ -97,7 +97,7 @@ const ExerciseTable = ({
   return (
     <div className="w-full">
       <ContentBox
-        className={twMerge(`rounded-2xl w-full py-4`)}
+        className="rounded-2xl w-full py-4"
         contentTitle="exercise-table"
       >
         {isLoading ? (
