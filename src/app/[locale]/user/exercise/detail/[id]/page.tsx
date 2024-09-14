@@ -9,6 +9,7 @@ import { twMerge } from 'tailwind-merge';
 
 import Button from '#/components/common/Button';
 import ContentBox from '#/components/common/ContentBox';
+import Skeleton from '#/components/common/Skeleton';
 
 import { useCustomQuery } from '#/hooks/useCustomQuery';
 
@@ -25,7 +26,7 @@ const ExerciseDetailPage = () => {
   const pathname = usePathname();
   const id = pathname.split('detail/')[1];
 
-  const { data } = useCustomQuery<Exercise>(
+  const { data, isLoading } = useCustomQuery<Exercise>(
     QUERY_KEYS.EXERCISE.DETAIL(id),
     API_ENDPOINT.EXERCISE.DETAIL(id),
   );
@@ -46,34 +47,45 @@ const ExerciseDetailPage = () => {
             className="rounded-2xl w-full"
             contentTitle="exercise detail"
           >
-            <h1 className="text-center pb-8">
-              🏋️‍♀️ {dayjs(data?.date).format(FORMAT.DATE)}{' '}
-              {t('EXERCISE.DETAIL..TITLE')} 🏋️‍♀️
-            </h1>
-            <hr />
-            <div className="flex justify-between">
-              <div className="flex flex-col gap-9 pt-8">
-                <p>{t('EXERCISE.DETAIL..CONTENT.IS_PT')}</p>
-                <p>{t('EXERCISE.DETAIL..CONTENT.TYPE')}</p>
-                <p>
-                  {t('EXERCISE.DETAIL..CONTENT.MIN')}(
-                  {t('EXERCISE.DETAIL..CONTENT.UNIT')})
-                </p>
-                <p>{t('EXERCISE.DETAIL..CONTENT.FORCE')}</p>
-              </div>
-              {data && (
-                <div className="flex flex-col gap-9 pt-8">
-                  <p>{data.isPT === 'Y' ? 'PT' : '개인운동'}</p>
-                  <p>{data.detail[0]?.type || '정보 없음'}</p>
-                  <p>
-                    {data.detail[0]?.duration
-                      ? `${data.detail[0]?.duration}${t('EXERCISE.DETAIL..CONTENT.UNIT')}`
-                      : '정보 없음'}
-                  </p>
-                  <p>{data.detail[0]?.force || '정보 없음'}</p>
+            {isLoading && (
+              <Skeleton
+                theadNumber={1}
+                tbodyRowNumber={4}
+                tbodyCellNumber={1}
+              />
+            )}
+            {!isLoading && (
+              <>
+                <h1 className="text-center pb-8">
+                  🏋️‍♀️ {dayjs(data?.date).format(FORMAT.DATE)}{' '}
+                  {t('EXERCISE.DETAIL..TITLE')} 🏋️‍♀️
+                </h1>
+                <hr />
+                <div className="flex justify-between">
+                  <div className="flex flex-col gap-9 pt-8">
+                    <p>{t('EXERCISE.DETAIL..CONTENT.IS_PT')}</p>
+                    <p>{t('EXERCISE.DETAIL..CONTENT.TYPE')}</p>
+                    <p>
+                      {t('EXERCISE.DETAIL..CONTENT.MIN')}(
+                      {t('EXERCISE.DETAIL..CONTENT.UNIT')})
+                    </p>
+                    <p>{t('EXERCISE.DETAIL..CONTENT.FORCE')}</p>
+                  </div>
+                  {data && (
+                    <div className="flex flex-col gap-9 pt-8">
+                      <p>{data.isPT === 'Y' ? 'PT' : '개인운동'}</p>
+                      <p>{data.detail[0]?.type || '정보 없음'}</p>
+                      <p>
+                        {data.detail[0]?.duration
+                          ? `${data.detail[0]?.duration}${t('EXERCISE.DETAIL..CONTENT.UNIT')}`
+                          : '정보 없음'}
+                      </p>
+                      <p>{data.detail[0]?.force || '정보 없음'}</p>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </>
+            )}
           </ContentBox>
         </section>
       </div>
