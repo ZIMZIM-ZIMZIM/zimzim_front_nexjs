@@ -52,9 +52,9 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   const handleLogout = () => mutate();
 
   return (
-    <main className="h-screen w-screen flex flex-col bg-secondary-light/50 overflow-hidden">
+    <main className="h-screen w-screen flex flex-col bg-secondary-light/50 overflow-auto">
       <Header className="bg-none bg-white">
-        <div className="flex flex-row gap-4 ">
+        <div className="flex flex-row gap-4">
           <div className="w-10 relative">
             <Button
               className={twMerge(
@@ -106,7 +106,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
       </Header>
       <div className="flex h-[calc(100vh-4.95rem)]">
         <Menu />
-        <section className="h-full w-5/6 flex flex-col justify-between p-8">
+        <section className="h-full w-5/6 flex flex-col justify-between pt-4 px-8">
           {children}
         </section>
       </div>
