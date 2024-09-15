@@ -5,11 +5,12 @@ import {
   FieldError,
   Path,
   PathValue,
+  FieldValues,
 } from 'react-hook-form';
 
 import Input from '#components/common/input/Input';
 
-interface ControllerInputProps<T> {
+interface ControllerInputProps<T extends FieldValues> {
   name: Path<T>;
   control: Control<T>;
   placeholder: string;
@@ -23,7 +24,7 @@ interface ControllerInputProps<T> {
   value: string;
 }
 
-const ControllerInput = <T,>({
+const ControllerInput = <T extends FieldValues>({
   name,
   control,
   placeholder,
@@ -53,8 +54,8 @@ const ControllerInput = <T,>({
           errorMessage={error?.message}
           max={max}
           min={min}
+          value={field.value as string | number | undefined}
           disabled={disabled}
-          value={field.value ? value : ''}
           {...props}
         />
       )}

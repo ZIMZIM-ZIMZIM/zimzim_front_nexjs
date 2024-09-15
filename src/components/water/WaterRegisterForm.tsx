@@ -33,6 +33,7 @@ const WaterRegisterForm = ({ defaultValue, mutate }: WaterFormProps) => {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: defaultValue,
@@ -47,6 +48,10 @@ const WaterRegisterForm = ({ defaultValue, mutate }: WaterFormProps) => {
 
     return () => subscription.unsubscribe();
   }, [watch, trigger]);
+
+  useEffect(() => {
+    reset(defaultValue);
+  }, [defaultValue, reset]);
 
   return (
     <div className="pt-8">
