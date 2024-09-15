@@ -26,7 +26,7 @@ const Menu = () => {
             id="/user/exercise"
           />
           <MenuItem
-            to={`/${i18n.language + ROUTE.WATER}`}
+            to={`/${i18n.language + ROUTE.WATER.LIST}`}
             title="Water"
             icon="/icon/water.svg"
             id="/user/water"

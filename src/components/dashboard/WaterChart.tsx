@@ -71,7 +71,7 @@ const WaterChart = () => {
       aria-labelledby="water-chart-title"
     >
       <p className="text-sm font-bold">{t('DASHBOARD.CHART.WATER.TITLE')}</p>
-      <Link href={`/${i18n.language}${ROUTE.WATER}`}>
+      <Link href={`/${i18n.language}${ROUTE.WATER.LIST}`}>
         <Bar data={data} options={options} height={100} />
       </Link>
     </section>

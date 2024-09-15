@@ -5,12 +5,18 @@ const ROUTE = {
   LOGIN: '/auth/login',
   EXERCISE: {
     DEFAULT: '/user/exercise/list',
-    LIST: '/user/list',
+    LIST: '/user/exercise/list',
     POST: '/user/exercise/post',
     DETAIL: '/user/exercise/detail/:id',
     UPDATE: '/user/exercise/update/:id',
   },
-  WATER: '/user/water',
+  WATER: {
+    DEFAULT: '/user/water/list',
+    LIST: '/user/water/list',
+    POST: '/user/water/post',
+    DETAIL: '/user/water/detail/:id',
+    UPDATE: '/user/water/update/:id',
+  },
 };
 
 export default ROUTE;
