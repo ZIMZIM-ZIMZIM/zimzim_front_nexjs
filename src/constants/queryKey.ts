@@ -10,5 +10,9 @@ const QUERY_KEYS = {
     LIST: () => [...QUERY_KEYS.EXERCISE.DEFAULT, 'list'],
     DETAIL: (id: string) => [...QUERY_KEYS.EXERCISE.DEFAULT, 'detail', id],
   },
+  WATER: {
+    DEFAULT: ['water'],
+    LIST: () => [...QUERY_KEYS.WATER.DEFAULT, 'list'],
+  },
 };
 export default QUERY_KEYS;

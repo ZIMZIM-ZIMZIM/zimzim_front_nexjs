@@ -14,6 +14,13 @@ const API_ENDPOINT = {
     DETAIL: (id: string) => `/exercise/detail/${id}`,
     DETAILS: '/exercise/details',
   },
+  WATER: {
+    WATER: '/water',
+    LIST: '/water/list',
+    POST: '/water',
+    UPDATE: (id: string) => `/water/${id}`,
+    DELETE: `/water`,
+  },
 };
 
 export default API_ENDPOINT;

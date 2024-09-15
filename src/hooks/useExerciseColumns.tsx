@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { FlattenedExercise } from '#/components/exercise/list/ExerciseTable';
 
-const toggleRowSelected = (
+export const toggleRowSelected = (
   id: string,
   setCheckedExercise: Dispatch<SetStateAction<string[]>>,
 ) => {
@@ -24,7 +24,7 @@ export const useGetExerciseColumns = (
 ) => {
   const { t } = useTranslation();
 
-  const colums = useMemo(
+  const columns = useMemo(
     () => [
       columnHelper.display({
         id: 'select',
@@ -105,5 +105,5 @@ export const useGetExerciseColumns = (
     [columnHelper, flattenedData, checkedExercise, setCheckedExercise],
   );
 
-  return colums;
+  return columns;
 };

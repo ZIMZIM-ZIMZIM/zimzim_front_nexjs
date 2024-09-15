@@ -149,7 +149,7 @@ const ExerciseForm = ({
       className="flex flex-col gap-6"
     >
       <div className="flex flex-col gap-8">
-        <ControllerInput
+        <ControllerInput<ExercisePostFormInput>
           name="date"
           control={control}
           value={defaultValues?.date ?? ''}
@@ -201,7 +201,7 @@ const ExerciseForm = ({
           error={errors?.type}
           selectClassName="w-52"
         />
-        <ControllerInput
+        <ControllerInput<ExercisePostFormInput>
           value=""
           name="duration"
           control={control}

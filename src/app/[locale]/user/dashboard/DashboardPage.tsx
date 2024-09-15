@@ -9,7 +9,7 @@ import { twMerge } from 'tailwind-merge';
 import FallbackView from '#/components/common/FallbackView';
 import ExerciseChart from '#/components/dashboard/ExerciseChart';
 import TotalChart from '#/components/dashboard/TotalChart';
-import WaterChart from '#/components/dashboard/WaterChart';
+import WaterChart, { WaterData } from '#/components/dashboard/WaterChart';
 
 import { Exercise, User } from '#/api/type';
 
@@ -19,9 +19,14 @@ import { PRIMARY_BUTTON } from '#/constants/style';
 interface DashboardPageProps {
   exerciseData: Exercise[];
   userInfo: User;
+  waterData: WaterData;
 }
 
-const DashboardPage = ({ exerciseData, userInfo }: DashboardPageProps) => {
+const DashboardPage = ({
+  exerciseData,
+  userInfo,
+  waterData,
+}: DashboardPageProps) => {
   const { t } = useTranslation();
 
   const totalDuration = useMemo(
@@ -52,11 +57,11 @@ const DashboardPage = ({ exerciseData, userInfo }: DashboardPageProps) => {
               <TotalChart exerciseData={exerciseData} />
               <ExerciseChart exerciseData={exerciseData} />
             </div>
-            <WaterChart />
+            <WaterChart waterData={waterData} />
           </div>
         </div>
       )}
-      {!exerciseData.length && (
+      {!exerciseData.length && !waterData.totalWaterAmount && (
         <FallbackView>
           <p className="text-xl">
             🏋🏻

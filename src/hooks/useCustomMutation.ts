@@ -7,12 +7,13 @@ import {
 import axiosInstance from '#/api/axios';
 
 const mutateData = async <TData, TVariables>(
-  url: string,
+  url: string | ((variables: TVariables) => string),
   method: 'post' | 'put' | 'delete' | 'patch',
   data?: TVariables,
 ) => {
+  const finalUrl = typeof url === 'function' ? url(data as TVariables) : url;
   const response = await axiosInstance({
-    url,
+    url: finalUrl,
     method,
     data,
   });
@@ -26,7 +27,7 @@ export const useCustomMutation = <
   TVariables = void,
   TContext = unknown,
 >(
-  url: string,
+  url: string | ((variables: TVariables) => string),
   method: 'post' | 'put' | 'delete' | 'patch',
   options?: UseMutationOptions<TData, TError, TVariables, TContext>,
 ): UseMutationResult<TData, TError, TVariables, TContext> => {
