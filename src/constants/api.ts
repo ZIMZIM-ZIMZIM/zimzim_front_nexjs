@@ -15,7 +15,8 @@ const API_ENDPOINT = {
     DETAILS: '/exercise/details',
   },
   WATER: {
-    LIST: '/water',
+    WATER: '/water',
+    LIST: '/water/list',
     POST: '/water',
     UPDATE: (id: string) => `/water/${id}`,
     DELETE: `/water`,

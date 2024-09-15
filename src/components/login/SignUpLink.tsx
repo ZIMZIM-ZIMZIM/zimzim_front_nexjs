@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import ROUTE from '#/constants/route';
 
 const SignUpLink = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <p className="flex space-x-2 justify-center">
@@ -15,7 +15,7 @@ const SignUpLink = () => {
         {t('AUTH.LOGIN.NEW_USER')}
       </span>
       <Link
-        href={ROUTE.SIGN_UP}
+        href={`/${i18n.language}/${ROUTE.SIGN_UP}`}
         className="font-semibold underline"
         aria-label={t('AUTH.LOGIN.SIGN_UP')}
       >
