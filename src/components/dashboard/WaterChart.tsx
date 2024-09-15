@@ -25,17 +25,25 @@ ChartJS.register(
   Legend,
 );
 
-const WaterChart = () => {
+export interface WaterData {
+  totalWaterAmount: number;
+}
+
+interface WaterChartProps {
+  waterData: WaterData;
+}
+
+const WaterChart = ({ waterData }: WaterChartProps) => {
   const { t, i18n } = useTranslation();
 
   const data = {
-    labels: ['January'],
+    labels: ['water'],
     datasets: [
       {
-        label: 'Sales 2024 (M)',
-        data: [100],
+        label: '',
+        data: [waterData.totalWaterAmount],
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        borderColor: '#19abab',
         borderWidth: 1,
       },
     ],
@@ -71,7 +79,7 @@ const WaterChart = () => {
       aria-labelledby="water-chart-title"
     >
       <p className="text-sm font-bold">{t('DASHBOARD.CHART.WATER.TITLE')}</p>
-      <Link href={`/${i18n.language}${ROUTE.WATER}`}>
+      <Link href={`/${i18n.language}${ROUTE.WATER.LIST}`}>
         <Bar data={data} options={options} height={100} />
       </Link>
     </section>

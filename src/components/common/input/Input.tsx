@@ -8,7 +8,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string;
   label?: string;
   errorMessage?: string;
-  value?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -23,7 +22,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       children,
       label,
       errorMessage,
-      value,
       name,
       ...props
     },
@@ -52,7 +50,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               placeholder={placeholder}
               autoComplete={autoComplete}
               ref={ref}
-              value={value}
               {...props}
             />
             {children}
