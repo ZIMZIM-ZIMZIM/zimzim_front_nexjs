@@ -9,6 +9,7 @@ import {
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import ContentBox from '#/components/common/ContentBox';
@@ -36,9 +37,12 @@ interface WaterRecord {
 }
 
 const WaterTable = ({ data, isLoading }) => {
+  const { t } = useTranslation();
+
   const [selectedId, setSelectedId] = useState<string>('');
 
   const queryClient = useQueryClient();
+
   const { createModal, deleteModal } = useModal();
 
   const columnHelper = createColumnHelper<WaterRecord>();
@@ -87,15 +91,15 @@ const WaterTable = ({ data, isLoading }) => {
       columnHelper.accessor('date', {
         id: 'date',
         cell: (info) => dayjs(info.getValue()).format('YYYY-MM-DD'),
-        header: () => 'Date',
+        header: () => t('WATER.TABLE.DATE'),
         meta: { className: 'w-1/6 text-left' },
       }),
       columnHelper.accessor('amount', {
         id: 'amount',
-        header: () => 'Amount(ml)',
+        header: () => `${t('WATER.TABLE.AMOUNT')}(${t('WATER.UNIT')})`,
         cell: ({ row, getValue }) => (
           <div className="flex flex-row gap-4">
-            {getValue() + 'ml'}
+            {getValue() + t('WATER.UNIT')}
             <Image
               src="/icon/pencil.svg"
               width={20}
@@ -199,7 +203,7 @@ const WaterTable = ({ data, isLoading }) => {
             ) : (
               <tr>
                 <td colSpan={columns.length} className="text-center py-2 h-16">
-                  등록된 음수량 기록이 없습니다
+                  {t('WATER.TABLE.NO_DATA')}
                 </td>
               </tr>
             )}

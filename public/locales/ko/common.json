@@ -128,5 +128,24 @@
         "KO": "한국어"
       }
     }
+  },
+  "WATER": {
+    "REGISTER": "등록",
+    "UNIT": "ml",
+    "TABLE": {
+      "DATE": "날짜",
+      "AMOUNT": "음수량",
+      "NO_DATA": "등록된 음수량 기록이 없습니다"
+    },
+    "FORM": {
+      "DATE": {
+        "REQUIRED": "날짜를 선택해주세요",
+        "LABEL": "날짜"
+      },
+      "AMOUNT": {
+        "REQUIRED": "음수량을 입력해주세요",
+        "LABEL": "음수량"
+      }
+    }
   }
 }

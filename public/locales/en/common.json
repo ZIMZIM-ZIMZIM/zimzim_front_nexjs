@@ -128,5 +128,24 @@
         "KO": "Korean"
       }
     }
+  },
+  "WATER": {
+    "REGISTER": "Register",
+    "UNIT": "ml",
+    "TABLE": {
+      "DATE": "Date",
+      "AMOUNT": "Water Intake",
+      "NO_DATA": "No water intake records available"
+    },
+    "FORM": {
+      "DATE": {
+        "REQUIRED": "Please select a date",
+        "LABEL": "Date"
+      },
+      "AMOUNT": {
+        "REQUIRED": "Please enter the water intake",
+        "LABEL": "Water Intake"
+      }
+    }
   }
 }

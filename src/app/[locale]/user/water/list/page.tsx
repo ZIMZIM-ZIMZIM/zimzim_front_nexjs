@@ -2,6 +2,7 @@
 
 import { useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
 import Button from '#/components/common/Button';
@@ -29,6 +30,8 @@ interface WaterRecord {
 }
 
 const WaterListPage = () => {
+  const { t } = useTranslation();
+
   const [page, setPage] = useState<number>(1);
 
   const queryClient = useQueryClient();
@@ -74,7 +77,7 @@ const WaterListPage = () => {
           className={twMerge(ACTION_BUTTON, 'bg-primary')}
           onClick={waterRegisterModal}
         >
-          등록
+          {t('WATER.REGISTER')}
         </Button>
       </div>
       <div className="w-4/5 flex flex-col gap-8">

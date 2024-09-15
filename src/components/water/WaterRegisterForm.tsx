@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { UseMutateFunction } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 import * as yup from 'yup';
 
@@ -22,9 +23,11 @@ interface WaterFormProps {
 }
 
 const WaterRegisterForm = ({ defaultValue, mutate }: WaterFormProps) => {
+  const { t } = useTranslation();
+
   const schema: yup.ObjectSchema<WaterRegisterFormInput> = yup.object().shape({
-    date: yup.string().required('날짜를 선택해주세요'),
-    amount: yup.string().required('음수량을 입력해주세요'),
+    date: yup.string().required(t('WATER.FORM.DATE.REQUIRED')),
+    amount: yup.string().required(t('WATER.FORM.AMOUNT.REQUIRED')),
   });
 
   const {
@@ -61,9 +64,9 @@ const WaterRegisterForm = ({ defaultValue, mutate }: WaterFormProps) => {
             name="date"
             control={control}
             value={defaultValue.date ?? ''}
-            label={'Date'}
+            label={t('WATER.FORM.DATE.LABEL')}
             type="date"
-            placeholder={'날짜를 선택해 주세요'}
+            placeholder={t('WATER.FORM.DATE.REQUIRED')}
             inputClassName={twMerge(`w-52`)}
             max={defaultValue.date}
             error={errors?.date}
@@ -72,9 +75,9 @@ const WaterRegisterForm = ({ defaultValue, mutate }: WaterFormProps) => {
             value={defaultValue.amount}
             name="amount"
             control={control}
-            label={'Amount'}
+            label={t('WATER.FORM.AMOUNT.LABEL')}
             type="number"
-            placeholder={'음수량을 입력해주세요'}
+            placeholder={t('WATER.FORM.AMOUNT.REQUIRED')}
             inputClassName="w-52"
             error={errors?.amount}
             min={1}
@@ -82,7 +85,7 @@ const WaterRegisterForm = ({ defaultValue, mutate }: WaterFormProps) => {
         </div>
         <div className="flex justify-center">
           <Button type="submit" className={twMerge(PRIMARY_BUTTON, 'w-32')}>
-            등록
+            {t('WATER.REGISTER')}
           </Button>
         </div>
       </form>
