@@ -1,6 +1,6 @@
 const { i18n } = require('./next-i18next.config.cjs');
 
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   i18n,
   webpack(config) {
@@ -12,3 +12,5 @@ module.exports = {
     return config;
   },
 };
+
+module.exports = nextConfig;

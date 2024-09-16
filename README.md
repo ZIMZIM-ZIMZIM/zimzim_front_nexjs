@@ -15,3 +15,5 @@
 1. [next.js로 마이그레이션 하기](https://ramirami.tistory.com/203)
 2. [시맨틱 마크업을 사용하여 seo를 높이자.](https://ramirami.tistory.com/204)
 3. [클라이언트 컴포넌트와 서버 컴포넌트의 성능 차이는 얼마나 날까?](https://ramirami.tistory.com/205)
+4. [클라이언트 컴포넌트에는 skeleton ui를 입혀주자](https://ramirami.tistory.com/206)
+5. [pwa로 만들어 보는건 어떨까?(1)](https://ramirami.tistory.com/207)
