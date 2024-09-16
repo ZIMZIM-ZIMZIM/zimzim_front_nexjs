@@ -22,6 +22,7 @@ const LoginPage = () => {
             className="max-xl:w-2/3"
             width={480}
             height={357}
+            priority
           />
         </div>
 

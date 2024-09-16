@@ -1,15 +1,18 @@
+import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
 import ClientProvider from './ClientProvider';
 
 import '../styles/index.css';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'ZIMZIM',
   description: 'Record your workouts. Exercise saves you',
   icons: {
     icon: '/icon/icon.svg',
   },
+  manifest: '/manifest.json',
+
   openGraph: {
     images: [''],
     title: 'ZIMZIM',
