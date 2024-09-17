@@ -1,6 +1,6 @@
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
@@ -9,8 +9,14 @@ import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
 
 import { useModal } from '#/app/ModalContext';
+import { User } from '#/api/type';
 
-const CharacterModal = ({ count, nickname }) => {
+interface CharacterModalProps {
+  count: number;
+  nickname: User['nickname'];
+}
+
+const CharacterModal = ({ count, nickname }: CharacterModalProps) => {
   const { i18n } = useTranslation();
   const { deleteModal } = useModal();
 

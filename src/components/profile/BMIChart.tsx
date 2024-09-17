@@ -1,27 +1,31 @@
-import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 import React from 'react';
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-const BMIChart = ({ value }) => {
+interface BMIChartProps {
+  value: number;
+}
+
+const BMIChart = ({ value }: BMIChartProps) => {
   const data = {
     datasets: [
       {
-        data: [18.5, 6.4, 6.4, 6.4, 6.4, 6.4],
+        data: [6.4, 6.4, 6.4, 6.4, 6.4, 6.4],
         backgroundColor: [
+          'rgb(135, 206, 250)',
           'rgb(76, 175, 80)',
-          'rgb(173, 204, 48)',
-          'rgb(219, 167, 55)',
-          'rgb(255, 166, 0)',
-          'rgb(255, 102, 0)',
+          'rgb(255, 235, 59)',
+          'rgb(255, 165, 0)',
+          'rgb(255, 69, 0)',
           'rgb(255, 0, 0)',
         ],
-        borderWidth: 0,
+        borderWidth: 1,
         cutout: '80%',
         circumference: 180,
         rotation: 270,
-        needleValue: value,
+        needleValue: value - 12,
       },
     ],
   };
@@ -80,7 +84,7 @@ const BMIChart = ({ value }) => {
   };
 
   return (
-    <div className="w-32 h-32">
+    <div className="w-40 h-40">
       <Doughnut data={data} options={options} plugins={[customPlugin]} />
     </div>
   );
