@@ -1,7 +1,7 @@
 const ROUTE = {
   MAIN_PAGE: '/user/dashboard',
   SIGN_UP: '/auth/signup',
-  USER: '/user',
+  USER: '/user/profile',
   LOGIN: '/auth/login',
   EXERCISE: {
     DEFAULT: '/user/exercise/list',

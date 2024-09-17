@@ -1,6 +1,8 @@
 export interface User {
   id: string;
   nickname: string;
+  height: string;
+  weight: string;
 }
 
 export interface SignupState {

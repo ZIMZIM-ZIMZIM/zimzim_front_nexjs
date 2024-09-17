@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "format": "prettier --write . && eslint --fix ."
+    "format": "prettier --write . && eslint --fix .",
+    "start": "next dev --experimental-https"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
