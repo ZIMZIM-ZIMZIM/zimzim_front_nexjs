@@ -38,7 +38,7 @@
   },
   "DASHBOARD": {
     "WAITING_MESSAGE": "잠시만 기다려주세요... 운동 기록을 확인하고 있습니다",
-    "WELCOME_MESSAGE": "{{name}}님, {{count}}번의 운동을 완료하셨고 총 {{min}}분 동안 운동하셨습니다",
+    "WELCOME_MESSAGE": "{{name}}님, 지난 7일 동안 {{count}}번의 운동을 완료하셨고 총 {{min}}분 동안 운동하셨습니다",
     "NO_DATA_MESSAGE": "{{name}}님, 운동 기록을 등록하고 이번 주의 운동량을 확인해 보세요",
     "REGISTER_BUTTON": "운동 기록 등록하기",
     "CHART": {

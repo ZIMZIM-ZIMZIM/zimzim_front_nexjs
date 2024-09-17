@@ -1,5 +1,5 @@
 export const LOCAL_STORAGE = {
-  LANGUAGE: 'ZimZimLangauge',
+  LANGUAGE: 'ZimZimLanguage',
   LOGIN: 'ZimZimLogin',
 };
 

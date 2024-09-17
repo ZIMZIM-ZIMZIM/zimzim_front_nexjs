@@ -1,15 +1,16 @@
-import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
+
+import { User } from '#/api/type';
 
 import { MODAL } from '#/constants/key';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
 
 import { useModal } from '#/app/ModalContext';
-import { User } from '#/api/type';
 
 interface CharacterModalProps {
   count: number;

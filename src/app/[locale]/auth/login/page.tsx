@@ -13,9 +13,9 @@ const LoginPage = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="flex flex-row h-full justify-between px-24 max-xl:justify-center max-md:px-0">
+    <section className="flex flex-row h-full justify-evenly max-xl:justify-center max-md:px-0">
       <div className="flex flex-row relative items-center max-xl:hidden">
-        <div className="z-1 absolute pt-2.5 ">
+        <div className="z-1 absolute pt-2">
           <Image
             src="/image/landing_exercise.svg"
             alt="babel"
@@ -25,13 +25,12 @@ const LoginPage = () => {
             priority
           />
         </div>
-
         <div className="bg-[#9FACDD] w-[426px] h-[426px] rounded-full" />
       </div>
 
       <ContentBox
         contentTitle="login"
-        className=" rounded-t-2xl w-5/12 flex flex-col gap-8 max-xl:w-2/3 max-lg:w-11/12 max-md:w-full"
+        className="rounded-t-2xl w-5/12 flex flex-col gap-8 max-lg:w-11/12 max-md:w-full bottom-0"
       >
         <h1 className="text-center text-2xl">{t('AUTH.LOGIN.TITLE')}</h1>
 
