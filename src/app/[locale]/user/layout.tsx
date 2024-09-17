@@ -53,73 +53,70 @@ const UserLayout = ({ children }: UserLayoutProps) => {
 
   return (
     <>
-      <Header className="bg-none bg-white">
-        <div className="flex h-20 justify-end items-center">
-          <div className="flex flex-row gap-4">
-            <Link href={`/${i18n.language}${ROUTE.USER}`}>
-              <div
-                className={twMerge(
-                  HEADER_ICON_BUTTON,
-                  'rounded-full hover:bg-secondary-light',
-                )}
-              >
-                <Image
-                  src="/icon/user.svg"
-                  width={20}
-                  height={20}
-                  alt="user icon"
-                />
-              </div>
-            </Link>
-            <div className="w-10 relative">
-              <Button
-                className={twMerge(
-                  HEADER_ICON_BUTTON,
-                  'rounded-full relative text-center hover:bg-secondary-light',
-                )}
-                aria-label="change langauge icon"
-                onClick={langugageSelectModal}
-              >
-                <Image
-                  src="/icon/translate.svg"
-                  width={20}
-                  height={20}
-                  alt="change langauge icon"
-                />
-              </Button>
+      <Header className="flex bg-none bg-white px-16 shadow-lg">
+        <div className="flex justify-center items-center h-20 gap-16">
+          <Link href="/">
+            <Image src="/icon/icon.svg" width={52} height={52} alt="icon" />
+          </Link>
+          <Menu />
+        </div>
+        <div className="flex flex-row gap-4 items-center">
+          <Link href={`/${i18n.language}${ROUTE.USER}`}>
+            <div
+              className={twMerge(
+                HEADER_ICON_BUTTON,
+                'rounded-full hover:bg-secondary-light',
+              )}
+            >
+              <Image
+                src="/icon/user.svg"
+                width={20}
+                height={20}
+                alt="user icon"
+              />
             </div>
+          </Link>
 
+          <div className="w-10 relative">
             <Button
               className={twMerge(
                 HEADER_ICON_BUTTON,
-                'rounded-md hover:bg-secondary-light',
+                'rounded-full relative text-center hover:bg-secondary-light',
               )}
-              onClick={handleLogout}
-              aria-label="log out"
+              aria-label="change langauge icon"
+              onClick={langugageSelectModal}
             >
               <Image
-                src="/icon/logout.svg"
+                src="/icon/translate.svg"
                 width={20}
                 height={20}
-                alt="logout icon"
+                alt="change langauge icon"
               />
             </Button>
           </div>
+
+          <Button
+            className={twMerge(
+              HEADER_ICON_BUTTON,
+              'rounded-md hover:bg-secondary-light',
+            )}
+            onClick={handleLogout}
+            aria-label="log out"
+          >
+            <Image
+              src="/icon/logout.svg"
+              width={20}
+              height={20}
+              alt="logout icon"
+            />
+          </Button>
         </div>
       </Header>
 
       <main className="w-full h-full flex flex-col bg-secondary-light/50 overflow-auto">
-        <div className="w-[12rem] flex justify-center items-center h-20 absolute top-0 left-0">
-          <Link href="/">
-            <Image src="/icon/icon.svg" width={52} height={52} alt="icon" />
-          </Link>
-        </div>
-        <div className="flex">
-          <Menu />
-          <section className="w-5/6 flex flex-col justify-between py-4 px-8 min-h-[calc(100vh-5rem)]">
-            {children}
-          </section>
-        </div>
+        <section className="flex flex-col py-8 px-16 h-[calc(100vh-5rem)]">
+          {children}
+        </section>
       </main>
     </>
   );
