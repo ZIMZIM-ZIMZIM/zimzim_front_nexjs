@@ -9,4 +9,5 @@ export const MODAL = {
     REGISTER: 'water regisetr',
     UPDATE: 'water update',
   },
+  CHARACTER: 'character',
 };
