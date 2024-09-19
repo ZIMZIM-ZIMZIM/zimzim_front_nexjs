@@ -18,7 +18,7 @@ interface CharacterModalProps {
 }
 
 const CharacterModal = ({ count, nickname }: CharacterModalProps) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { deleteModal } = useModal();
 
   return (
@@ -50,7 +50,6 @@ const CharacterModal = ({ count, nickname }: CharacterModalProps) => {
           alt="arrow"
           className="h-12 animate-pulse"
         />
-
         <Image
           src="/image/characters/adult.png"
           width={40}
@@ -60,11 +59,12 @@ const CharacterModal = ({ count, nickname }: CharacterModalProps) => {
       </div>
       <div className="flex flex-col gap-2">
         <p>
-          {nickname}님, 다음 단계까지 {5 - count}번 남으셨어요.
+          {t('PROFILE.MODAL.CONTENT', {
+            name: nickname,
+            count: Math.floor(count % 5),
+          })}
         </p>
-        <p className="text-gray-dark text-xs">
-          * 운동기록을 5일 이상 기록하면 한 단계씩 성장합니다.
-        </p>
+        <p className="text-gray-dark text-xs">{t('PROFILE.MODAL.SUB')}</p>
       </div>
       <div className="flex justify-center">
         <Link
@@ -75,7 +75,7 @@ const CharacterModal = ({ count, nickname }: CharacterModalProps) => {
             'w-52 flex justify-center items-center hover:bg-primary/75 animate-bounce',
           )}
         >
-          등록하기
+          {t('PROFILE.MODAL.BUTTON')}
         </Link>
       </div>
     </div>

@@ -1,6 +1,5 @@
 export const LOCAL_STORAGE = {
   LANGUAGE: 'ZimZimLanguage',
-  LOGIN: 'ZimZimLogin',
 };
 
 export const MODAL = {

@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ContentBox from '#/components/common/ContentBox';
 import Input from '#/components/common/input/Input';
@@ -19,6 +20,8 @@ interface UserBodyInfoProps {
 }
 
 const UserBodyInfo = ({ userInfo, exerciseData }: UserBodyInfoProps) => {
+  const { t } = useTranslation();
+
   const { handleKeyDown } = useEnterKeyDown();
 
   const queryClient = useQueryClient();
@@ -45,13 +48,13 @@ const UserBodyInfo = ({ userInfo, exerciseData }: UserBodyInfoProps) => {
       className="rounded-2xl w-full gap-8"
     >
       <div className="flex justify-between items-center h-8">
-        <p>키</p>
+        <p>{t('PROFILE.HEIGHT.HEIGHT')}</p>
 
         <span className="flex justify-end items-center gap-2">
           {isEditHeight && (
             <Input
               inputClassName="h-8"
-              placeholder="키를 입력하세요"
+              placeholder={t('PROFILE.HEIGHT.PLACEHOLDER')}
               onChange={(e) => setHeight(e.target.value)}
               onKeyDown={(e) =>
                 handleKeyDown(e, height, () => {
@@ -86,12 +89,12 @@ const UserBodyInfo = ({ userInfo, exerciseData }: UserBodyInfoProps) => {
         </span>
       </div>
       <div className="flex justify-between items-center">
-        <p>몸무게</p>
+        <p>{t('PROFILE.WEIGHT.WEIGHT')}</p>
         <span className="flex justify-end items-center gap-2">
           {isEditWeight && (
             <Input
               inputClassName="h-8"
-              placeholder="몸무게를 입력하세요"
+              placeholder={t('PROFILE.WEIGHT.PLACEHOLDER')}
               onChange={(e) => setWeight(e.target.value)}
               onKeyDown={(e) =>
                 handleKeyDown(e, weight, () => {
@@ -126,8 +129,12 @@ const UserBodyInfo = ({ userInfo, exerciseData }: UserBodyInfoProps) => {
         </span>
       </div>
       <div className="flex justify-between items-center">
-        <p>총 운동 횟수</p>
-        <p>{exerciseData?.length ?? 0}회</p>
+        <p>{t('PROFILE.TOTAL_COUNT.TOTAL')}</p>
+        <p>
+          {t('PROFILE.TOTAL_COUNT.COUNT', {
+            count: exerciseData?.length || 0,
+          })}
+        </p>
       </div>
     </ContentBox>
   );

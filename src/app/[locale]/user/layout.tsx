@@ -16,7 +16,7 @@ import LanguageSelectModal from '#/components/header/LanguageSelectModal';
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import API_ENDPOINT from '#/constants/api';
-import { LOCAL_STORAGE, MODAL } from '#/constants/key';
+import { MODAL } from '#/constants/key';
 import ROUTE from '#/constants/route';
 import { HEADER_ICON_BUTTON } from '#/constants/style';
 
@@ -42,14 +42,10 @@ const UserLayout = ({ children }: UserLayoutProps) => {
 
   const { mutate } = useCustomMutation(API_ENDPOINT.AUTH.LOGOUT, 'post', {
     onSuccess: () => {
-      localStorage.removeItem(LOCAL_STORAGE.LOGIN);
-
       router.push(`/${i18n.language}${ROUTE.LOGIN}`);
       queryClient.invalidateQueries();
     },
   });
-
-  const handleLogout = () => mutate();
 
   return (
     <>
@@ -100,7 +96,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
               HEADER_ICON_BUTTON,
               'rounded-md hover:bg-secondary-light',
             )}
-            onClick={handleLogout}
+            onClick={() => mutate()}
             aria-label="log out"
           >
             <Image

@@ -5,18 +5,16 @@ import React, { useRef, useState, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
+import Button from '#/components/common/Button';
+import ErrorMessage from '#/components/common/ErrorMessage';
 import Input from '#/components/common/input/Input';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 
 import API_ENDPOINT from '#/constants/api';
-import { LOCAL_STORAGE } from '#/constants/key';
 import MESSAGE from '#/constants/message';
 import ROUTE from '#/constants/route';
 import { PRIMARY_BUTTON } from '#/constants/style';
-
-import Button from '#components/common/Button';
-import ErrorMessage from '#components/common/ErrorMessage';
 
 const LoginForm = () => {
   const { t, i18n } = useTranslation();
@@ -28,7 +26,6 @@ const LoginForm = () => {
     { id: string; password: string }
   >(API_ENDPOINT.AUTH.LOGIN, 'post', {
     onSuccess: () => {
-      localStorage.setItem(LOCAL_STORAGE.LOGIN, 'success');
       if (i18n.language) {
         router.push(`/${i18n.language}${ROUTE.MAIN_PAGE}`);
       }

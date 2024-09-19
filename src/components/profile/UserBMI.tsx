@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React from 'react';
 
 import ContentBox from '#/components/common/ContentBox';
@@ -25,14 +26,12 @@ const UserBMI = ({ weight, height }: UserBMIProps) => {
       <div className="flex justify-between items-center">
         <p>BMI</p>
         <p>{caculatedBMI}</p>
-        <div>{getBMIPeriod(caculatedBMI)}</div>
+        <div>{t(`PROFILE.BMI.${getBMIPeriod(caculatedBMI)}`)}</div>
         <BMIChart value={caculatedBMI} />
       </div>
       <div>
-        <span className="text-gray-dark text-sm">
-          * BMI 지수가 18.5 이하이면 저체중, 18.5 이상 24.9 미만이면 정상체중,
-          25 이상 29.9 미만이면 과체중, 30 이상 34.9 이하이면 경도비만, 35 이상
-          39.5 이하이면 중등도 비만, 40 이상이면 고도비만입니다.
+        <span className="text-gray-dark text-sm whitespace-pre">
+          {t('PROFILE.BMI.DESCRIPTION')}
         </span>
       </div>
     </ContentBox>
