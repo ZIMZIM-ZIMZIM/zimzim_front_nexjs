@@ -13,8 +13,12 @@ import Link from 'next/link';
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useTranslation } from 'react-i18next';
+import { twMerge } from 'tailwind-merge';
+
+import FallbackView from '#/components/common/FallbackView';
 
 import ROUTE from '#/constants/route';
+import { PRIMARY_BUTTON } from '#/constants/style';
 
 ChartJS.register(
   CategoryScale,
@@ -75,13 +79,33 @@ const WaterChart = ({ waterData }: WaterChartProps) => {
 
   return (
     <section
-      className="h-36 bg-white rounded-lg border-1 pt-2 px-4 w-full cursor-pointer shadow-md shadow-gray-dark/25"
+      className={twMerge(
+        'h-36 bg-white rounded-lg border-1 py-2 px-4 w-full shadow-md shadow-gray-dark/25 relative',
+        `${waterData.totalWaterAmount > 0 && 'cursor-pointer'}`,
+      )}
       aria-labelledby="water-chart-title"
     >
       <p className="text-sm font-bold">{t('DASHBOARD.CHART.WATER.TITLE')}</p>
-      <Link href={`/${i18n.language}${ROUTE.WATER.LIST}`}>
-        <Bar data={data} options={options} height={100} />
-      </Link>
+      {waterData.totalWaterAmount === 0 && (
+        <FallbackView>
+          <Link
+            href={`/${i18n.language}${ROUTE.WATER.LIST}`}
+            className={twMerge(
+              PRIMARY_BUTTON,
+              'w-52 flex justify-center items-center hover:bg-primary/75 animate-bounce',
+            )}
+          >
+            {t('DASHBOARD.REGISTER_BUTTON')}
+          </Link>
+        </FallbackView>
+      )}
+      {waterData.totalWaterAmount > 0 && (
+        <>
+          <Link href={`/${i18n.language}${ROUTE.WATER.LIST}`}>
+            <Bar data={data} options={options} height={100} />
+          </Link>
+        </>
+      )}
     </section>
   );
 };

@@ -25,7 +25,6 @@ const fetchExerciseData = async (
   const response = await customFetch(
     `${API_ENDPOINT.EXERCISE.EXERCISE}?id=${userId}&startDate=${startDate}&endDate=${endDate}`,
   );
-
   return response.data;
 };
 

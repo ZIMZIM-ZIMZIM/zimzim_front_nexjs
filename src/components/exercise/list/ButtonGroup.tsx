@@ -53,7 +53,7 @@ const ButtonGroup = ({ checkedExercise, page }: ButtonGroupProps) => {
     }
   >(API_ENDPOINT.EXERCISE.DETAILS, 'post', {
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.EXERCISE.LIST() });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.EXERCISE.DEFAULT });
     },
   });
 
