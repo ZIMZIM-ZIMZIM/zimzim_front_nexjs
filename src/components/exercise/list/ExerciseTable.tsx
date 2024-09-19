@@ -45,7 +45,7 @@ const ExerciseTable = ({
   page,
   setPage,
 }: ExerciseTableProps) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const router = useRouter();
   const columnHelper = createColumnHelper<FlattenedExercise>();
 
@@ -161,7 +161,7 @@ const ExerciseTable = ({
                     colSpan={columns.length}
                     className="text-center py-2 h-16"
                   >
-                    등록된 운동 기록이 없습니다
+                    {t('EXERCISE.TABLE.NO_DATA')}
                   </td>
                 </tr>
               )}
