@@ -12,13 +12,15 @@ const customFetch = async (url: string) => {
     const response = await axios.get(`${process.env.NEXT_SERVER_URL}${url}`, {
       headers: {
         Authorization: `Bearer ${token}`,
+        'Cache-Control': 'no-store, max-age=0',
       },
     });
+
     return response.data;
   } catch (error) {
     if (
-      axios.isAxiosError(error) &&
-      (error.response?.status === 401 || error.response?.status === 403)
+      error instanceof Error &&
+      (error.message === 'Unauthorized' || error.message === 'Forbidden')
     ) {
       redirect('/ko' + ROUTE.LOGIN);
     }
