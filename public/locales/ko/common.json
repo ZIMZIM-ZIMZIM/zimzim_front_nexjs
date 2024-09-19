@@ -147,5 +147,36 @@
         "LABEL": "음수량"
       }
     }
+  },
+  "PROFILE": {
+    "MODAL": {
+      "CONTENT": "{{name}}님, 다음 단계까지 {{count}}번 남으셨습니다.",
+      "SUB": "* 운동기록을 5일 이상 기록하면 한 단계씩 성장합니다.",
+      "BUTTON": "등록하기"
+    },
+    "NICKNAME": {
+      "PLACEHOLDER": "닉네임을 입력해주세요"
+    },
+    "HEIGHT": {
+      "HEIGHT": "키",
+      "PLACEHOLDER": "키를 입력하세요"
+    },
+    "WEIGHT": {
+      "WEIGHT": "몸무게",
+      "PLACEHOLDER": "몸무게를 입력하세요"
+    },
+    "TOTAL_COUNT": {
+      "TOTAL": "총 운동 횟수",
+      "COUNT": "{{count}}회"
+    },
+    "BMI": {
+      "DESCRIPTION": "BMI 지수가 18.5 이하이면 저체중, 18.5 이상 24.9 미만이면 정상체중, \n25 이상 29.9 미만이면 과체중, 30 이상 34.9 이하이면 경도비만,\n35 이상 39.5 이하이면 중등도 비만, 40 이상이면 고도비만입니다.",
+      "UNDER": "저체중",
+      "NORMAL": "정상 체중",
+      "OVER": "과체중",
+      "OBESITY_CLASS_I": "경도 비만",
+      "OBESITY_CLASS_II": "중등도 비만",
+      "OBESITY_CLASS_III": "고도 비만"
+    }
   }
 }
