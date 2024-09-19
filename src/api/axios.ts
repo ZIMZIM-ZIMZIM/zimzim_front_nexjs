@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import API_ENDPOINT from '#/constants/api';
+import ROUTE from '#/constants/route';
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
@@ -26,19 +26,13 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     if (error.response) {
-      const originalRequest = error.config;
       const { status } = error.response;
 
       if (status === 401 || status === 403) {
         try {
-          const response = await axios.post(
-            `${import.meta.env.NEXT_PUBLIC_SERVER_URL}${API_ENDPOINT.AUTH.REFRESH_TOKEN}`,
-          );
+          location.replace('/ko' + ROUTE.LOGIN);
 
-          originalRequest.headers['Authorization'] =
-            `Bearer ${response.data.token}`;
-
-          return axiosInstance(originalRequest);
+          return Promise.reject(error);
         } catch (error) {
           return Promise.reject(error);
         }

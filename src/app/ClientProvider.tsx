@@ -15,27 +15,27 @@ import ROUTE from '#/constants/route';
 import i18n from '../../i18n';
 
 import { ModalProvider, useModal } from '#/app/ModalContext';
+import { Language } from '#/app/types';
 
 const queryClient = new QueryClient();
 
-export default function ClientProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+interface ClientProviderProps {
+  children: ReactNode;
+}
+
+export default function ClientProvider({ children }: ClientProviderProps) {
   const router = useRouter();
   const pathname = usePathname();
 
   const [isReady, setIsReady] = useState<boolean>(false);
 
   useEffect(() => {
-    let locale = 'ko';
+    let locale: Language = 'ko';
 
     const langluage = localStorage.getItem(LOCAL_STORAGE.LANGUAGE);
-    const isLogin = localStorage.getItem(LOCAL_STORAGE.LOGIN);
 
     if (langluage) {
-      locale = langluage;
+      locale = langluage as Language;
     } else {
       localStorage.setItem(LOCAL_STORAGE.LANGUAGE, locale);
     }
@@ -43,21 +43,8 @@ export default function ClientProvider({
     i18n.changeLanguage(locale);
 
     if (pathname === '/') {
-      if (isLogin) {
-        router.replace(`/${locale}${ROUTE.MAIN_PAGE}`);
-      } else {
-        router.replace(`/${locale}${ROUTE.LOGIN}`);
-      }
-
+      router.replace(`/${locale}${ROUTE.MAIN_PAGE}`);
       return;
-    }
-
-    if (pathname.includes('user')) {
-      if (isLogin) {
-        router.replace(pathname);
-      } else {
-        router.replace(`/${locale}${ROUTE.LOGIN}`);
-      }
     }
 
     const currentLocale = pathname.split('/')[1];

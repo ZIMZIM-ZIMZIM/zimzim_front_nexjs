@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
+import ROUTE from '#/constants/route';
 
 const customFetch = async (url: string) => {
   try {
@@ -13,8 +16,15 @@ const customFetch = async (url: string) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
-    throw new Error('Data fetch failed');
+    if (
+      axios.isAxiosError(error) &&
+      (error.response?.status === 401 || error.response?.status === 403)
+    ) {
+      redirect('/ko' + ROUTE.LOGIN);
+    }
+    return {
+      notFound: true,
+    };
   }
 };
 

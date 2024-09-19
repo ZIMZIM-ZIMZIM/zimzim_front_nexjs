@@ -7,6 +7,7 @@ import Button from '#/components/common/Button';
 import { LOCAL_STORAGE, MODAL } from '#/constants/key';
 
 import { useModal } from '#/app/ModalContext';
+import { Language } from '#/app/types';
 
 interface LanguageSelectModal {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -19,7 +20,7 @@ const LanguageSelectModal = () => {
 
   const pathname = usePathname();
 
-  const handleChangeLangugage = (language: 'ko' | 'en') => {
+  const handleChangeLangugage = (language: Language) => {
     const originalPath = pathname.split(i18n.language)[1];
 
     i18n.changeLanguage(language);
