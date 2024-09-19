@@ -77,7 +77,7 @@ const TotalChart = ({ exerciseData }: { exerciseData: Exercise[] }) => {
 
   return (
     <section
-      className="w-2/3 bg-white rounded-lg border-1 border-gray-light py-2 px-4 cursor-pointer shadow-md shadow-gray-dark/25"
+      className="w-2/3 bg-white rounded-lg border-1 border-gray-light py-2 px-4 cursor-pointer shadow-md shadow-gray-dark/25 h-full"
       aria-labelledby="total-chart-title"
     >
       <p className="text-sm font-bold pb-2">

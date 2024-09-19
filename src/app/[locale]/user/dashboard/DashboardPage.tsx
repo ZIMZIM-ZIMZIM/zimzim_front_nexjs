@@ -2,7 +2,8 @@
 
 import i18n from 'i18n';
 import Link from 'next/link';
-import React, { useMemo } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twMerge } from 'tailwind-merge';
 
@@ -28,59 +29,56 @@ const DashboardPage = ({
   waterData,
 }: DashboardPageProps) => {
   const { t } = useTranslation();
+  const router = useRouter();
 
-  const totalDuration = useMemo(
-    () =>
-      exerciseData?.reduce(
-        (acc: number, cur: { totalDuration: string }) =>
-          acc + parseFloat(cur.totalDuration),
-        0,
-      ),
-    [exerciseData],
-  );
+  const totalDuration = useMemo(() => {
+    if (!exerciseData || exerciseData.length === 0) return null;
+
+    return exerciseData?.reduce(
+      (acc: number, cur: { totalDuration: string }) =>
+        acc + parseFloat(cur.totalDuration),
+      0,
+    );
+  }, [exerciseData]);
+
+  useEffect(() => {
+    router.refresh();
+  }, []);
 
   return (
     <div className="flex flex-col h-full gap-4 relative justify-between items-center w-full">
-      {exerciseData && exerciseData.length && (
-        <div className="flex flex-col gap-4 w-full">
-          <h1 className="text-lg h-1/12">
-            ✅
-            {t('DASHBOARD.WELCOME_MESSAGE', {
-              name: userInfo?.nickname,
-              count: exerciseData?.length,
-              min: totalDuration,
-            })}
-          </h1>
+      <div className="flex flex-col gap-4 w-full">
+        <h1 className="text-lg h-1/12">
+          ✅
+          {t('DASHBOARD.WELCOME_MESSAGE', {
+            name: userInfo?.nickname,
+            count: exerciseData?.length,
+            min: totalDuration,
+          })}
+        </h1>
 
-          <div className="flex flex-col gap-6">
-            <div className="flex flex-row justify-between items-cetner gap-6">
-              <TotalChart exerciseData={exerciseData} />
-              <ExerciseChart exerciseData={exerciseData} />
-            </div>
-            <WaterChart waterData={waterData} />
-          </div>
-        </div>
-      )}
-      {!exerciseData.length && !waterData.totalWaterAmount && (
-        <FallbackView>
-          <p className="text-xl">
-            🏋🏻
-            {t('DASHBOARD.NO_DATA_MESSAGE', {
-              name: userInfo?.nickname,
-            })}
-            🏋🏻
-          </p>
-          <Link
-            href={`/${i18n.language}${ROUTE.EXERCISE.POST}`}
-            className={twMerge(
-              PRIMARY_BUTTON,
-              'w-52 flex justify-center items-center hover:bg-primary/75 animate-bounce',
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-row justify-between items-center gap-6 relative">
+            {exerciseData && !exerciseData.length && (
+              <FallbackView>
+                <Link
+                  href={`/${i18n.language}${ROUTE.EXERCISE.POST}`}
+                  className={twMerge(
+                    PRIMARY_BUTTON,
+                    'w-52 flex justify-center items-center hover:bg-primary/75 animate-bounce',
+                  )}
+                >
+                  {t('DASHBOARD.REGISTER_BUTTON')}
+                </Link>
+              </FallbackView>
             )}
-          >
-            {t('DASHBOARD.REGISTER_BUTTON')}
-          </Link>
-        </FallbackView>
-      )}
+
+            <TotalChart exerciseData={exerciseData} />
+            <ExerciseChart exerciseData={exerciseData} />
+          </div>
+          <WaterChart waterData={waterData} />
+        </div>
+      </div>
     </div>
   );
 };

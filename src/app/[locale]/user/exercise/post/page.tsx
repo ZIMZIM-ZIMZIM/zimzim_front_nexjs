@@ -1,5 +1,6 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -27,6 +28,8 @@ import { getKoreaDate } from '#/util';
 import ContentBox from '#components/common/ContentBox';
 
 const ExercisePostPage = () => {
+  const queryClient = useQueryClient();
+
   const { i18n, t } = useTranslation();
 
   const today = getKoreaDate();
@@ -43,6 +46,8 @@ const ExercisePostPage = () => {
     PostExercisePayload
   >(API_ENDPOINT.EXERCISE.EXERCISE, 'post', {
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.EXERCISE.DEFAULT });
+
       alert(MESSAGE.COMPLETED('등록이'));
       router.push(`/${i18n.language}${ROUTE.MAIN_PAGE}`);
     },
@@ -95,7 +100,7 @@ const ExercisePostPage = () => {
 
         if (isSameDate) {
           const payload = handleSameDateExercises(exerciseList);
-          promises.push(mutateAsync(payload).then(() => {})); // 반환 값을 무시
+          promises.push(mutateAsync(payload).then(() => {}));
         } else {
           exerciseList.forEach((exercise) => {
             promises.push(
