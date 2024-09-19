@@ -1,8 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Input from '#/components/common/input/Input';
+import CharacterModal from '#/components/profile/CharacterModal';
 
 import { useCustomMutation } from '#/hooks/useCustomMutation';
 import useEnterKeyDown from '#/hooks/useEnterKeyDown';
@@ -14,7 +16,6 @@ import { MODAL } from '#/constants/key';
 import QUERY_KEYS from '#/constants/queryKey';
 
 import { useModal } from '#/app/ModalContext';
-import CharacterModal from '#components/profile/CharacterModal';
 
 interface ProfileHeaderProps {
   userNickname: User['nickname'];
@@ -25,7 +26,11 @@ const ProfileHeader = ({
   userNickname,
   exerciseDataCount,
 }: ProfileHeaderProps) => {
-  const [nickname, setNickname] = useState(userNickname);
+  const [nickname, setNickname] = useState<string>(userNickname);
+  const [isEidtNickname, setIsEditNickname] = useState<boolean>(false);
+
+  const { t } = useTranslation();
+
   const queryClient = useQueryClient();
 
   const { createModal } = useModal();
@@ -42,13 +47,11 @@ const ProfileHeader = ({
 
   const { handleKeyDown } = useEnterKeyDown();
 
-  const [isEidtNickname, setIsEditNickname] = useState<boolean>(false);
-
   return (
     <section className="flex flex-col items-center w-full gap-4">
       <div
         className="bg-primary/50 rounded-full w-28 h-28 relative flex items-center justify-center border-1 border-gray-dark/50 shadow-sm shadow-gray-dark cursor-pointer hover:bg-primary/75"
-        onClick={() => {
+        onClick={() =>
           createModal({
             id: MODAL.CHARACTER,
             component: (
@@ -57,8 +60,8 @@ const ProfileHeader = ({
                 count={exerciseDataCount}
               />
             ),
-          });
-        }}
+          })
+        }
       >
         <Image
           src="/image/characters/baby.png"
@@ -89,7 +92,7 @@ const ProfileHeader = ({
                   );
                 });
               }}
-              placeholder="닉네임을 입력해주세요"
+              placeholder={t('PROFILE.NICKNAME.PLACEHOLDER')}
               onChange={(e) => setNickname(e.target.value)}
             />
           </div>

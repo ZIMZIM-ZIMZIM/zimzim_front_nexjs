@@ -147,5 +147,36 @@
         "LABEL": "Water Intake"
       }
     }
+  },
+  "PROFILE": {
+    "MODAL": {
+      "CONTENT": "{{name}}, you have {{count}} steps remaining until the next level.",
+      "SUB": "* You progress to the next level after recording your workouts for more than 5 days.",
+      "BUTTON": "Register"
+    },
+    "NICKNAME": {
+      "PLACEHOLDER": "Enter your nickname"
+    },
+    "HEIGHT": {
+      "HEIGHT": "Height",
+      "PLACEHOLDER": "Enter your height"
+    },
+    "WEIGHT": {
+      "WEIGHT": "Weight",
+      "PLACEHOLDER": "Enter your weight"
+    },
+    "TOTAL_COUNT": {
+      "TOTAL": "Total Workout Count",
+      "COUNT": "{{count}} times"
+    },
+    "BMI": {
+      "DESCRIPTION": "BMI is classified as follows:\n- Underweight: BMI ≤ 18.5\n- Normal weight: 18.5 ≤ BMI < 24.9\n- Overweight: 25 ≤ BMI < 29.9\n- Obesity class I: 30 ≤ BMI < 34.9\n- Obesity class II: 35 ≤ BMI < 39.9\n- Obesity class III: BMI ≥ 40",
+      "UNDER": "Underweight",
+      "NORMAL": "Normal weight",
+      "OVER": "Overweight",
+      "OBESITY_CLASS_I": "Obesity class I",
+      "OBESITY_CLASS_II": "Obesity class II",
+      "OBESITY_CLASS_III": "Obesity class III"
+    }
   }
 }
